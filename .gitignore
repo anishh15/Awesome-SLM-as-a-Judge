@@ -1,0 +1,26 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Python
+__pycache__/
+*.pyc
+.env

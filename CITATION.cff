@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this survey or repository, please cite it as below."
+title: "Small Language Models as Judges: A Survey"
+authors:
+  - family-names: Laddha
+    given-names: Anish
+    affiliation: "LNM Institute of Information Technology, Jaipur, India"
+  - family-names: Pradhan
+    given-names: Nitesh
+    affiliation: "LNM Institute of Information Technology, Jaipur, India"
+  - family-names: Srivastava
+    given-names: Gaurav
+    affiliation: "Department of Computer Science, Virginia Tech, USA"
+type: article
+year: 2025
+repository-code: "https://github.com/anishh15/SLM-as-a-Judge-Survey"
+license: MIT
+keywords:
+  - small language models
+  - LLM-as-a-Judge
+  - SLM-as-a-Judge
+  - automated evaluation
+  - natural language processing
+  - survey
