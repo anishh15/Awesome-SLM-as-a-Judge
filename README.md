@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/taxonomy.png" alt="SLM-as-a-Judge Taxonomy" width="95%">
-</p>
-
 <h1 align="center">📐 Awesome SLM-as-a-Judge</h1>
 
 <p align="center">
@@ -26,16 +22,16 @@
 
 |  Title  |   Venue  |   Date   |   Code   |
 |:--------|:--------:|:--------:|:--------:|
-| ![Star](https://img.shields.io/github/stars/ctrl-gaurav/effGen.svg?style=social&label=Star) <br> [**EffGen: Enabling Small Language Models as Capable Autonomous Agents**](https://arxiv.org/abs/2602.00887) <br> | ArXiv | 2026-02 | [Github](https://github.com/ctrl-gaurav/effGen) |
-| [**The Persona Paradox: Medical Personas as Behavioral Priors in Clinical Language Models**](https://arxiv.org/abs/2601.05376) <br> | ArXiv | 2026-01 | - |
-| [**Rethinking LLM-as-a-Judge: Representation-as-a-Judge with SLMs via Semantic Capacity Asymmetry**](https://arxiv.org/abs/2601.22588) <br> | ArXiv | 2026-01 | - |
-| [**Efficient LLM Safety Evaluation through Multi-Agent Debate**](https://arxiv.org/abs/2511.06396) <br> | ArXiv | 2025-11 | - |
-| [**Multi-Agent Debate for LLM Judges with Adaptive Stability Detection**](https://arxiv.org/abs/2510.12697) <br> | NeurIPS | 2025-10 | - |
-| ![Star](https://img.shields.io/github/stars/ctrl-gaurav/BeyondBench.svg?style=social&label=Star) <br> [**BeyondBench: Contamination-Resistant Evaluation of Reasoning in Language Models**](https://arxiv.org/abs/2509.24210) <br> | ICLR | 2025-09 | [Github](https://github.com/ctrl-gaurav/BeyondBench) |
-| [**"Talk Isn't Always Cheap": Understanding Failure Modes in Multi-Agent Debate**](https://arxiv.org/abs/2509.05396) <br> | ArXiv | 2025-09 | - |
-| [**OptimalThinkingBench: Evaluating Over and Underthinking in LLMs**](https://arxiv.org/abs/2508.13141) <br> | ArXiv | 2025-08 | - |
-| ![Star](https://img.shields.io/github/stars/open-compass/CompassJudger.svg?style=social&label=Star) <br> [**CompassJudger-2: Towards Generalist Judge Model via Verifiable Rewards**](https://arxiv.org/abs/2507.09104) <br> | ArXiv | 2025-07 | [Github](https://github.com/open-compass/CompassJudger) |
-| [**The Illusion of Thinking: Understanding Strengths and Limitations of Reasoning Models**](https://arxiv.org/abs/2506.06941) <br> | NeurIPS | 2025-06 | - |
+| ![Star](https://img.shields.io/github/stars/ctrl-gaurav/effGen.svg?style=social&label=Star) <br> [**EffGen: Enabling Small Language Models as Capable Autonomous Agents**](https://arxiv.org/abs/2602.00887) | ArXiv | 2026-02 | [Github](https://github.com/ctrl-gaurav/effGen) |
+| [**The Persona Paradox: Medical Personas as Behavioral Priors in Clinical Language Models**](https://arxiv.org/abs/2601.05376) | ArXiv | 2026-01 | - |
+| [**Rethinking LLM-as-a-Judge: Representation-as-a-Judge with SLMs via Semantic Capacity Asymmetry**](https://arxiv.org/abs/2601.22588) | ArXiv | 2026-01 | - |
+| [**Efficient LLM Safety Evaluation through Multi-Agent Debate**](https://arxiv.org/abs/2511.06396) | ArXiv | 2025-11 | - |
+| [**Multi-Agent Debate for LLM Judges with Adaptive Stability Detection**](https://arxiv.org/abs/2510.12697) | NeurIPS | 2025-10 | - |
+| ![Star](https://img.shields.io/github/stars/ctrl-gaurav/BeyondBench.svg?style=social&label=Star) <br> [**BeyondBench: Contamination-Resistant Evaluation of Reasoning in Language Models**](https://arxiv.org/abs/2509.24210) | ICLR | 2025-09 | [Github](https://github.com/ctrl-gaurav/BeyondBench) |
+| [**"Talk Isn't Always Cheap": Understanding Failure Modes in Multi-Agent Debate**](https://arxiv.org/abs/2509.05396) | ArXiv | 2025-09 | - |
+| [**OptimalThinkingBench: Evaluating Over and Underthinking in LLMs**](https://arxiv.org/abs/2508.13141) | ArXiv | 2025-08 | - |
+| ![Star](https://img.shields.io/github/stars/open-compass/CompassJudger.svg?style=social&label=Star) <br> [**CompassJudger-2: Towards Generalist Judge Model via Verifiable Rewards**](https://arxiv.org/abs/2507.09104) | ArXiv | 2025-07 | [Github](https://github.com/open-compass/CompassJudger) |
+| [**The Illusion of Thinking: Understanding Strengths and Limitations of Reasoning Models**](https://arxiv.org/abs/2506.06941) | NeurIPS | 2025-06 | - |
 
 ---
 
