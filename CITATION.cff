@@ -13,7 +13,7 @@ authors:
     affiliation: "Department of Computer Science, Virginia Tech, USA"
 type: article
 year: 2025
-repository-code: "https://github.com/anishh15/SLM-as-a-Judge-Survey"
+repository-code: "https://github.com/anishh15/Awesome-SLM-as-a-Judge"
 license: MIT
 keywords:
   - small language models
