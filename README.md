@@ -2,19 +2,21 @@
   <img src="assets/banner.svg" alt="Awesome SLM-as-a-Judge Banner" width="100%">
 </p>
 
+<div align="center">
 
+<!-- Badges -->
+<a href="#-citation"><img src="https://img.shields.io/badge/📄_Paper-ArXiv_(Coming_Soon)-red?style=for-the-badge&logo=arxiv" alt="Paper"/></a>
+<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/"><img src="https://img.shields.io/badge/🌐_Website-Live_Demo-4ECDC4?style=for-the-badge" alt="Website"/></a>
+<a href="https://github.com/anishh15/Awesome-SLM-as-a-Judge"><img src="https://img.shields.io/github/stars/anishh15/Awesome-SLM-as-a-Judge?style=for-the-badge&logo=github&color=yellow" alt="Stars"/></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License"/></a>
 
-<p align="center">
-  <a href="#citation"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-red?logo=arxiv" alt="arXiv"></a>
-  <a href="https://github.com/anishh15/Awesome-SLM-as-a-Judge"><img src="https://img.shields.io/badge/GitHub-Repository-blue?logo=github" alt="GitHub"></a>
-  <img src="https://img.shields.io/github/last-commit/anishh15/Awesome-SLM-as-a-Judge" alt="Last Commit">
-  <img src="https://img.shields.io/github/stars/anishh15/Awesome-SLM-as-a-Judge?style=social" alt="Stars">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License"></a>
-</p>
+*A curated collection of papers, benchmarks, datasets, and resources for the **SLM-as-a-Judge** paradigm.*
 
-<p align="center">
-  <em>A curated collection of papers, benchmarks, datasets, and resources for the <strong>SLM-as-a-Judge</strong> paradigm, where Small Language Models serve as automated evaluators.</em>
-</p>
+**📑 60+ Papers &bull; 🧠 15+ Judge Systems &bull; 🏗️ 5 Model Families &bull; 📊 10 Benchmarks &bull; ≤14B Parameters**
+
+[**🌐 Website**](https://anishh15.github.io/Awesome-SLM-as-a-Judge/) | [**📖 Read Paper**](#-citation) | [**⭐ Star This Repo**](https://github.com/anishh15/Awesome-SLM-as-a-Judge)
+
+</div>
 
 ---
 
@@ -431,12 +433,25 @@ Please make sure to include:
 
 ---
 
-## 📄 License
+## 📞 Contact & Support
 
-This project is licensed under the [MIT License](LICENSE).
+- **📧 Email**: [anshladdha15@gmail.com](mailto:anshladdha15@gmail.com), [nitesh.pradhan@lnmiit.ac.in](mailto:nitesh.pradhan@lnmiit.ac.in), [gks@vt.edu](mailto:gks@vt.edu)
+- **🐛 Issues**: [GitHub Issues](https://github.com/anishh15/Awesome-SLM-as-a-Judge/issues)
 
 ---
 
-<p align="center">
-  <em>If you find this repository helpful, please consider giving it a ⭐!</em>
-</p>
+## 📄 License
+
+MIT License -- see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/"><img src="https://img.shields.io/badge/🌐_Visit_Website-4ECDC4?style=for-the-badge" alt="Website"/></a>
+<a href="#-citation"><img src="https://img.shields.io/badge/📖_Read_Paper-red?style=for-the-badge" alt="Paper"/></a>
+<a href="https://github.com/anishh15/Awesome-SLM-as-a-Judge"><img src="https://img.shields.io/badge/⭐_Star_on_GitHub-yellow?style=for-the-badge" alt="GitHub"/></a>
+
+**Made with ❤️ by [Anish Laddha](https://github.com/anishh15), [Nitesh Pradhan](https://github.com), and [Gaurav Srivastava](https://github.com/ctrl-gaurav)**
+
+</div>
