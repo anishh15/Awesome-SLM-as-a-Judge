@@ -5,7 +5,7 @@
 <div align="center">
 
 <!-- Badges -->
-<a href="#-citation"><img src="https://img.shields.io/badge/📄_Paper-ArXiv_(Coming_Soon)-red?style=for-the-badge&logo=arxiv" alt="Paper"/></a>
+<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/paper.pdf"><img src="https://img.shields.io/badge/📄_Paper-ArXiv_(Coming_Soon)-red?style=for-the-badge&logo=arxiv" alt="Paper"/></a>
 <a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/"><img src="https://img.shields.io/badge/🌐_Website-Live_Demo-4ECDC4?style=for-the-badge" alt="Website"/></a>
 <a href="https://github.com/anishh15/Awesome-SLM-as-a-Judge"><img src="https://img.shields.io/github/stars/anishh15/Awesome-SLM-as-a-Judge?style=for-the-badge&logo=github&color=yellow" alt="Stars"/></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License"/></a>
@@ -14,7 +14,7 @@
 
 **📑 60+ Papers &bull; 🧠 15+ Judge Systems &bull; 🏗️ 5 Model Families &bull; 📊 10 Benchmarks &bull; ≤14B Parameters**
 
-[**🌐 Website**](https://anishh15.github.io/Awesome-SLM-as-a-Judge/) | [**📖 Read Paper**](#-citation) | [**⭐ Star This Repo**](https://github.com/anishh15/Awesome-SLM-as-a-Judge)
+[**🌐 Website**](https://anishh15.github.io/Awesome-SLM-as-a-Judge/) | [**📖 Read Paper**](https://anishh15.github.io/Awesome-SLM-as-a-Judge/paper.pdf) | [**⭐ Star This Repo**](https://github.com/anishh15/Awesome-SLM-as-a-Judge)
 
 </div>
 
@@ -449,7 +449,7 @@ MIT License -- see [LICENSE](LICENSE) for details.
 <div align="center">
 
 <a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/"><img src="https://img.shields.io/badge/🌐_Visit_Website-4ECDC4?style=for-the-badge" alt="Website"/></a>
-<a href="#-citation"><img src="https://img.shields.io/badge/📖_Read_Paper-red?style=for-the-badge" alt="Paper"/></a>
+<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/paper.pdf"><img src="https://img.shields.io/badge/📖_Read_Paper-red?style=for-the-badge" alt="Paper"/></a>
 <a href="https://github.com/anishh15/Awesome-SLM-as-a-Judge"><img src="https://img.shields.io/badge/⭐_Star_on_GitHub-yellow?style=for-the-badge" alt="GitHub"/></a>
 
 **Made with ❤️ by [Anish Laddha](https://github.com/anishh15), [Nitesh Pradhan](https://github.com), and [Gaurav Srivastava](https://github.com/ctrl-gaurav)**
