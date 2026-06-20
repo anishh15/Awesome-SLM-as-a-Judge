@@ -1,4 +1,8 @@
-<h1 align="center">📐 Awesome SLM-as-a-Judge</h1>
+<p align="center">
+  <img src="assets/banner.svg" alt="Awesome SLM-as-a-Judge Banner" width="100%">
+</p>
+
+
 
 <p align="center">
   <a href="#citation"><img src="https://img.shields.io/badge/arXiv-Coming%20Soon-red?logo=arxiv" alt="arXiv"></a>
@@ -9,12 +13,18 @@
 </p>
 
 <p align="center">
-  <em>A curated collection of papers, benchmarks, datasets, and resources for the <strong>SLM-as-a-Judge</strong> paradigm — where Small Language Models serve as automated evaluators.</em>
+  <em>A curated collection of papers, benchmarks, datasets, and resources for the <strong>SLM-as-a-Judge</strong> paradigm, where Small Language Models serve as automated evaluators.</em>
 </p>
 
 ---
 
-> 🔥🔥 **Survey Paper**: *Small Language Models as Judges: A Survey* — arXiv coming soon.
+## 📢 Latest News
+
+| Date | Update |
+|------|--------|
+| **Jun 2026** | Project website launched: [anishh15.github.io/Awesome-SLM-as-a-Judge](https://anishh15.github.io/Awesome-SLM-as-a-Judge/) |
+| **Jun 2026** | Survey paper released: *Small Language Models as Judges: A Survey* |
+| **May 2026** | Repository launched as companion to our EMNLP 2026 survey submission |
 
 ---
 
@@ -35,17 +45,10 @@
 
 ---
 
-## 📰 Updates
-
-- 🔥 **[2026/05]** — Major update: synced with survey paper, added 20+ papers, SVG figures from the paper.
-- 🔥 **[2026/05]** — Repository launched as companion to our EMNLP 2026 survey submission.
-
----
-
 ## 🌳 Table of Contents
 
+- [Latest News](#-latest-news)
 - [Latest Papers](#-latest-papers)
-- [Updates](#-updates)
 - [About This Repository](#-about-this-repository)
 - [Overview](#-overview)
 - [Key Insights from the Survey](#-key-insights-from-the-survey)
@@ -72,15 +75,15 @@
 
 ## 🌟 About This Repository
 
-This repository accompanies our survey paper **"Small Language Models as Judges: A Survey"**, which provides the first comprehensive review of the emerging paradigm where **Small Language Models (SLMs)**—operationally defined as models with **≤14B parameters** that can run on a single consumer GPU—serve as automated evaluators.
+This repository accompanies our survey paper **"Small Language Models as Judges: A Survey"**, which provides the first comprehensive review of the emerging paradigm where **Small Language Models (SLMs)**, operationally defined as models with **≤14B parameters** that can run on a single consumer GPU, serve as automated evaluators.
 
 We organize the rapidly expanding literature around a structured taxonomy spanning five key dimensions:
 
-1. **Background & Motivation** — Why SLM judges, formal definitions, and evaluation formalism
-2. **Individual SLM Judging** — Specialized judges, token budgets, capability thresholds, overthinking, biases, and thinking modes
-3. **Multi-Agent Strategies** — Ensembles, debate, output optimization, and persona robustness
-4. **Benchmarks & Metrics** — Meta-evaluation infrastructure, adversarial robustness
-5. **Challenges & Future Directions** — Open research problems along the verifiability gradient
+1. **Background & Motivation**: Why SLM judges, formal definitions, and evaluation formalism
+2. **Individual SLM Judging**: Specialized judges, token budgets, capability thresholds, overthinking, biases, and thinking modes
+3. **Multi-Agent Strategies**: Ensembles, debate, output optimization, and persona robustness
+4. **Benchmarks & Metrics**: Meta-evaluation infrastructure, adversarial robustness
+5. **Challenges & Future Directions**: Open research problems along the verifiability gradient
 
 We will continuously update this repository with the latest papers and resources. If you find this helpful, please ⭐ star the repo!
 
@@ -107,14 +110,14 @@ Our survey identifies five convergent insights with multi-paper evidence:
   <img src="assets/panel_reasoning.svg" alt="Reasoning Token Trends" width="48%">
 </p>
 
-> *Left: Scale vs. capability — fine-tuned 3-8B judges match proprietary models on standard benchmarks. Right: Reasoning tokens help only when they carry new discriminative signal.*
+> *Left: Scale vs. capability, where fine-tuned 3-8B judges match proprietary models on standard benchmarks. Right: Reasoning tokens help only when they carry new discriminative signal.*
 
 <p align="center">
   <img src="assets/panel_ensemble.svg" alt="Ensemble Composition Trends" width="48%">
   <img src="assets/panel_verifiability.svg" alt="Verifiability Gradient" width="48%">
 </p>
 
-> *Left: Heterogeneous SLM juries decorrelate errors more effectively than scaling a single judge. Right: The verifiability gradient — SLM judges approach parity in high-verifiability domains but degrade for subjective tasks.*
+> *Left: Heterogeneous SLM juries decorrelate errors more effectively than scaling a single judge. Right: The verifiability gradient, where SLM judges approach parity in high-verifiability domains but degrade for subjective tasks.*
 
 <p align="center">
   <img src="assets/deployment_tradeoff.svg" alt="Cost-Quality Frontier" width="60%">
@@ -193,7 +196,7 @@ Our survey identifies five convergent insights with multi-paper evidence:
   <img src="assets/strategy_taxonomy.svg" alt="Multi-Agent Strategy Taxonomy" width="80%">
 </p>
 
-> *Figure: Taxonomy of multi-agent evaluation strategies — ensembles, juries, and debate.*
+> *Figure: Taxonomy of multi-agent evaluation strategies: ensembles, juries, and debate.*
 
 |  Title  |   Venue  |   Year   |   Links   |
 |:--------|:--------:|:--------:|:---------:|
@@ -400,11 +403,11 @@ Our survey identifies five convergent insights with multi-paper evidence:
 If you find this survey and repository useful for your research, please cite our paper:
 
 ```bibtex
-@article{laddha2025slmasjudgesurvey,
-  title={Small Language Models as Judges: A Survey},
-  author={Laddha, Anish and Pradhan, Nitesh and Srivastava, Gaurav},
-  journal={ArXiv},
-  year={2025}
+@article{laddha2026slmjudge,
+  title   = {Small Language Models as Judges: A Survey},
+  author  = {Anish Laddha and Nitesh Pradhan and Gaurav Srivastava},
+  year    = {2026},
+  url     = {https://github.com/anishh15/Awesome-SLM-as-a-Judge}
 }
 ```
 
