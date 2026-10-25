@@ -975,7 +975,7 @@
     },
     "eq:ifr_bias": {
       "kind": "equation",
-      "num": "14"
+      "num": "13"
     },
     "tab:deployment": {
       "kind": "table",
@@ -1255,7 +1255,7 @@
       "panel": null,
       "label": "fig:benchmark_coverage",
       "parentLabel": "fig:benchmark_coverage",
-      "caption": "Meta-evaluation dimension coverage across major judge benchmarks. No single benchmark covers all six dimensions; even the broadest (JudgeBoard) omits some, which is the gap motivating a unified suite (C5).",
+      "caption": "Meta-evaluation dimension coverage across major judge benchmarks. No benchmark covers more than three of the six dimensions, which is the gap motivating a unified suite (C5).",
       "subcaption": null,
       "where": {
         "section": "I",
@@ -1272,7 +1272,7 @@
       "panel": null,
       "label": "fig:defense_heatmap",
       "parentLabel": "fig:defense_heatmap",
-      "caption": "Robustness of judge configurations against each attack vector, from a prompted SLM up to a sanitized heterogeneous panel. Darker cells indicate stronger resistance. Robustness grows as defenses are layered, and only the full stack reaches high resistance across all vectors.",
+      "caption": "Expected robustness of judge configurations against each attack vector, from a prompted SLM up to a sanitized heterogeneous panel. Cells encode the ordinal ranking argued in this appendix rather than measured rates, and darker cells indicate stronger resistance. Robustness grows as defenses are layered, and only the full stack is expected to reach high resistance across all vectors.",
       "subcaption": null,
       "where": {
         "section": "K",
@@ -1306,7 +1306,7 @@
       "panel": null,
       "label": "fig:flowchart",
       "parentLabel": "fig:flowchart",
-      "caption": "Practitioner deployment flowchart mapping the survey's insights (I1--I5) and challenges (C1) to deployment choices. The routing variable is domain verifiability (I5): fully or mostly verifiable domains such as math, code, and factual QA permit single SLM judges (I1), partially verifiable domains split into cost-sensitive (cascade, I2/C1) and quality-critical (cross-family panel, I3) branches, and subjective domains require human oversight. Multi-agent debate (I4) is recommended only when information asymmetry is high.",
+      "caption": "Practitioner deployment flowchart mapping the survey's insights (I1--I5) and challenges (C1) to deployment choices. The routing variable is domain verifiability (I5): fully or mostly verifiable domains such as math, code, and factual QA permit single SLM judges for low-stakes evaluation (I1), partially verifiable domains split into cost-sensitive (cascade, I2/C1) and quality-critical (cross-family panel, I3) branches, and subjective domains require human oversight. Multi-agent debate (I4) is recommended only when information asymmetry is high.",
       "subcaption": null,
       "where": {
         "section": "L",
@@ -1340,7 +1340,7 @@
       "panel": "a",
       "label": "fig:trend_scale",
       "parentLabel": "fig:individual_trends",
-      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench accuracy against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
+      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench scores against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
       "subcaption": "I1: training vs.\\ scale.",
       "where": {
         "section": "3",
@@ -1357,7 +1357,7 @@
       "panel": "b",
       "label": "fig:trend_reasoning",
       "parentLabel": "fig:individual_trends",
-      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench accuracy against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
+      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench scores against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
       "subcaption": "I2: effect of more reasoning.",
       "where": {
         "section": "3",
@@ -1374,7 +1374,7 @@
       "panel": "c",
       "label": "fig:trend_ensemble",
       "parentLabel": "fig:individual_trends",
-      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench accuracy against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
+      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench scores against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
       "subcaption": "I3: panel vs.\\ GPT-4.",
       "where": {
         "section": "3",
@@ -1391,7 +1391,7 @@
       "panel": "d",
       "label": "fig:trend_verif",
       "parentLabel": "fig:individual_trends",
-      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench accuracy against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
+      "caption": "\\textit{The four quantitative trends behind the survey's insights.} \\textbf{(\\subref{fig:trend_scale})}~Published RewardBench scores against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \\textbf{(\\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \\textbf{(\\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\\times$ lower cost (I3). \\textbf{(\\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \\S\\ref{sec:multiagent}. \\emph{Panels~(\\subref{fig:trend_scale}) and~(\\subref{fig:trend_ensemble}) plot reported numbers; (\\subref{fig:trend_reasoning}) and~(\\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\\ref{app:evidence} and~\\ref{app:provenance} give the underlying comparisons.",
       "subcaption": "I5: verifiability gradient.",
       "where": {
         "section": "3",
@@ -1510,7 +1510,7 @@
       "panel": null,
       "label": "fig:mast",
       "parentLabel": "fig:mast",
-      "caption": "Distribution of multi-agent system failures across the three MAST categories \\citep{cemri2026multi}. Specification and system-design faults dominate, and are largely addressable through better engineering; the remaining inter-agent and verification failures are rooted in model behavior.",
+      "caption": "Distribution of multi-agent system failures across the three MAST categories \\citep{cemri2026multi}. System-design faults are the largest category and are largely addressable through better engineering; the remaining inter-agent and verification failures are rooted in model behavior.",
       "subcaption": null,
       "where": {
         "section": "G",

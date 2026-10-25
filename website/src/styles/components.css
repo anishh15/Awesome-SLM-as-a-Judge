@@ -42,7 +42,7 @@
 }
 
 .copy-btn .copy-icon { display: inline-flex; transition: transform var(--t) var(--ease-out); }
-.copy-btn.is-done { color: var(--moss); }
+.copy-btn.is-done { color: var(--moss-text); }
 .copy-btn.is-done .copy-icon { transform: scale(1.12); }
 
 /* ── text pieces ─────────────────────────────────────────────────────────── */
@@ -190,7 +190,7 @@
   font-size: 13px; line-height: 1.65; color: var(--text-2); overflow-x: auto; white-space: pre;
   tab-size: 2;
 }
-.code-block .bib-type { color: var(--coral); }
+.code-block .bib-type { color: var(--coral-text); }
 .code-block .bib-key { color: var(--teal-ink); font-weight: 600; }
 [data-theme='dark'] .code-block .bib-key { color: var(--teal-strong); }
 .code-block .bib-field { color: var(--slate-ink); }

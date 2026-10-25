@@ -784,7 +784,7 @@ papers:
     venue_full: "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
     category: benchmarks-metrics
     group: metrics
-    sections: [App. H]
+    sections: [§6, App. B, App. H, App. J]
     links:
       paper: "https://aclanthology.org/2024.acl-long.205/"
       arxiv: "https://arxiv.org/abs/2406.06004"

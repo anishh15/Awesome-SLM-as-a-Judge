@@ -2,83 +2,83 @@
   "note": "Written by scripts/sync-paper.mjs. Hashes are the first 16 hex digits of SHA-256.",
   "syncedAt": "2026-10-25",
   "pdf": {
-    "bytes": 1204022,
-    "sha256": "7a489efb130934b9"
+    "bytes": 1216187,
+    "sha256": "4a2255e817c35f6b"
   },
   "files": {
-    "main.tex": "84d1e917cec1d2d5",
+    "main.tex": "61f56f7120e4afcb",
     "tables/2_insight_summary.tex": "2c87aad8ac3de871",
     "tables/3_judge_systems.tex": "292087c4add5334f",
-    "appendix/M_methodology.tex": "9ec15ef87a393f23"
+    "appendix/M_methodology.tex": "96d8c485c8600c03"
   },
   "figures": {
     "10_bias_heatmap": {
-      "light": "4acf3741c605d4aa",
-      "dark": "da02622f7f5c47de"
+      "light": "871a7071a8192a00",
+      "dark": "d3ba5386c4ddc9ef"
     },
     "11_benchmark_coverage": {
-      "light": "f14f84b7fb4f9463",
-      "dark": "591d707595e43ac6"
+      "light": "a980ed642c492cc4",
+      "dark": "40f6eb1dfd280ec7"
     },
     "12_defense_heatmap": {
-      "light": "a38a2d84eba83a61",
-      "dark": "6b799c4924bcfb7c"
+      "light": "0cb57873767b6e0f",
+      "dark": "18e7c53d321393d5"
     },
     "13_coverage_gap_heatmap": {
-      "light": "89d057afa0295aef",
-      "dark": "9a0927bde39c8191"
+      "light": "1c2ac80bf2e3960c",
+      "dark": "83124d00cd428e2c"
     },
     "14_deployment_flowchart": {
-      "light": "870c5c1976cc4c72",
-      "dark": "79a3d94b3be50b4c"
+      "light": "b55e35f04cef912a",
+      "dark": "1ef362e02932edac"
     },
     "1_main_taxonomy": {
       "light": "8bc1d719aaecf153",
       "dark": "73849a0ee142b0d1"
     },
     "2a_panel_scale": {
-      "light": "69c5aa433d76d8be",
-      "dark": "7d57da55e89cebfc"
+      "light": "2d1b4dda6681605e",
+      "dark": "0bc9601012c9e099"
     },
     "2b_panel_reasoning": {
-      "light": "96050f5a1905095c",
-      "dark": "6f308b2eaad63f66"
+      "light": "46baccf5e83c96a1",
+      "dark": "14131dd990d99945"
     },
     "2c_panel_ensemble": {
-      "light": "b2409ae05043b664",
-      "dark": "622dbccdd0d83f28"
+      "light": "57f396febe31941b",
+      "dark": "05f87bc2f36679f0"
     },
     "2d_panel_verifiability": {
-      "light": "2b5cd9ef9dac52a8",
-      "dark": "33579f9be803bd09"
+      "light": "840e71ea6173864c",
+      "dark": "773cb119b91f858a"
     },
     "3_distill_scaling": {
-      "light": "c4ba0de1dc6aa742",
-      "dark": "7f6ba7e4f0b438f4"
+      "light": "ebd39e85e5f82621",
+      "dark": "a84b708308f934a1"
     },
     "4_family_heatmap": {
-      "light": "48d30ac584b6e1e1",
-      "dark": "cc01ac5612652c7f"
+      "light": "f22e8cff71d64efb",
+      "dark": "25aa1a377326556c"
     },
     "5_paradigm_scatter": {
-      "light": "4d730352d052f17e",
-      "dark": "fac4a09c3ff1ff26"
+      "light": "7e1fff820f26babb",
+      "dark": "015feca49626241f"
     },
     "6_paradigm_supervision": {
-      "light": "3afc512ab2308ca8",
-      "dark": "d689d8ea6eeb0f2d"
+      "light": "8b08bfdbebdd6b94",
+      "dark": "2c1c3cef272fe44d"
     },
     "7_deployment_tradeoff": {
-      "light": "a791aa29697a6745",
-      "dark": "7ae1faa87e62cf4c"
+      "light": "cfd4247804176304",
+      "dark": "a099a729e7f2f532"
     },
     "8_strategy_taxonomy": {
       "light": "20d5a89c27b0b64d",
       "dark": "14708b1f030bec2b"
     },
     "9_mast_failures": {
-      "light": "1e56fd85863193f7",
-      "dark": "12eb974ea4f13294"
+      "light": "9543e3db5a44f0c9",
+      "dark": "31867c726d8a1853"
     }
   }
 }

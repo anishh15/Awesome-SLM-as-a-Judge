@@ -127,8 +127,8 @@ The challenges in §6 follow from the verifiability gradient (I5). Appendix L ex
 | | Challenge | Why it is open |
 |:--:|:--|:--|
 | **C1** | Adaptive inference-time compute | The best reasoning budget varies sharply with task difficulty, but confidence-based routing needs calibration that SLM judges lack, since they are overconfident where they are least accurate. |
-| **C2** | Calibration without human labels | Conformal prediction, TrustJudge, causal surrogate auditing and fine-tuning 7–9B judges to match human preference distributions are starting points, not general frameworks. |
-| **C3** | Domain generalization beyond math and code | Only 5% of 650 judge papers address multilingual or low-resource settings. M-Prometheus is a first step, MM-Eval now tests judges in 122 languages, and multimodal SLM judges are unexplored. |
+| **C2** | Calibration without human labels | Conformal prediction, TrustJudge, causal surrogate auditing and fine-tuning 7–9B judges to match preference distributions are starting points, not general frameworks. |
+| **C3** | Domain generalization beyond math and code | Only 5% of 650 judge papers address multilingual or low-resource settings. M-Prometheus is a first step, MM-Eval tests judges in 18 languages (122 for language consistency), and multimodal SLM judges remain rare. |
 | **C4** | Resistance to reward hacking | Generators trained against an SLM judge produce superficially convincing reasoning, and SLM robustness is less studied than LLM robustness. |
 | **C5** | Standardized meta-evaluation | No benchmark spans position-consistent accuracy, human correlation, domain coverage, robustness and IFR, and long-form evaluation is the weakest area. |
 | **C6** | Representation-based evaluation | Probing the hidden states of a frozen 1.7B model closely approximates full LLM judges on GSM8K, MATH and GPQA, but open-ended evaluation remains untested. |
@@ -147,7 +147,7 @@ Read together, the insights give a simple recipe for choosing a judge (§6 and A
 
 - For verifiable, low-stakes evaluation such as math, code and factual QA, a single fine-tuned 3–8B judge giving a direct verdict is a practical default, paired with a tool wherever an external oracle exists (I1, I5).
 - When a domain is only partly verifiable, the budget decides the design. A cascade that escalates uncertain cases to a larger judge keeps spending low (I2, C1), and a panel of three judges from different families buys reliability when quality matters most (I3).
-- Hard comparisons can go to thinking mode, which raises a small judge's accuracy by 13–19% (I2).
+- Hard comparisons can go to thinking mode, which lifts the Chat Hard accuracy of 1.7B and 4B judges by about 30% (I2).
 - Debate earns its cost only when the agents hold different evidence or roles (I4).
 - Subjective, high-stakes evaluation keeps a human in the loop.
 
@@ -287,7 +287,7 @@ Benchmarks that test judges and reward models, task benchmarks used in judge stu
 
 | Paper | Venue | Year | Links |
 |:--|:--:|:--:|:--|
-| **[FLEUR: An Explainable Reference-Free Evaluation Metric for Image Captioning Using a Large Multimodal Model](https://aclanthology.org/2024.acl-long.205/)**<br><sub>Lee et al. · survey: App. H</sub> | ACL | 2024 | [arXiv](https://arxiv.org/abs/2406.06004) · [Code](https://github.com/Yebin46/FLEUR) · <a href="https://github.com/Yebin46/FLEUR"><img src="https://img.shields.io/github/stars/Yebin46/FLEUR?style=flat&logo=github&label=&color=1F6F6F&labelColor=0B2B2B" alt="GitHub stars of Yebin46/FLEUR"></a> |
+| **[FLEUR: An Explainable Reference-Free Evaluation Metric for Image Captioning Using a Large Multimodal Model](https://aclanthology.org/2024.acl-long.205/)**<br><sub>Lee et al. · survey: §6; Apps. B, H, J</sub> | ACL | 2024 | [arXiv](https://arxiv.org/abs/2406.06004) · [Code](https://github.com/Yebin46/FLEUR) · <a href="https://github.com/Yebin46/FLEUR"><img src="https://img.shields.io/github/stars/Yebin46/FLEUR?style=flat&logo=github&label=&color=1F6F6F&labelColor=0B2B2B" alt="GitHub stars of Yebin46/FLEUR"></a> |
 | **[COMET: A Neural Framework for MT Evaluation](https://aclanthology.org/2020.emnlp-main.213/)**<br><sub>Rei et al. · survey: App. A</sub> | EMNLP | 2020 | [arXiv](https://arxiv.org/abs/2009.09025) · [Code](https://github.com/Unbabel/COMET) · <a href="https://github.com/Unbabel/COMET"><img src="https://img.shields.io/github/stars/Unbabel/COMET?style=flat&logo=github&label=&color=1F6F6F&labelColor=0B2B2B" alt="GitHub stars of Unbabel/COMET"></a> |
 | **[BERTScore: Evaluating Text Generation with BERT](https://arxiv.org/abs/1904.09675)**<br><sub>Zhang et al. · survey: App. A</sub> | arXiv | 2019 | [Code](https://github.com/Tiiiger/bert_score) · <a href="https://github.com/Tiiiger/bert_score"><img src="https://img.shields.io/github/stars/Tiiiger/bert_score?style=flat&logo=github&label=&color=1F6F6F&labelColor=0B2B2B" alt="GitHub stars of Tiiiger/bert_score"></a> |
 | **[BLEU: a Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)**<br><sub>Papineni et al. · survey: App. A</sub> | ACL | 2002 | – |
@@ -437,7 +437,7 @@ Related surveys of LLM judges and small language models, and the reports of the 
 
 ## 🖼️ Figures
 
-All 17 figures of the survey are in [`assets/figures`](assets/figures) as dark SVGs, rendered from the survey's own figure scripts with only the colors changed.
+All 17 figures of the survey are in [`assets/figures`](assets/figures) as dark SVGs.
 
 | Figure | Shows | Survey | In this README |
 |:--:|:--|:--:|:--|

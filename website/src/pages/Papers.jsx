@@ -1,5 +1,5 @@
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { ArrowUpRight, Braces, Check, Code2, Download, FileText, Search, X, Box, ScrollText } from 'lucide-react'
 import site, { asset, loadPapers } from '../lib/site.js'
 import useTitle from '../lib/useTitle.js'
@@ -9,6 +9,7 @@ import PageHeader from '../components/PageHeader.jsx'
 import CopyButton from '../components/CopyButton.jsx'
 import { CategoryDot } from '../components/Badges.jsx'
 import { figureLabel } from '../components/Figure.jsx'
+import { figureHref } from '../components/figureLink.js'
 
 const CATS = site.corpus.categories
 const YEARS = site.corpus.years.map((y) => y.bin)
@@ -21,14 +22,34 @@ export default function Papers() {
   useEffect(() => { loadPapers().then(setPapers) }, [])
   const { category: pathCat } = useParams()
   const [params, setParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const cat = params.get('cat') || pathCat || ''
   const year = params.get('year') || ''
   const code = params.get('code') === '1'
   const sort = SORTS[params.get('sort')] ? params.get('sort') : 'group'
   const focus = params.get('paper') || ''
-  const [q, setQ] = useState(params.get('q') || '')
+  const urlQ = params.get('q') || ''
+  const [q, setQ] = useState(urlQ)
   const dq = useDeferredValue(q)
+  // the last ?q= this page wrote; any other change came from a link or history
+  const wroteQ = useRef(urlQ)
+  useEffect(() => {
+    if (urlQ !== wroteQ.current) { wroteQ.current = urlQ; setQ(urlQ) }
+  }, [urlQ])
+
+  // /papers/:category is a shareable alias; turn it into ?cat= on /papers so
+  // that All and Clear filters can reset the category like any other filter
+  useEffect(() => {
+    if (!pathCat) return
+    const next = new URLSearchParams(params)
+    if (!next.has('cat')) next.set('cat', pathCat)
+    navigate({ pathname: '/papers', search: `?${next}` }, { replace: true, preventScrollReset: true })
+  }, [pathCat]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const apply = useCallback((next) => {
+    setParams(next, { replace: true, preventScrollReset: true })
+  }, [setParams])
 
   const update = useCallback((patch) => {
     const next = new URLSearchParams(params)
@@ -37,12 +58,12 @@ export default function Papers() {
       else next.set(k, v === true ? '1' : v)
     }
     if (!('paper' in patch)) next.delete('paper')
-    setParams(next, { replace: true, preventScrollReset: true })
-  }, [params, setParams])
+    apply(next)
+  }, [params, apply])
 
   // keep ?q= in step with the box, without a history entry per keystroke
   useEffect(() => {
-    const t = setTimeout(() => { if ((params.get('q') || '') !== q) update({ q }) }, 250)
+    const t = setTimeout(() => { if (urlQ !== q) { wroteQ.current = q; update({ q }) } }, 250)
     return () => clearTimeout(t)
   }, [q]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -81,7 +102,7 @@ export default function Papers() {
   }, [focus, papers])
 
   const inputRef = useRef(null)
-  const clearAll = () => { setQ(''); setParams(new URLSearchParams(sort !== 'group' ? { sort } : {}), { replace: true, preventScrollReset: true }) }
+  const clearAll = () => { setQ(''); wroteQ.current = ''; apply(new URLSearchParams(sort !== 'group' ? { sort } : {})) }
 
   const bibOfShown = useMemo(() => shown.map((p) => p.bibtex).filter(Boolean).join('\n\n') + '\n', [shown])
   const downloadBib = () => {
@@ -191,6 +212,7 @@ export default function Papers() {
 }
 
 function CategoryBlock({ c, papers, terms, focus }) {
+  const location = useLocation()
   const fig = c.figure ? site.figures.find((f) => f.stem === c.figure) : null
   return (
     <section className={`cat-block cat-${c.id}`} aria-labelledby={`cat-${c.id}`}>
@@ -199,7 +221,7 @@ function CategoryBlock({ c, papers, terms, focus }) {
           <h2 id={`cat-${c.id}`} className="cat-title"><CategoryDot id={c.id} /> {c.title} <span className="cat-count tnum">{papers.length}{papers.length !== c.count ? ` of ${c.count}` : ''}</span></h2>
           <p className="cat-summary">{c.summary} <span className="muted">Survey: {c.where}</span></p>
         </div>
-        {fig && <Link className="cat-fig-link" to={`?fig=${fig.id}`} state={{ figOpen: true }} preventScrollReset>{figureLabel(fig)}</Link>}
+        {fig && <Link className="cat-fig-link" to={figureHref(location, fig.id)} state={{ figOpen: true }} preventScrollReset>{figureLabel(fig)}</Link>}
       </header>
       {c.groups.filter((g) => papers.some((p) => p.group === g.id)).map((g) => {
         const list = papers.filter((p) => p.group === g.id)

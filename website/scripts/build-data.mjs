@@ -209,6 +209,13 @@ for (const b of YEAR_BINS) {
 // ── the paper list ───────────────────────────────────────────────────────────
 const cats = Object.fromEntries(data.categories.map((c) => [c.id, c]))
 const keys = new Set()
+const surname = (name) => String(name).trim().split(/\s+/).pop()
+function laterLabel(p) {
+  if (p.in_survey !== false || !p.authors?.length) return null
+  const [a, b2] = p.authors
+  const author = p.authors.length > 2 || p.et_al ? `${surname(a)} et al.` : b2 ? `${surname(a)} and ${surname(b2)}` : surname(a)
+  return { author, year: String(p.year) }
+}
 const papers = data.papers.map((p) => {
   if (keys.has(p.key)) fail(`${p.key}: duplicate key`)
   keys.add(p.key)
@@ -218,8 +225,9 @@ const papers = data.papers.map((p) => {
   if (!p.links?.paper) fail(`${p.key}: missing links.paper`)
   for (const [k, u] of Object.entries(p.links || {})) if (!/^https:\/\//.test(u)) fail(`${p.key}: links.${k} is not https`)
   const b = bib[p.key]
-  if (!b) fail(`${p.key}: not in data/references.bib`)
-  const lab = labelsBib[p.key]
+  // works added after the survey (in_survey: false) have no survey bib entry or natbib label
+  if (!b && p.in_survey !== false) fail(`${p.key}: not in data/references.bib`)
+  const lab = labelsBib[p.key] || laterLabel(p)
   return {
     key: p.key,
     name: p.name || null,
@@ -244,7 +252,7 @@ for (const e of bibEntries) if (!keys.has(e.key)) fail(`${e.key}: in references.
 
 const citeIndex = {}
 for (const p of papers) {
-  const lab = labelsBib[p.key]
+  const lab = labelsBib[p.key] || laterLabel(data.papers.find((d) => d.key === p.key)) || { author: p.authors[0] || p.key, year: String(p.year) }
   citeIndex[p.key] = { author: lab.author, year: lab.year, title: p.title, name: p.name, url: p.links.paper, category: p.category }
 }
 
@@ -378,8 +386,9 @@ const items = []
 }
 if (items.map((c) => c.id).join() !== 'C1,C2,C3,C4,C5,C6') fail('§6 does not list C1 to C6')
 const challengesIntro = (() => {
-  const p = paraStarting('Six open challenges')
-  return p ? tex(p.text) : (fail('challenges intro not found'), [])
+  const lead = 'The challenges below stem from'
+  const p = mainParas.find((q) => q.text.includes(lead))
+  return p ? tex(p.text.slice(p.text.indexOf(lead)).trim()) : (fail('challenges intro not found'), [])
 })()
 
 // Sections and subsections that each insight and challenge belongs to.
@@ -481,7 +490,8 @@ const figures = outline.figures.map((f) => {
   const [, , w, h] = vb ? vb[1].trim().split(/\s+/).map(Number) : [0, 0, 0, 0]
   if (!w || !h) fail(`${f.stem}.svg: no viewBox`)
   if (!fs.existsSync(path.join(SITE, 'public', 'figures', 'dark', `${f.stem}.svg`))) fail(`${f.stem}: dark render missing`)
-  const noCite = (t) => nodesToText(texToNodes(t, warn).filter((n) => n.t !== 'cite')).replace(/\s+([.,;])/g, '$1').trim()
+  // refs resolved first, so alt text reads "§2" or "Table 15" rather than a raw label
+  const noCite = (t) => nodesToText(resolve(texToNodes(t, warn)).filter((n) => n.t !== 'cite')).replace(/\s+([.,;])/g, '$1').trim()
   const captionText = noCite(f.caption)
   const sub = f.subcaption ? noCite(f.subcaption) : null
   // first sentence, not fooled by "vs." or "e.g."

@@ -117,6 +117,9 @@ export default function CommandPalette() {
     else if (e.key === 'ArrowDown') { e.preventDefault(); setActive((a) => Math.min(flat.length - 1, a + 1)) }
     else if (e.key === 'ArrowUp') { e.preventDefault(); setActive((a) => Math.max(0, a - 1)) }
     else if (e.key === 'Enter') { e.preventDefault(); choose(flat[active]) }
+    // the input is the dialog's only focus stop (options use aria-activedescendant),
+    // so Tab stays on it instead of reaching the page behind the modal
+    else if (e.key === 'Tab') { e.preventDefault(); inputRef.current?.focus() }
   }
 
   if (!open) return null
