@@ -9,6 +9,32 @@ const HERE = path.dirname(fileURLToPath(import.meta.url))
 const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 
+// Inline nodes from site.json (strings, italic, bold, math) as plain HTML.
+const nodesHtml = (nodes) => [].concat(nodes).map((n) => {
+  if (typeof n === 'string') return esc(n)
+  const inner = nodesHtml(n.c || [])
+  if (n.t === 'i') return `<em>${inner}</em>`
+  if (n.t === 'b') return `<strong>${inner}</strong>`
+  return inner
+}).join('')
+
+// Title, authors and abstract as plain HTML inside #root. Crawlers that do
+// not run JavaScript (Google Scholar among them) read this; the app replaces
+// it as soon as it mounts.
+function staticPaper(site) {
+  const { paper, config: c } = site
+  const authors = paper.authors.map((a) => esc(a.name)).join(', ')
+  const affiliations = paper.affiliations.map((x) => esc(x.name)).join('; ')
+  return `<div id="root"><article style="max-width:46rem;margin:0 auto;padding:3rem 1.25rem;line-height:1.6">
+      <h1>${esc(paper.title)}</h1>
+      <p>${authors}</p>
+      <p>${affiliations}</p>
+      <h2>Abstract</h2>
+      <p>${nodesHtml(site.abstract)}</p>
+      <p><a href="${esc(c.pdf)}">PDF</a> · <a href="${esc(c.repo)}">GitHub repository</a></p>
+    </article></div>`
+}
+
 // Fill the <head> of index.html from the generated data, so the title, the
 // description and the Google Scholar tags carry the same numbers as the pages.
 function headFromData() {
@@ -56,6 +82,7 @@ function headFromData() {
             `and ${words[counts.challenges] || counts.challenges} challenges`))
           .replace('<!--%CITATION_AUTHORS%-->', authorTags)
           .replace('<!--%JSON_LD%-->', `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`)
+          .replace('<div id="root"></div>', staticPaper(site))
       },
     },
   }
