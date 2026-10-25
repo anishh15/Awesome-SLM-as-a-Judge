@@ -1,0 +1,84 @@
+{
+  "note": "Written by scripts/sync-paper.mjs. Hashes are the first 16 hex digits of SHA-256.",
+  "syncedAt": "2026-10-25",
+  "pdf": {
+    "bytes": 1204022,
+    "sha256": "7a489efb130934b9"
+  },
+  "files": {
+    "main.tex": "84d1e917cec1d2d5",
+    "tables/2_insight_summary.tex": "2c87aad8ac3de871",
+    "tables/3_judge_systems.tex": "292087c4add5334f",
+    "appendix/M_methodology.tex": "9ec15ef87a393f23"
+  },
+  "figures": {
+    "10_bias_heatmap": {
+      "light": "4acf3741c605d4aa",
+      "dark": "da02622f7f5c47de"
+    },
+    "11_benchmark_coverage": {
+      "light": "f14f84b7fb4f9463",
+      "dark": "591d707595e43ac6"
+    },
+    "12_defense_heatmap": {
+      "light": "a38a2d84eba83a61",
+      "dark": "6b799c4924bcfb7c"
+    },
+    "13_coverage_gap_heatmap": {
+      "light": "89d057afa0295aef",
+      "dark": "9a0927bde39c8191"
+    },
+    "14_deployment_flowchart": {
+      "light": "870c5c1976cc4c72",
+      "dark": "79a3d94b3be50b4c"
+    },
+    "1_main_taxonomy": {
+      "light": "8bc1d719aaecf153",
+      "dark": "73849a0ee142b0d1"
+    },
+    "2a_panel_scale": {
+      "light": "69c5aa433d76d8be",
+      "dark": "7d57da55e89cebfc"
+    },
+    "2b_panel_reasoning": {
+      "light": "96050f5a1905095c",
+      "dark": "6f308b2eaad63f66"
+    },
+    "2c_panel_ensemble": {
+      "light": "b2409ae05043b664",
+      "dark": "622dbccdd0d83f28"
+    },
+    "2d_panel_verifiability": {
+      "light": "2b5cd9ef9dac52a8",
+      "dark": "33579f9be803bd09"
+    },
+    "3_distill_scaling": {
+      "light": "c4ba0de1dc6aa742",
+      "dark": "7f6ba7e4f0b438f4"
+    },
+    "4_family_heatmap": {
+      "light": "48d30ac584b6e1e1",
+      "dark": "cc01ac5612652c7f"
+    },
+    "5_paradigm_scatter": {
+      "light": "4d730352d052f17e",
+      "dark": "fac4a09c3ff1ff26"
+    },
+    "6_paradigm_supervision": {
+      "light": "3afc512ab2308ca8",
+      "dark": "d689d8ea6eeb0f2d"
+    },
+    "7_deployment_tradeoff": {
+      "light": "a791aa29697a6745",
+      "dark": "7ae1faa87e62cf4c"
+    },
+    "8_strategy_taxonomy": {
+      "light": "20d5a89c27b0b64d",
+      "dark": "14708b1f030bec2b"
+    },
+    "9_mast_failures": {
+      "light": "1e56fd85863193f7",
+      "dark": "12eb974ea4f13294"
+    }
+  }
+}

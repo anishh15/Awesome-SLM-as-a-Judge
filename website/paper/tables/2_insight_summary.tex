@@ -1,0 +1,21 @@
+
+\begin{table*}[t]
+\centering
+\small
+\begin{adjustbox}{max width=\textwidth}
+\prettytable
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{2.2cm}@{}}
+\toprule
+\textbf{Insight} & \textbf{Evidence} & \textbf{Main support} & \textbf{Boundary conditions} & \textbf{Design} \\
+\midrule
+\textbf{I1}~Evaluation-specific training matters more than scale & \textsc{Consensus}: 5 independent lines; across related benchmarks & Selene Mini, J1, GLIDER, JudgeLRM, J4R, GenPRM; the trained judge beats its own base model in 8 of 8 papers (+15--63\%) & Smaller margins on fine-grained rubric correlation (FLASK) and on the hardest pairs (JudgeBench) & Same backbone and cross-study \\
+\textbf{I2}~Reasoning helps only when it adds new signal & \textsc{Consensus}: 7 studies; across tasks & Thinking-mode gains in 0.6--4B judges; NoThinking wins at low budgets; accuracy collapses past a complexity threshold & The best budget depends on both the judge and the task difficulty & Budget sweeps within each study \\
+\textbf{I3}~Cross-family panels decorrelate errors & \textsc{Replicated}: 3 studies; QA, math, code & PoLL (over 7$\times$ cheaper than GPT-4), JudgeBoard, COSMosFL & Each member must beat chance; members should come from different families & Panel vs.\ single judge within each study \\
+\textbf{I4}~Debate value is bounded by information novelty & \textsc{Consensus}: 5 studies; across tasks & Gains when agents hold distinct evidence or assigned roles; MAST failure analysis & Shared-context debate loses to single agents given equal compute & Debate vs.\ single agent within each study \\
+\textbf{I5}~Reliability tracks domain verifiability & \textsc{Consensus}: 8 domains; across domains & Near parity in math and code, good agreement in factual QA & Widest gap in creative and medical evaluation & Cross-study \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{The five insights at a glance. \textbf{Evidence} gives the grade (\S\ref{sec:individual}) and how widely the result has been shown: within one benchmark, across related benchmarks, or across tasks and domains. \textbf{Design} records whether the supporting comparisons hold the backbone fixed or compare systems across studies. Appendix~\ref{app:evidence} lists every study behind each row.}
+\label{tab:insights}
+\end{table*}

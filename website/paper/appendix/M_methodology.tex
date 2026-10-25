@@ -1,0 +1,99 @@
+
+
+\begin{figure*}[!t]
+\centering
+\begin{adjustbox}{max width=0.86\textwidth}
+\begin{tikzpicture}[
+  font=\small,
+  stage/.style={draw=tealrule, line width=0.7pt, rounded corners=2pt,
+                fill=tealrow, text width=4.9cm, align=center, inner sep=5pt},
+  excl/.style={draw=gray!55, line width=0.6pt, rounded corners=2pt,
+               fill=gray!8, text width=5.4cm, align=left, inner sep=4pt,
+               font=\footnotesize},
+  final/.style={stage, fill=tealhead!18, line width=1.0pt},
+  arr/.style={-{Latex[length=2mm]}, draw=tealrule, line width=0.7pt},
+  sarr/.style={-{Latex[length=1.6mm]}, draw=gray!60, line width=0.5pt},
+  node distance=7mm
+]
+\node[stage] (s1) {Records identified via database search\\[1pt]\textbf{$\sim$320}};
+\node[stage, below=of s1] (s2) {After deduplication\\[1pt]\textbf{$\sim$240}};
+\node[stage, below=of s2] (s3) {Title and abstract screened\\[1pt]\textbf{$\sim$150}};
+\node[stage, below=of s3] (s4) {Full text assessed\\[1pt]\textbf{$\sim$120}};
+\node[final, below=of s4] (s5) {\textbf{Included and cited: 105}};
+
+\draw[arr] (s1) -- (s2);
+\draw[arr] (s2) -- (s3);
+\draw[arr] (s3) -- (s4);
+\draw[arr] (s4) -- (s5);
+
+\node[excl, right=30mm of $(s1)!0.5!(s2)$] (e1) {Duplicates across the four databases ($\sim$80)};
+\node[excl, right=30mm of $(s2)!0.5!(s3)$] (e2) {Off topic on title or abstract ($\sim$90)};
+\node[excl, right=30mm of $(s3)!0.5!(s4)$] (e3) {No evaluative use of a language model ($\sim$30)};
+\node[excl, right=30mm of $(s4)!0.5!(s5)$] (e4) {Scope mismatch: reward modeling without judge evaluation, or $>$70B only ($\sim$15)};
+
+\draw[sarr] ($(s1)!0.5!(s2)$) -- (e1);
+\draw[sarr] ($(s2)!0.5!(s3)$) -- (e2);
+\draw[sarr] ($(s3)!0.5!(s4)$) -- (e3);
+\draw[sarr] ($(s4)!0.5!(s5)$) -- (e4);
+
+\node[below=4mm of s5, text width=8.6cm, align=center, font=\footnotesize] {
+  Of the 105 included: 29 judge systems, 20 benchmarks and metrics,
+  26 training and methodology, 13 bias and robustness,
+  17 foundational and model reports.};
+\end{tikzpicture}
+\end{adjustbox}
+
+\caption{Literature selection flow. Left column gives records retained at each stage; right column gives the dominant exclusion reason. Only the final count is exact and can be checked against the reference list; upstream counts are recorded from the search logs and are approximate, since the same work was often retrieved by several query families.}
+\label{fig:selection_flow}
+\end{figure*}
+
+\subsection{Search Strategy}
+
+We searched Semantic Scholar, arXiv (cs.CL, cs.AI, cs.LG), ACL Anthology, and Google Scholar between November 2024 and July 2026 using the following query families:
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=2pt]
+  \item \textbf{Core judging:} \texttt{("LLM-as-a-judge" OR "LLM judge" OR "language model evaluator" OR "automated evaluation")} combined with \texttt{("small" OR "7B" OR "8B" OR "3B" OR "13B" OR "14B" OR "efficient")}.
+  \item \textbf{Training for evaluation:} \texttt{("reward model" OR "process reward" OR "GRPO" OR "DPO") AND ("judge" OR "evaluator" OR "scoring")}.
+  \item \textbf{Multi-agent evaluation:} \texttt{("multi-agent debate" OR "ensemble judge" OR "panel of judges" OR "jury evaluation")}.
+  \item \textbf{Reasoning budget:} \texttt{("overthinking" OR "token budget" OR "test-time compute" OR "chain-of-thought efficiency") AND ("evaluation" OR "judge")}.
+  \item \textbf{Bias and robustness:} \texttt{("position bias" OR "self-preference" OR "adversarial" OR "prompt sensitivity") AND ("judge" OR "evaluator")}.
+\end{enumerate}
+
+We also followed citation chains from three anchor surveys \citep{gu2024survey, li2025generation, li2024llms} and tracked the RewardBench leaderboard~\citep{lambert2025rewardbench} for newly submitted judge systems.
+
+\subsection{Inclusion and Exclusion Criteria}
+
+\paragraph{Inclusion.} A paper was included if it met at least one of:
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+  \item It proposes, trains, or evaluates an SLM ($\leq$14B parameters) in an evaluative or scoring role.
+  \item It introduces a benchmark, dataset, or metric used to evaluate language-model judges.
+  \item It provides general-purpose methodology (multi-agent debate, ensemble voting, bias mitigation) that has been applied to or is directly applicable to SLM judges.
+  \item It reports results for LLM judges ($>$14B) on benchmarks also used by SLM judge papers, enabling direct comparison. Such systems serve only as reference points and never count toward an insight's evidence grade.
+\end{itemize}
+
+\paragraph{Exclusion.} We excluded:
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+  \item Papers where language models are used purely as data annotators (e.g., labeling NER datasets) rather than as quality judges.
+  \item Papers focused exclusively on reward modeling for RLHF without evaluation of the model as a standalone judge.
+  \item Non-peer-reviewed blog posts, unless they describe a released system with reproducible results (e.g., model cards on HuggingFace with benchmark numbers).
+  \item Preprints whose central claims could not be verified from the manuscript or released artifacts.
+\end{itemize}
+
+\subsection{Selection Accounting}
+
+Screening followed a two-stage procedure for literature surveys. Records were first screened on title and abstract against the criteria above, and the remaining candidates were read in full before a final inclusion decision. Works found through citation chasing went through the same full-text check. Figure~\ref{fig:selection_flow} summarizes the selection process.
+
+The largest source of exclusion at the full-text stage was scope mismatch: papers about reward modeling for RLHF that did not evaluate the model as a judge, and papers about LLM evaluation that studied only models above 70B without reporting results on smaller systems.
+
+\subsection{Corpus Statistics}
+\label{sec:corpus_stats}
+
+We characterize the surveyed literature along four dimensions.
+
+\paragraph{By training paradigm.} Table~\ref{tab:master_systems} groups the 19 judge systems into five paradigms: off-the-shelf prompting (1), supervised fine-tuning from distillation, human labels, or rubrics (8), self-supervised or preference optimization (1), reinforcement learning with verifiable rewards (7), and representation-based probing (2). Table~\ref{tab:training_overview} decomposes the same space more finely, separating the three supervised variants and listing preference optimization on its own. The RL systems all come from 2025--2026 work while the supervised systems cluster in 2023--2024, which is the decreasing-supervision gradient developed in Appendix~\ref{app:training}.
+
+\paragraph{By base model family.} Qwen backbones (Qwen2.5, Qwen~3) support 8 of the 19 systems and LLaMA variants support 5, making these the two dominant bases. Mistral, Phi-3.5-mini, Vicuna, PaLM~2, and R1-Distill each support one. One system, J1, reports on both Qwen and LLaMA backbones and is counted under each, so the family totals exceed 19; the two representation-based systems probe a frozen model without committing to a family. The concentration on Qwen and LLaMA likely reflects permissive licensing and strong instruction-following baselines rather than any architectural advantage for judging.
+
+\paragraph{By evaluation domain.} Nine of the 19 systems report on general-purpose or broad-coverage evaluation. Five target reasoning or verifiable tasks, and the remaining five each target a single setting: rubric-conditioned assessment, multilingual evaluation, mathematical process supervision, structured tasks, and fine-grained scoring. No system in the table is dedicated to safety, creative, or medical evaluation; those domains enter the survey only through benchmark and analysis papers (Appendix~\ref{app:domains}). The imbalance is itself a finding: evidence is dense where answers can be checked and thin everywhere else (Insight~I5).
+
+\paragraph{By publication year.} Of the 105 cited works, 21 are from 2023 or earlier, 26 from 2024, 44 from 2025, and 14 from 2026. The subfield is young: every judge system in Table~\ref{tab:master_systems} carries a bibliography date of 2024 or later, and the two earliest of them, PandaLM and JudgeLM, first circulated as 2023 preprints.

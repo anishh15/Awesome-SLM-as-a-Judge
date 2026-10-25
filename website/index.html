@@ -1,27 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>%TITLE%</title>
+    <meta name="description" content="%DESCRIPTION%" />
+    <link rel="canonical" href="%URL%" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Small Language Models as Judges: A Survey</title>
-    <meta name="description" content="A comprehensive survey of Small Language Models (≤14B parameters) as automated evaluators. Covers 60+ papers, 15+ judge systems, 5 model families, and 10 benchmarks." />
-    <meta name="keywords" content="SLM, small language models, LLM-as-a-judge, NLP, evaluation, survey, benchmarks" />
-    <meta property="og:title" content="Small Language Models as Judges: A Survey" />
-    <meta property="og:description" content="Can small language models reliably serve as judges? A survey covering 60+ papers, 15+ systems, 5 model families." />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6faf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#071411" />
+    <meta name="color-scheme" content="light dark" />
+
     <meta property="og:type" content="website" />
-    <!-- Google Scholar citation meta tags -->
-    <meta name="citation_title" content="Small Language Models as Judges: A Survey" />
-    <meta name="citation_author" content="Laddha, Anish" />
-    <meta name="citation_author" content="Pradhan, Nitesh" />
-    <meta name="citation_author" content="Srivastava, Gaurav" />
-    <meta name="citation_publication_date" content="2026" />
-    <meta name="citation_pdf_url" content="https://anishh15.github.io/Awesome-SLM-as-a-Judge/paper.pdf" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:site_name" content="Awesome SLM-as-a-Judge" />
+    <meta property="og:title" content="%TITLE%" />
+    <meta property="og:description" content="%DESCRIPTION%" />
+    <meta property="og:url" content="%URL%" />
+    <meta property="og:image" content="%OG_IMAGE%" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="%OG_ALT%" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="%TITLE%" />
+    <meta name="twitter:description" content="%DESCRIPTION%" />
+    <meta name="twitter:image" content="%OG_IMAGE%" />
+    <meta name="twitter:image:alt" content="%OG_ALT%" />
+
+    <meta name="citation_title" content="%TITLE%" />
+    <!--%CITATION_AUTHORS%-->
+    <meta name="citation_publication_date" content="%YEAR%" />
+    <meta name="citation_pdf_url" content="%PDF_URL%" />
+    <!--%JSON_LD%-->
+
+    <script>
+      // Set the theme before the first paint so the page never flashes.
+      ;(function () {
+        var t = null
+        try { t = localStorage.getItem('slmjudge-theme') } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = t
+        document.documentElement.style.colorScheme = t
+      })()
+    </script>
   </head>
   <body>
+    <noscript>
+      <p style="padding:24px;font-family:system-ui,sans-serif">This site needs JavaScript. The paper is at <a href="paper.pdf">paper.pdf</a> and the paper list is in the <a href="%REPO%">GitHub repository</a>.</p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

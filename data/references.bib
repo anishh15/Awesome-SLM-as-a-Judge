@@ -1,0 +1,869 @@
+% REFERENCES -- ORGANIZED BY TOPIC AREA
+
+
+% FOUNDATIONAL NLP EVALUATION METRICS
+
+@inproceedings{papineni2002bleu,
+  title={{BLEU}: a method for automatic evaluation of machine translation},
+  author={Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
+  booktitle={Proceedings of the 40th annual meeting of the Association for Computational Linguistics},
+  pages={311--318},
+  year={2002}
+}
+
+@article{zhang2019bertscore,
+  title={{BERTScore}: Evaluating text generation with {BERT}},
+  author={Zhang, Tianyi and Kishore, Varsha and Wu, Felix and Weinberger, Kilian Q and Artzi, Yoav},
+  journal={arXiv preprint arXiv:1904.09675},
+  year={2019}
+}
+
+@inproceedings{rei2020comet,
+  title={{COMET}: A neural framework for {MT} evaluation},
+  author={Rei, Ricardo and Stewart, Craig and Farinha, Ana C and Lavie, Alon},
+  booktitle={Proceedings of the 2020 conference on empirical methods in natural language processing (emnlp)},
+  pages={2685--2702},
+  year={2020}
+}
+
+% FOUNDATIONAL LLM-AS-A-JUDGE WORK
+
+@article{zheng2023judging,
+  title={Judging {LLM-as-a-Judge} with {MT-Bench} and {Chatbot Arena}},
+  author={Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric and others},
+  journal={Advances in neural information processing systems},
+  volume={36},
+  pages={46595--46623},
+  year={2023}
+}
+
+@inproceedings{zhu2025judgelm,
+  title={{JudgeLM}: Fine-tuned large language models are scalable judges},
+  author={Zhu, Lianghui and Wang, Xinggang and Wang, Xinlong},
+  booktitle={International Conference on Learning Representations},
+  volume={2025},
+  pages={51257--51296},
+  year={2025}
+}
+
+@inproceedings{kim2024prometheus1,
+  title={{Prometheus}: Inducing fine-grained evaluation capability in language models},
+  author={Kim, Seungone and Shin, Jay and Jang, Joel and Longpre, Shayne and Lee, Hwaran and Yun, Sangdoo and Shin, Ryan and Kim, Sungdong and Thorne, James and Seo, Minjoon and others},
+  booktitle={International Conference on Learning Representations},
+  volume={2024},
+  pages={29927--29962},
+  year={2024}
+}
+
+@inproceedings{kim2024prometheus2,
+  title={{Prometheus} 2: An open source language model specialized in evaluating other language models},
+  author={Kim, Seungone and Suk, Juyoung and Longpre, Shayne and Lin, Bill Yuchen and Shin, Jamin and Welleck, Sean and Neubig, Graham and Lee, Moontae and Lee, Kyungjae and Seo, Minjoon},
+  booktitle={Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages={4334--4353},
+  year={2024}
+}
+
+@inproceedings{wang2024pandalm,
+  title={{PandaLM}: An automatic evaluation benchmark for {LLM} instruction tuning optimization},
+  author={Wang, Yidong and Yu, Zhuohao and Yao, Wenjin and Zeng, Zhengran and Yang, Linyi and Wang, Cunxiang and Chen, Hao and Jiang, Chaoya and Xie, Rui and Wang, Jindong and others},
+  booktitle={International Conference on Learning Representations},
+  volume={2024},
+  pages={43573--43593},
+  year={2024}
+}
+
+@inproceedings{chen2024humans,
+  title={Humans or {LLMs} as the judge? a study on judgement bias},
+  author={Chen, Guiming Hardy and Chen, Shunian and Liu, Ziche and Jiang, Feng and Wang, Benyou},
+  booktitle={Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages={8301--8327},
+  year={2024}
+}
+
+@inproceedings{szymanski2025limitations,
+  title={Limitations of the {LLM-as-a-Judge} approach for evaluating {LLM} outputs in expert knowledge tasks},
+  author={Szymanski, Annalisa and Ziems, Noah and Eicher-Miller, Heather A and Li, Toby Jia-Jun and Jiang, Meng and Metoyer, Ronald A},
+  booktitle={Proceedings of the 30th international conference on intelligent user interfaces},
+  pages={952--966},
+  year={2025}
+}
+
+% LLM-AS-A-JUDGE SURVEYS
+
+@article{gu2024survey,
+  title={A survey on {LLM-as-a-Judge}},
+  author={Gu, Jiawei and Jiang, Xuhui and Shi, Zhichao and Tan, Hexiang and Zhai, Xuehao and Xu, Chengjin and Li, Wei and Shen, Yinghan and Ma, Shengjie and Liu, Honghao and others},
+  journal={The Innovation},
+  year={2024},
+  publisher={Elsevier}
+}
+
+@inproceedings{li2025generation,
+  title={From generation to judgment: Opportunities and challenges of {LLM-as-a-Judge}},
+  author={Li, Dawei and Jiang, Bohan and Huang, Liangjie and Beigi, Alimohammad and Zhao, Chengshuai and Tan, Zhen and Bhattacharjee, Amrita and Jiang, Yuxuan and Chen, Canyu and Wu, Tianhao and others},
+  booktitle={Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages={2757--2791},
+  year={2025}
+}
+
+% SLM-AS-A-JUDGE AND SLMJURY
+
+@inproceedings{bi2026judgeboard,
+  title={{JudgeBoard}: Benchmarking and enhancing small language models for reasoning evaluation},
+  author={Bi, Zhenyu and Srivastava, Gaurav and Li, Yang and Roy, Swastik and Lu, Meng and Ziyadi, Morteza and Wang, Xuan},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={40},
+  pages={30076--30084},
+  year={2026}
+}
+
+@article{li2026rethinking,
+  title={Rethinking {LLM-as-a-Judge}: Representation-as-a-Judge with Small Language Models via Semantic Capacity Asymmetry},
+  author={Li, Zhuochun and Zhang, Yong and Li, Ming and Ji, Yuelyu and Zeng, Yiming and Cheng, Ning and Zhu, Yun and Wang, Yanmeng and Wang, Shaojun and Xiao, Jing and others},
+  journal={arXiv preprint arXiv:2601.22588},
+  year={2026}
+}
+
+@article{jayarao2025explicit,
+  title={Explicit Reasoning Makes Better Judges: A Systematic Study on Accuracy, Efficiency, and Robustness},
+  author={Jayarao, Pratik and Gupta, Himanshu and Varshney, Neeraj and Dwivedi, Chaitanya},
+  journal={arXiv preprint arXiv:2509.13332},
+  year={2025}
+}
+
+@article{xu2025j4r,
+  title={{J4R}: Learning to judge with equivalent initial state group relative policy optimization},
+  author={Xu, Austin and Zhou, Yilun and Nguyen, Xuan-Phi and Xiong, Caiming and Joty, Shafiq},
+  journal={arXiv preprint arXiv:2505.13346},
+  year={2025}
+}
+
+@article{zhang2025compassjudger,
+  title={{CompassJudger-2}: Towards generalist judge model via verifiable rewards},
+  author={Zhang, Taolin and Cao, Maosong and Lam, Alexander and Zhang, Songyang and Chen, Kai},
+  journal={arXiv preprint arXiv:2507.09104},
+  year={2025}
+}
+
+@article{jiang2025codejudgebench,
+  title={{CodeJudgeBench}: Benchmarking {LLM-as-a-Judge} for coding tasks},
+  author={Jiang, Hongchao and Chen, Yiming and Cao, Yushi and Lee, Hung-yi and Tan, Robby T},
+  journal={arXiv preprint arXiv:2507.10535},
+  year={2025}
+}
+
+@inproceedings{xu2025does,
+  title={Does context matter? {ContextualJudgeBench} for evaluating {LLM}-based judges in contextual settings},
+  author={Xu, Austin and Bansal, Srijan and Ming, Yifei and Yavuz, Semih and Joty, Shafiq},
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={9541--9564},
+  year={2025}
+}
+
+% TOKEN BUDGET, OVERTHINKING, AND REASONING EFFICIENCY
+
+@inproceedings{han2025token,
+  title={Token-budget-aware {LLM} reasoning},
+  author={Han, Tingxu and Wang, Zhenting and Fang, Chunrong and Zhao, Shiyu and Ma, Shiqing and Chen, Zhenyu},
+  booktitle={Findings of the Association for Computational Linguistics: ACL 2025},
+  pages={24842--24855},
+  year={2025}
+}
+
+@inproceedings{wang2024reasoning,
+  title={Reasoning in token economies: budget-aware evaluation of {LLM} reasoning strategies},
+  author={Wang, Junlin and Jain, Siddhartha and Zhang, Dejiao and Ray, Baishakhi and Kumar, Varun and Athiwaratkun, Ben},
+  booktitle={Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages={19916--19939},
+  year={2024}
+}
+
+@article{sui2025stop,
+  title={Stop overthinking: A survey on efficient reasoning for large language models},
+  author={Sui, Yang and Chuang, Yu-Neng and Wang, Guanchu and Zhang, Jiamu and Zhang, Tianyi and Yuan, Jiayi and Liu, Hongyi and Wen, Andrew and Zhong, Shaochen and Zou, Na and others},
+  journal={arXiv preprint arXiv:2503.16419},
+  year={2025}
+}
+
+@article{srivastava2025llms,
+  title={Do {LLMs} Overthink Basic Math Reasoning? Benchmarking the Accuracy-Efficiency Tradeoff in Language Models},
+  author={Srivastava, Gaurav and Hussain, Aafiya and Srinivasan, Sriram and Wang, Xuan},
+  journal={arXiv preprint arXiv:2507.04023},
+  year={2025}
+}
+
+@article{ma2025reasoning,
+  title={Reasoning models can be effective without thinking},
+  author={Ma, Wenjie and He, Jingxuan and Snell, Charlie and Griggs, Tyler and Min, Sewon and Zaharia, Matei},
+  journal={arXiv preprint arXiv:2504.09858},
+  year={2025}
+}
+
+@article{shojaee2026illusion,
+  title={The illusion of thinking: Understanding the strengths and limitations of reasoning models via the lens of problem complexity},
+  author={Shojaee, Parshin and Mirzadeh, Iman and Horton, Maxwell and Bengio, Samy and Farajtabar, Mehrdad and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  pages={108018--108059},
+  year={2026}
+}
+
+@article{ghosal2026does,
+  title={Does thinking more always help? mirage of test-time scaling in reasoning models},
+  author={Ghosal, Soumya Suvra and Chakraborty, Souradip and Reddy, Avinash and Lu, Yifu and Wang, Mengdi and Manocha, Dinesh and Huang, Furong and Ghavamzadeh, Mohammad and Bedi, Amrit Singh},
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  pages={172664--172691},
+  year={2026}
+}
+
+@article{aggarwal2025optimalthinkingbench,
+  title={{OptimalThinkingBench}: Evaluating over and underthinking in {LLMs}},
+  author={Aggarwal, Pranjal and Kim, Seungone and Lanchantin, Jack and Welleck, Sean and Weston, Jason and Kulikov, Ilia and Saha, Swarnadeep},
+  journal={arXiv preprint arXiv:2508.13141},
+  year={2025}
+}
+
+% PERSONA EFFECTS AND PROMPT SENSITIVITY
+
+@inproceedings{tseng2024two,
+  title={Two tales of persona in {LLMs}: A survey of role-playing and personalization},
+  author={Tseng, Yu-Min and Huang, Yu-Chao and Hsiao, Teng-Yun and Chen, Wei-Lin and Huang, Chao-Wei and Meng, Yu and Chen, Yun-Nung},
+  booktitle={Findings of the Association for Computational Linguistics: EMNLP 2024},
+  pages={16612--16631},
+  year={2024}
+}
+
+@article{salewski2023context,
+  title={In-context impersonation reveals large language models' strengths and biases},
+  author={Salewski, Leonard and Alaniz, Stephan and Rio-Torto, Isabel and Schulz, Eric and Akata, Zeynep},
+  journal={Advances in neural information processing systems},
+  volume={36},
+  pages={72044--72057},
+  year={2023}
+}
+
+@article{abdullahi2026persona,
+  title={The Persona Paradox: Medical Personas as Behavioral Priors in Clinical Language Models},
+  author={Abdullahi, Tassallah and Ghosh, Shrestha and Fraser, Hamish S and Tramontini, Daniel Le{\'o}n and Abbasi, Adeel and Bourjeily, Ghada and Eickhoff, Carsten and Singh, Ritambhara},
+  journal={arXiv preprint arXiv:2601.05376},
+  year={2026}
+}
+
+@inproceedings{ryan2025synthesizeme,
+  title={SynthesizeMe! inducing persona-guided prompts for personalized reward models in {LLMs}},
+  author={Ryan, Michael J and Shaikh, Omar and Bhagirath, Aditri and Frees, Daniel and Held, William Barr and Yang, Diyi},
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={8045--8078},
+  year={2025}
+}
+
+% MULTI-AGENT DEBATE
+
+@inproceedings{du2024improving,
+  title={Improving factuality and reasoning in language models through multiagent debate},
+  author={Du, Yilun and Li, Shuang and Torralba, Antonio and Tenenbaum, Joshua B and Mordatch, Igor},
+  booktitle={Forty-first international conference on machine learning},
+  year={2024}
+}
+
+@inproceedings{liang2024encouraging,
+  title={Encouraging divergent thinking in large language models through multi-agent debate},
+  author={Liang, Tian and He, Zhiwei and Jiao, Wenxiang and Wang, Xing and Wang, Yan and Wang, Rui and Yang, Yujiu and Shi, Shuming and Tu, Zhaopeng},
+  booktitle={Proceedings of the 2024 conference on empirical methods in natural language processing},
+  pages={17889--17904},
+  year={2024}
+}
+
+@inproceedings{srivastava2025debate,
+  title={{DEBATE}, {TRAIN}, {EVOLVE}: Self-Evolution of Language Model Reasoning},
+  author={Srivastava, Gaurav and Bi, Zhenyu and Lu, Meng and Wang, Xuan},
+  booktitle={Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages={32752--32798},
+  year={2025}
+}
+
+@article{hu2026multi,
+  title={Multi-agent debate for {LLM} judges with adaptive stability detection},
+  author={Hu, Tianyu and Tan, Zhen and Wang, Song and Qu, Huaizhi and Chen, Tianlong},
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  pages={46504--46540},
+  year={2026}
+}
+
+@article{lin2025efficient,
+  title={Efficient {LLM} Safety Evaluation through Multi-Agent Debate},
+  author={Lin, Dachuan and Shen, Guobin and Yang, Zihao and Liu, Tianrong and Zhao, Dongcheng and Zeng, Yi},
+  journal={arXiv preprint arXiv:2511.06396},
+  year={2025}
+}
+
+@article{wynn2025talk,
+  title={Talk Isn't Always Cheap: Understanding Failure Modes in Multi-Agent Debate},
+  author={Wynn, Andrea and Satija, Harsh and Hadfield, Gillian},
+  journal={arXiv preprint arXiv:2509.05396},
+  year={2025}
+}
+
+@article{zhang2025stop,
+  title={Stop Overvaluing Multi-Agent Debate--We Must Rethink Evaluation and Embrace Model Heterogeneity},
+  author={Zhang, Hangfan and Cui, Zhiyao and Chen, Jianhao and Wang, Xinrun and Zhang, Qiaosheng and Wang, Zhen and Wu, Dinghao and Hu, Shuyue},
+  journal={arXiv preprint arXiv:2502.08788},
+  year={2025}
+}
+
+% ENSEMBLE METHODS AND MAJORITY VOTING
+
+@article{wang2022self,
+  title={Self-consistency improves chain of thought reasoning in language models},
+  author={Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc and Chi, Ed and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
+  journal={arXiv preprint arXiv:2203.11171},
+  year={2022}
+}
+
+@article{verga2024replacing,
+  title={Replacing judges with juries: Evaluating {LLM} generations with a panel of diverse models},
+  author={Verga, Pat and Hofstatter, Sebastian and Althammer, Sophia and Su, Yixuan and Piktus, Aleksandra and Arkhangorodsky, Arkady and Xu, Minjie and White, Naomi and Lewis, Patrick},
+  journal={arXiv preprint arXiv:2404.18796},
+  year={2024}
+}
+
+@inproceedings{cho2025cosmosfl,
+  title={{COSMosFL}: Ensemble of Small Language Models for Fault Localisation},
+  author={Cho, Hyunjoon and Kang, Sungmin and An, Gabin and Yoo, Shin},
+  booktitle={2025 IEEE/ACM International Workshop on Large Language Models for Code (LLM4Code)},
+  pages={17--24},
+  year={2025},
+  organization={IEEE}
+}
+
+% JUDGE BENCHMARKS
+
+@inproceedings{tan2025judgebench,
+  title={{JudgeBench}: A benchmark for evaluating {LLM}-based judges},
+  author={Tan, Sijun and Zhuang, Siyuan and Montgomery, Kyle and Tang, William and Cuadron, Alejandro and Wang, Chenguang and Popa, Raluca and Stoica, Ion},
+  booktitle={International Conference on Learning Representations},
+  volume={2025},
+  pages={63277--63303},
+  year={2025}
+}
+
+% DATASETS
+
+@article{cobbe2021training,
+  title={Training verifiers to solve math word problems},
+  author={Cobbe, Karl and Kosaraju, Vineet and Bavarian, Mohammad and Chen, Mark and Jun, Heewoo and Kaiser, Lukasz and Plappert, Matthias and Tworek, Jerry and Hilton, Jacob and Nakano, Reiichiro and others},
+  journal={arXiv preprint arXiv:2110.14168},
+  year={2021}
+}
+
+@article{hendrycks2021measuring,
+  title={Measuring mathematical problem solving with the math dataset},
+  author={Hendrycks, Dan and Burns, Collin and Kadavath, Saurav and Arora, Akul and Basart, Steven and Tang, Eric and Song, Dawn and Steinhardt, Jacob},
+  journal={arXiv preprint arXiv:2103.03874},
+  year={2021}
+}
+
+@article{achiam2023gpt,
+  title={{GPT-4} technical report},
+  author={Achiam, Josh and Adler, Steven and Agarwal, Sandhini and Ahmad, Lama and Akkaya, Ilge and Aleman, Florencia Leoni and Almeida, Diogo and Altenschmidt, Janko and Altman, Sam and Anadkat, Shyamal and others},
+  journal={arXiv preprint arXiv:2303.08774},
+  year={2023}
+}
+
+@misc{qwen2025qwen25technicalreport,
+  title={Qwen2.5 Technical Report}, 
+  author={Qwen and : and An Yang and Baosong Yang and Beichen Zhang and Binyuan Hui and Bo Zheng and Bowen Yu and Chengyuan Li and Dayiheng Liu and Fei Huang and Haoran Wei and Huan Lin and Jian Yang and Jianhong Tu and Jianwei Zhang and Jianxin Yang and Jiaxi Yang and Jingren Zhou and Junyang Lin and Kai Dang and Keming Lu and Keqin Bao and Kexin Yang and Le Yu and Mei Li and Mingfeng Xue and Pei Zhang and Qin Zhu and Rui Men and Runji Lin and Tianhao Li and Tianyi Tang and Tingyu Xia and Xingzhang Ren and Xuancheng Ren and Yang Fan and Yang Su and Yichang Zhang and Yu Wan and Yuqiong Liu and Zeyu Cui and Zhenru Zhang and Zihan Qiu},
+  year={2025},
+  eprint={2412.15115},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2412.15115}, 
+}
+
+@article{yang2025qwen3,
+  title={Qwen3 technical report},
+  author={Yang, An and Li, Anfeng and Yang, Baosong and Zhang, Beichen and Hui, Binyuan and Zheng, Bo and Yu, Bowen and Gao, Chang and Huang, Chengen and Lv, Chenxu and others},
+  journal={arXiv preprint arXiv:2505.09388},
+  year={2025}
+}
+
+@article{grattafiori2024llama,
+  title={The {LLaMA} 3 herd of models},
+  author={Grattafiori, Aaron and Dubey, Abhimanyu and Jauhri, Abhinav and Pandey, Abhinav and Kadian, Abhishek and Al-Dahle, Ahmad and Letman, Aiesha and Mathur, Akhil and Schelten, Alan and Vaughan, Alex and others},
+  journal={arXiv preprint arXiv:2407.21783},
+  year={2024}
+}
+
+@article{abdin2024phi,
+  title={{Phi}-4 technical report},
+  author={Abdin, Marah and Aneja, Jyoti and Behl, Harkirat and Bubeck, S{\'e}bastien and Eldan, Ronen and Gunasekar, Suriya and Harrison, Michael and Hewett, Russell J and Javaheripi, Mojan and Kauffmann, Piero and others},
+  journal={arXiv preprint arXiv:2412.08905},
+  year={2024}
+}
+
+@article{abouelenin2025phi,
+  title={{Phi}-4-mini technical report: Compact yet powerful multimodal language models via mixture-of-loras},
+  author={Abouelenin, Abdelrahman and Ashfaq, Atabak and Atkinson, Adam and Awadalla, Hany and Bach, Nguyen and Bao, Jianmin and Benhaim, Alon and Cai, Martin and Chaudhary, Vishrav and Chen, Congcong and others},
+  journal={arXiv preprint arXiv:2503.01743},
+  year={2025}
+}
+
+@article{abdin2025phi,
+  title={{Phi}-4-reasoning technical report},
+  author={Abdin, Marah and Agarwal, Sahaj and Awadallah, Ahmed and Balachandran, Vidhisha and Behl, Harkirat and Chen, Lingjiao and de Rosa, Gustavo and Gunasekar, Suriya and Javaheripi, Mojan and Joshi, Neel and others},
+  journal={arXiv preprint arXiv:2504.21318},
+  year={2025}
+}
+
+% RELATED SLM WORK
+
+@article{ouyang2022training,
+  title={Training language models to follow instructions with human feedback},
+  author={Ouyang, Long and Wu, Jeffrey and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll and Mishkin, Pamela and Zhang, Chong and Agarwal, Sandhini and Slama, Katarina and Ray, Alex and others},
+  journal={Advances in neural information processing systems},
+  volume={35},
+  pages={27730--27744},
+  year={2022}
+}
+
+@article{bai2022constitutional,
+  title={Constitutional {AI}: Harmlessness from {AI} feedback},
+  author={Bai, Yuntao and Kadavath, Saurav and Kundu, Sandipan and Askell, Amanda and Kernion, Jackson and Jones, Andy and Chen, Anna and Goldie, Anna and Mirhoseini, Azalia and McKinnon, Cameron and others},
+  journal={arXiv preprint arXiv:2212.08073},
+  year={2022}
+}
+
+% INFERENCE AND SERVING
+
+@inproceedings{kwon2023efficient,
+  title={Efficient memory management for large language model serving with pagedattention},
+  author={Kwon, Woosuk and Li, Zhuohan and Zhuang, Siyuan and Sheng, Ying and Zheng, Lianmin and Yu, Cody Hao and Gonzalez, Joseph and Zhang, Hao and Stoica, Ion},
+  booktitle={Proceedings of the 29th symposium on operating systems principles},
+  pages={611--626},
+  year={2023}
+}
+
+@article{wan2023efficient,
+  title={Efficient large language models: A survey},
+  author={Wan, Zhongwei and Wang, Xin and Liu, Che and Alam, Samiul and Zheng, Yu and Liu, Jiachen and Qu, Zhongnan and Yan, Shen and Zhu, Yi and Zhang, Quanlu and others},
+  journal={arXiv preprint arXiv:2312.03863},
+  year={2023}
+}
+
+% CHAIN-OF-THOUGHT, REASONING, AND TRAINING METHODS
+
+@article{wei2022chain,
+  title={Chain-of-thought prompting elicits reasoning in large language models},
+  author={Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Xia, Fei and Chi, Ed and Le, Quoc V and Zhou, Denny and others},
+  journal={Advances in neural information processing systems},
+  volume={35},
+  pages={24824--24837},
+  year={2022}
+}
+
+@article{guo2025deepseek,
+  title={{DeepSeek}-R1 incentivizes reasoning in {LLMs} through reinforcement learning},
+  author={Guo, Daya and Yang, Dejian and Zhang, Haowei and Song, Junxiao and Wang, Peiyi and Zhu, Qihao and Xu, Runxin and Zhang, Ruoyu and Ma, Shirong and Bi, Xiao and others},
+  journal={Nature},
+  volume={645},
+  number={8081},
+  pages={633--638},
+  year={2025},
+  publisher={Nature Publishing Group UK London}
+}
+
+@article{lu2024small,
+  title={Small language models: Survey, measurements, and insights},
+  author={Lu, Zhenyan and Li, Xiang and Cai, Dongqi and Yi, Rongjie and Liu, Fangming and Zhang, Xiwen and Lane, Nicholas D and Xu, Mengwei},
+  journal={arXiv preprint arXiv:2409.15790},
+  year={2024}
+}
+
+@article{wang2023shepherd,
+  title={Shepherd: A critic for language model generation},
+  author={Wang, Tianlu and Yu, Ping and Tan, Xiaoqing Ellen and O'Brien, Sean and Pasunuru, Ramakanth and Dwivedi-Yu, Jane and Golovneva, Olga and Zettlemoyer, Luke and Fazel-Zarandi, Maryam and Celikyilmaz, Asli},
+  journal={arXiv preprint arXiv:2308.04592},
+  year={2023}
+}
+
+@article{wang2024self,
+  title={Self-taught evaluators},
+  author={Wang, Tianlu and Kulikov, Ilia and Golovneva, Olga and Yu, Ping and Yuan, Weizhe and Dwivedi-Yu, Jane and Pang, Richard Yuanzhe and Fazel-Zarandi, Maryam and Weston, Jason and Li, Xian},
+  journal={arXiv preprint arXiv:2408.02666},
+  year={2024}
+}
+
+@article{rafailov2023direct,
+  title={Direct preference optimization: Your language model is secretly a reward model},
+  author={Rafailov, Rafael and Sharma, Archit and Mitchell, Eric and Manning, Christopher D and Ermon, Stefano and Finn, Chelsea},
+  journal={Advances in neural information processing systems},
+  volume={36},
+  pages={53728--53741},
+  year={2023}
+}
+
+@inproceedings{lightman2024let,
+  title={Let's verify step by step},
+  author={Lightman, Hunter and Kosaraju, Vineet and Burda, Yuri and Edwards, Harrison and Baker, Bowen and Lee, Teddy and Leike, Jan and Schulman, John and Sutskever, Ilya and Cobbe, Karl},
+  booktitle={International Conference on Learning Representations},
+  volume={2024},
+  pages={39578--39601},
+  year={2024}
+}
+
+% BENCHMARKS AND EVALUATION INFRASTRUCTURE
+
+@inproceedings{lambert2025rewardbench,
+  title={{RewardBench}: Evaluating reward models for language modeling},
+  author={Lambert, Nathan and Pyatkin, Valentina and Morrison, Jacob and Miranda, LJ and Lin, Bill Yuchen and Chandu, Khyathi and Dziri, Nouha and Kumar, Sachin and Zick, Tom and Choi, Yejin and others},
+  booktitle={Findings of the Association for Computational Linguistics: NAACL 2025},
+  pages={1755--1797},
+  year={2025}
+}
+
+@article{hendrycks2020measuring,
+  title={Measuring massive multitask language understanding},
+  author={Hendrycks, Dan and Burns, Collin and Basart, Steven and Zou, Andy and Mazeika, Mantas and Song, Dawn and Steinhardt, Jacob},
+  journal={arXiv preprint arXiv:2009.03300},
+  year={2020}
+}
+
+% ADDITIONAL WORKS FOR EXPANDED INTRODUCTION
+
+@inproceedings{li2024generative,
+  title={Generative judge for evaluating alignment},
+  author={Li, Junlong and Sun, Shichao and Yuan, Weizhe and Fan, Run-Ze and Liu, Pengfei and others},
+  booktitle={International Conference on Learning Representations},
+  volume={2024},
+  pages={27547--27574},
+  year={2024}
+}
+
+@inproceedings{vu2024foundational,
+  title={Foundational autoraters: Taming large language models for better automatic evaluation},
+  author={Vu, Tu and Krishna, Kalpesh and Alzubi, Salaheddin and Tar, Chris and Faruqui, Manaal and Sung, Yun-Hsuan},
+  booktitle={Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing},
+  pages={17086--17105},
+  year={2024}
+}
+
+@article{team2024gemma1,
+  title={{Gemma}: Open models based on gemini research and technology},
+  author={Team, Gemma and Mesnard, Thomas and Hardin, Cassidy and Dadashi, Robert and Bhupatiraju, Surya and Pathak, Shreya and Sifre, Laurent and Rivi{\`e}re, Morgane and Kale, Mihir Sanjay and Love, Juliette and others},
+  journal={arXiv preprint arXiv:2403.08295},
+  year={2024}
+}
+
+@article{team2024gemma2,
+  title={{Gemma} 2: Improving open language models at a practical size},
+  author={Team, Gemma and Riviere, Morgane and Pathak, Shreya and Sessa, Pier Giuseppe and Hardin, Cassidy and Bhupatiraju, Surya and Hussenot, L{\'e}onard and Mesnard, Thomas and Shahriari, Bobak and Ram{\'e}, Alexandre and others},
+  journal={arXiv preprint arXiv:2408.00118},
+  year={2024}
+}
+
+@article{burns2023weak,
+  title={Weak-to-strong generalization: Eliciting strong capabilities with weak supervision},
+  author={Burns, Collin and Izmailov, Pavel and Kirchner, Jan Hendrik and Baker, Bowen and Gao, Leo and Aschenbrenner, Leopold and Chen, Yining and Ecoffet, Adrien and Joglekar, Manas and Leike, Jan and others},
+  journal={arXiv preprint arXiv:2312.09390},
+  year={2023}
+}
+
+@inproceedings{li2025preference,
+  title={Preference leakage: A contamination problem in {LLM-as-a-Judge}},
+  author={Li, Dawei and Sun, Renliang and Huang, Yue and Zhong, Ming and Jiang, Bohan and Han, Jiawei and Zhang, Xiangliang and Wang, Wei and others},
+  booktitle={Data in Generative Models-The Bad, the Ugly, and the Greats},
+  year={2025}
+}
+
+@inproceedings{shankar2024validates,
+  title={Who validates the validators? aligning {LLM}-assisted evaluation of {LLM} outputs with human preferences},
+  author={Shankar, Shreya and Zamfirescu-Pereira, JD and Hartmann, Bj{\"o}rn and Parameswaran, Aditya and Arawjo, Ian},
+  booktitle={Proceedings of the 37th Annual ACM Symposium on User Interface Software and Technology},
+  pages={1--14},
+  year={2024}
+}
+
+% ADDITIONAL MODELS FROM EXTENDED RESEARCH PASS
+
+
+@article{deshpande2024glider,
+  title={{GLIDER}: Grading {LLM} interactions and decisions using explainable ranking},
+  author={Deshpande, Darshan and Ravi, Selvan Sunitha and CH-Wang, Sky and Mielczarek, Bartosz and Kannappan, Anand and Qian, Rebecca},
+  journal={arXiv preprint arXiv:2412.14140},
+  year={2024}
+}
+
+@article{chen2025judgelrm,
+  title={{JudgeLRM}: Large reasoning models as a judge},
+  author={Chen, Nuo and Hu, Zhiyuan and Zou, Qingyun and Wu, Jiaying and Wang, Qian and Hooi, Bryan and He, Bingsheng},
+  journal={arXiv preprint arXiv:2504.00050},
+  year={2025}
+}
+
+@article{whitehouse2025j1,
+  title={{J1}: Incentivizing thinking in {LLM-as-a-Judge} via reinforcement learning},
+  author={Whitehouse, Chenxi and Wang, Tianlu and Yu, Ping and Li, Xian and Weston, Jason and Kulikov, Ilia and Saha, Swarnadeep},
+  journal={arXiv preprint arXiv:2505.10320},
+  year={2025}
+}
+
+@article{pombal2025m,
+  title={{M-Prometheus}: A Suite of Open Multilingual {LLM} Judges},
+  author={Pombal, Jos{\'e} and Yoon, Dongkeun and Fernandes, Patrick and Wu, Ian and Kim, Seungone and Rei, Ricardo and Neubig, Graham and Martins, Andr{\'e} FT},
+  journal={arXiv preprint arXiv:2504.04953},
+  year={2025}
+}
+
+@inproceedings{lee2024fleur,
+  title={Fleur: An explainable reference-free evaluation metric for image captioning using a large multimodal model},
+  author={Lee, Yebin and Park, Imseong and Kang, Myungjoo},
+  booktitle={Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={3732--3746},
+  year={2024}
+}
+
+@article{wang2025trustjudge,
+  title={{TrustJudge}: Inconsistencies of {LLM-as-a-Judge} and How to Alleviate Them},
+  author={Wang, Yidong and Song, Yunze and Zhu, Tingyuan and Zhang, Xuanwang and Yu, Zhuohao and Chen, Hao and Song, Chiyu and Wang, Qiufeng and Wang, Cunxiang and Wu, Zhen and others},
+  journal={arXiv preprint arXiv:2509.21117},
+  year={2025}
+}
+
+@inproceedings{jung2025trust,
+  title={Trust or escalate: {LLM} judges with provable guarantees for human agreement},
+  author={Jung, Jaehun and Brahman, Faeze and Choi, Yejin},
+  booktitle={International Conference on Learning Representations},
+  volume={2025},
+  pages={3101--3125},
+  year={2025}
+}
+
+@inproceedings{zhang2025crowd,
+  title={Crowd comparative reasoning: Unlocking comprehensive evaluations for {LLM-as-a-Judge}},
+  author={Zhang, Qiyuan and Wang, Yufei and Jiang, Yuxin and Li, Liangyou and Wu, Chuhan and Wang, Yasheng and Jiang, Xin and Shang, Lifeng and Tang, Ruiming and Lyu, Fuyuan and others},
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={5059--5074},
+  year={2025}
+}
+
+@inproceedings{zheng2025cheating,
+  title={Cheating automatic {LLM} benchmarks: Null models achieve high win rates},
+  author={Zheng, Xiaosen and Pang, Tianyu and Du, Chao and Liu, Qian and Jiang, Jing and Lin, Min},
+  booktitle={International Conference on Learning Representations},
+  volume={2025},
+  pages={61994--62027},
+  year={2025}
+}
+
+@article{cemri2026multi,
+  title={Why do multi-agent {LLM} systems fail?},
+  author={Cemri, Mert and Pan, Melissa Z and Yang, Shuyi and Agrawal, Lakshya A and Chopra, Bhavya and Tiwari, Rishabh and Keutzer, Kurt and Parameswaran, Aditya and Klein, Dan and Ramchandran, Kannan and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  year={2026}
+}
+
+@inproceedings{jimenez2024swe,
+  title={{SWE-bench}: Can language models resolve real-world github issues?},
+  author={Jimenez, Carlos E and Yang, John and Wettig, Alexander and Yao, Shunyu and Pei, Kexin and Press, Ofir and Narasimhan, Karthik},
+  booktitle={International Conference on Learning Representations},
+  volume={2024},
+  pages={54107--54157},
+  year={2024}
+}
+
+@inproceedings{jain2025livecodebench,
+  title={{LiveCodeBench}: Holistic and contamination free evaluation of large language models for code},
+  author={Jain, Naman and Gu, Alex and Li, Wen-Ding and Yan, Fanjia and Zhang, Tianjun and Wang, Sida and Solar-Lezama, Armando and Sen, Koushik and Stoica, Ion},
+  booktitle={International Conference on Learning Representations},
+  volume={2025},
+  pages={58791--58831},
+  year={2025}
+}
+
+@article{wang2023decodingtrust,
+  title={{DecodingTrust}: A Comprehensive Assessment of Trustworthiness in $\{${GPT}$\}$ Models},
+  author={Wang, Boxin and Chen, Weixin and Pei, Hengzhi and Xie, Chulin and Kang, Mintong and Zhang, Chenhui and Xu, Chejian and Xiong, Zidi and Dutta, Ritik and Schaeffer, Rylan and others},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2023}
+}
+
+@inproceedings{lin2022truthfulqa,
+  title={{TruthfulQA}: Measuring how models mimic human falsehoods},
+  author={Lin, Stephanie and Hilton, Jacob and Evans, Owain},
+  booktitle={Proceedings of the 60th annual meeting of the association for computational linguistics (volume 1: long papers)},
+  pages={3214--3252},
+  year={2022}
+}
+
+@inproceedings{ye2025justice,
+  title={Justice or prejudice? quantifying biases in {LLM-as-a-Judge}},
+  author={Ye, Jiayi and Wang, Yanbo and Huang, Yue and Chen, Dongping and Zhang, Qihui and Moniz, Nuno and Gao, Tian and Geyer, Werner and Huang, Chao and Chen, Pin-Yu and others},
+  booktitle={International Conference on Learning Representations},
+  volume={2025},
+  pages={102351--102390},
+  year={2025}
+}
+
+% NEW CITATIONS ADDED DURING POLISHING PASS
+
+@article{zhao2025one,
+  title={One token to fool {LLM-as-a-Judge}},
+  author={Zhao, Yulai and Liu, Haolin and Yu, Dian and Kung, Sunyuan and Chen, Meijia and Mi, Haitao and Yu, Dong},
+  journal={arXiv preprint arXiv:2507.08794},
+  year={2025}
+}
+
+@inproceedings{sheng2025analyzing,
+  title={Analyzing Uncertainty of {LLM-as-a-Judge}: Interval Evaluations with Conformal Prediction},
+  author={Sheng, Huanxin and Liu, Xinyi and He, Hangfeng and Zhao, Jieyu and Kang, Jian},
+  booktitle={Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages={11297--11339},
+  year={2025}
+}
+
+@article{xiong2025stepwiser,
+  title={{StepWiser}: Stepwise generative judges for wiser reasoning},
+  author={Xiong, Wei and Zhao, Wenting and Yuan, Weizhe and Golovneva, Olga and Zhang, Tong and Weston, Jason and Sukhbaatar, Sainbayar},
+  journal={arXiv preprint arXiv:2508.19229},
+  year={2025}
+}
+
+@inproceedings{zhao2026genprm,
+  title={{GenPRM}: Scaling test-time compute of process reward models via generative reasoning},
+  author={Zhao, Jian and Liu, Runze and Zhang, Kaiyan and Zhou, Zhimu and Gao, Junqi and Li, Dong and Lyu, Jiafei and Qian, Zhouyi and Qi, Biqing and Li, Xiu and others},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={40},
+  pages={34932--34940},
+  year={2026}
+}
+
+@inproceedings{wei2025igniting,
+  title={Igniting creative writing in small language models: {LLM-as-a-Judge} versus multi-agent refined rewards},
+  author={Wei, Xiaolong and Lu, Bo and Zhang, Xingyu and Zhao, Zhejun and Shen, Dongdong and Xia, Long and Yin, Dawei},
+  booktitle={Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages={17171--17197},
+  year={2025}
+}
+
+@article{manik2026gemma,
+  title={{Gemma} 4, {Phi}-4, and Qwen3: Accuracy-Efficiency Tradeoffs in Dense and MoE Reasoning Language Models},
+  author={Manik, Md Motaleb Hossen and Wang, Ge},
+  journal={arXiv preprint arXiv:2604.07035},
+  year={2026}
+}
+
+% EXTRAS
+
+@article{alexandru2025atla,
+  title={Atla {Selene} mini: A general purpose evaluation model},
+  author={Alexandru, Andrei and Calvi, Antonia and Broomfield, Henry and Golden, Jackson and Dai, Kyle and Leys, Mathias and Burger, Maurice and Bartolo, Max and Engeler, Roman and Pisupati, Sashank and others},
+  journal={arXiv preprint arXiv:2501.17195},
+  year={2025}
+}
+
+@article{crupi2026improving,
+  title={Improving Code Generation via Small Language Model-as-a-judge},
+  author={Crupi, Giuseppe and Tufano, Rosalia and Bavota, Gabriele},
+  journal={arXiv preprint arXiv:2602.11911},
+  year={2026}
+}
+
+@article{li2024llms,
+  title={{LLMs-as-Judges}: a comprehensive survey on {LLM}-based evaluation methods},
+  author={Li, Haitao and Dong, Qian and Chen, Junjie and Su, Huixue and Zhou, Yujia and Ai, Qingyao and Ye, Ziyi and Liu, Yiqun},
+  journal={arXiv preprint arXiv:2412.05579},
+  year={2024}
+}
+
+@article{landesberg2025causal,
+  title={Causal Judge Evaluation: Calibrated Surrogate Metrics for {LLM} Systems},
+  author={Landesberg, Eddie and Narayan, Manjari},
+  journal={arXiv preprint arXiv:2512.11150},
+  year={2025}
+}
+
+@article{bedemariam2025potential,
+  title={Potential and perils of large language models as judges of unstructured textual data},
+  author={Bedemariam, Rewina and Perez, Natalie and Bhaduri, Sreyoshi and Kapoor, Satya and Gil, Alex and Conjar, Elizabeth and Itoku, Ikkei and Theil, David and Chadha, Aman and Nayyar, Naumaan},
+  journal={arXiv preprint arXiv:2501.08167},
+  year={2025}
+}
+
+% ═══════════════════════════════════════════════════════════════════════════
+% NEW CITATIONS ADDED FOR RESUBMISSION (July 2026)
+% ═══════════════════════════════════════════════════════════════════════════
+
+
+
+@article{dougruoz2026challenges,
+  title={Challenges and Recommendations for {LLMs}-as-a-Judge in Multilingual Settings and Low-Resource Languages},
+  author={Do{\u{g}}ru{\"o}z, A Seza and Liao, Xixian and Blaschke, Verena and Prange, Jakob and Li, Senyu and Adelani, David Ifeoluwa},
+  journal={arXiv preprint arXiv:2607.02235},
+  year={2026}
+}
+
+@article{chen2026benchmarking,
+  title={Benchmarking {LLM-as-a-Judge} for Long-Form Output Evaluation},
+  author={Chen, Junjie and Dong, Yuxi and Li, Haitao and Su, Weihang and Zhou, Yujia and Zhang, Min and Liu, Yiqun and Ai, Qinyao},
+  journal={arXiv preprint arXiv:2606.01629},
+  year={2026}
+}
+
+% ===== ADDED DURING RESUBMISSION REVISION =====
+% Both entries below were verified against arXiv (title, author order, identifier).
+% Please replace with an exact Google Scholar / ACL Anthology export before camera-ready.
+
+@inproceedings{xu2026incentivizing,
+  title={Incentivizing agentic reasoning in {LLM} judges via tool-integrated reinforcement learning},
+  author={Xu, Ran and Chen, Jingjing and Ye, Jiayu and Wu, Yu and Yan, Jun and Yang, Carl and Yu, Hongkun},
+  booktitle={International Conference on Learning Representations},
+  volume={2026},
+  pages={156446--156468},
+  year={2026}
+}
+
+@article{lai2026beyond,
+  title={Beyond the surface: Enhancing {LLM-as-a-Judge} alignment with human via internal representations},
+  author={Lai, Peng and Zheng, Jianjie and Cheng, Sijie and Chen, Yun and Li, Peng and Liu, Yang and Chen, Guanhua},
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  pages={93353--93383},
+  year={2026}
+}
+
+% ---- Added for the camera-ready (2026-10-25); replace with Google Scholar BibTeX ----
+@article{li2025judging,
+  title={Judging with confidence: Calibrating autoraters to preference distributions},
+  author={Li, Zhuohang and Li, Xiaowei and Huang, Chengyu and Li, Guowang and Goshvadi, Katayoon and Dai, Bo and Schuurmans, Dale and Zhou, Paul and Palangi, Hamid and Song, Yiwen and others},
+  journal={arXiv preprint arXiv:2510.00263},
+  year={2025}
+}
+
+@article{son2024mm,
+  title={MM-Eval: a multilingual meta-evaluation benchmark for LLM-as-a-Judge and reward models},
+  author={Son, Guijin and Yoon, Dongkeun and Suk, Juyoung and Aula-Blasco, Javier and Aslan, Mano and Kim, Vu Trong and Islam, Shayekh Bin and Prats-Cristi{\`a}, Jaume and Tormo-Ba{\~n}uelos, Luc{\'\i}a and Kim, Seungone},
+  journal={arXiv preprint arXiv:2410.17578},
+  year={2024}
+}
+
+@inproceedings{perez2023discovering,
+  title={Discovering language model behaviors with model-written evaluations},
+  author={Perez, Ethan and Ringer, Sam and Lukosiute, Kamile and Nguyen, Karina and Chen, Edwin and Heiner, Scott and Pettit, Craig and Olsson, Catherine and Kundu, Sandipan and Kadavath, Saurav and others},
+  booktitle={Findings of the association for computational linguistics: ACL 2023},
+  pages={13387--13434},
+  year={2023}
+}
+
+@misc{wei2024simplesyntheticdatareduces,
+  title={Simple synthetic data reduces sycophancy in large language models}, 
+  author={Jerry Wei and Da Huang and Yifeng Lu and Denny Zhou and Quoc V. Le},
+  year={2024},
+  eprint={2308.03958},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2308.03958}, 
+}

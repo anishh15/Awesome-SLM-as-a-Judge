@@ -1,76 +1,49 @@
-import { useState } from 'react'
-import { FileText, BookOpen, Copy, Check, Heart } from 'lucide-react'
-import GithubIcon from './GithubIcon'
-import { citation, paperMeta } from '../data/paperData'
+import { Link } from 'react-router-dom'
+import site, { pdfUrl } from '../lib/site.js'
+import { GitHubIcon, LogoMark } from './Icons.jsx'
+import { NAV } from './Header.jsx'
 
 export default function Footer() {
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(citation)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {}
-  }
-
+  const { config, paper } = site
+  const blob = (p) => `${config.repo}/blob/main/${p}`
   return (
-    <footer className="footer" id="citation">
-      <div className="container">
-        <div className="footer-grid">
-          {/* Citation */}
-          <div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '16px', color: 'var(--c-text)' }}>
-              📎 Citation
-            </h3>
-            <div className="citation-box">
-              <button className="citation-copy-btn" onClick={handleCopy}>
-                {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}
-              </button>
-              {citation}
-            </div>
-          </div>
-
-          {/* Authors */}
-          <div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '16px', color: 'var(--c-text)' }}>
-              Authors
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {paperMeta.authors.map(a => (
-                <div key={a.name}>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--c-text)' }}>{a.name}</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--c-text-muted)' }}>{a.affiliation}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '16px', color: 'var(--c-text)' }}>
-              Links
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <a href="paper.pdf" target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--c-text-secondary)' }}>
-                <FileText size={15} /> Read Paper (PDF)
-              </a>
-              <a href={paperMeta.repo} target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--c-text-secondary)' }}>
-                <GithubIcon size={15} /> GitHub Repository
-              </a>
-              <a href={paperMeta.repo} target="_blank" rel="noopener" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--c-text-secondary)' }}>
-                <BookOpen size={15} /> Awesome List
-              </a>
-            </div>
+    <footer className="site-footer">
+      <div className="container footer-grid">
+        <div className="footer-brand">
+          <Link to="/" className="brand" viewTransition>
+            <LogoMark size={28} />
+            <span className="brand-name"><span className="brand-awesome">Awesome</span> <b>SLM</b>-as-a-<b className="brand-accent">Judge</b></span>
+          </Link>
+          <p className="footer-blurb">
+            The companion site of <em>{paper.title}</em> by {paper.authors.map((a) => a.name).join(', ').replace(/, ([^,]*)$/, ' and $1')}.
+            {' '}{config.venue}.
+          </p>
+          <div className="footer-icons">
+            <a className="icon-btn" href={config.repo} target="_blank" rel="noopener noreferrer" aria-label="GitHub repository"><GitHubIcon size={17} /></a>
           </div>
         </div>
-
-        <div className="footer-bottom">
-          <span>© 2026 · Small Language Models as Judges: A Survey</span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            Made with <Heart size={12} style={{ color: 'var(--c-accent)' }} /> by Anish, Nitesh & Gaurav
-          </span>
+        <nav className="footer-col" aria-label="Pages">
+          <p className="footer-head">Pages</p>
+          {NAV.map((n) => <Link key={n.to} to={n.to} viewTransition>{n.label}</Link>)}
+          <Link to="/cite" viewTransition>Cite</Link>
+        </nav>
+        <div className="footer-col">
+          <p className="footer-head">Resources</p>
+          <a href={pdfUrl} target="_blank" rel="noopener">Paper (PDF)</a>
+          <a href={config.repo} target="_blank" rel="noopener noreferrer">GitHub repository</a>
+          <a href={blob('CITATION.cff')} target="_blank" rel="noopener noreferrer">CITATION.cff</a>
+          <a href={blob('CONTRIBUTING.md')} target="_blank" rel="noopener noreferrer">Contributing</a>
         </div>
+        <div className="footer-col">
+          <p className="footer-head">Contact</p>
+          {paper.authors.map((a) => (
+            <a key={a.email} href={`mailto:${a.email}`}>{a.name}</a>
+          ))}
+          <a href={`${config.repo}/issues`} target="_blank" rel="noopener noreferrer">Open an issue</a>
+        </div>
+      </div>
+      <div className="container footer-bottom">
+        <p>The list and code are MIT licensed. Figures come from the survey; each listed work belongs to its authors.</p>
       </div>
     </footer>
   )

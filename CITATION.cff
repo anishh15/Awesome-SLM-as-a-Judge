@@ -1,24 +1,41 @@
 cff-version: 1.2.0
-message: "If you use this survey or repository, please cite it as below."
-title: "Small Language Models as Judges: A Survey"
+message: "If you use this list or the survey, please cite the survey as below."
+title: "Awesome SLM-as-a-Judge: companion repository of the survey Small Language Models as Judges"
+type: dataset
 authors:
   - family-names: Laddha
     given-names: Anish
-    affiliation: "LNM Institute of Information Technology, Jaipur, India"
+    affiliation: "Department of Computer Science and Engineering, LNMIIT, India"
+    email: anshladdha15@gmail.com
   - family-names: Pradhan
     given-names: Nitesh
-    affiliation: "LNM Institute of Information Technology, Jaipur, India"
+    affiliation: "Department of Computer Science and Engineering, LNMIIT, India"
+    email: nitesh.pradhan@lnmiit.ac.in
   - family-names: Srivastava
     given-names: Gaurav
     affiliation: "Department of Computer Science, Virginia Tech, USA"
-type: article
-year: 2025
+    email: gks@vt.edu
 repository-code: "https://github.com/anishh15/Awesome-SLM-as-a-Judge"
+url: "https://anishh15.github.io/Awesome-SLM-as-a-Judge/"
 license: MIT
 keywords:
   - small language models
-  - LLM-as-a-Judge
   - SLM-as-a-Judge
+  - LLM-as-a-Judge
   - automated evaluation
-  - natural language processing
+  - reward models
   - survey
+preferred-citation:
+  type: generic
+  title: "Small Language Models as Judges: A Survey"
+  authors:
+    - family-names: Laddha
+      given-names: Anish
+    - family-names: Pradhan
+      given-names: Nitesh
+    - family-names: Srivastava
+      given-names: Gaurav
+  year: 2026
+  status: preprint
+  notes: Preprint
+  url: "https://anishh15.github.io/Awesome-SLM-as-a-Judge/"

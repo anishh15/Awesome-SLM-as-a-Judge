@@ -1,69 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
-    <!-- Inner fill: radial gradient for dome/3D lighting -->
-    <radialGradient id="dome" cx="0.45" cy="0.38" r="0.6">
-      <stop offset="0%" stop-color="#1e4a42"/>
-      <stop offset="100%" stop-color="#0a201c"/>
-    </radialGradient>
-
-    <!-- Ring gradient -->
-    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#5ce8c4"/>
-      <stop offset="50%" stop-color="#3db8a0"/>
-      <stop offset="100%" stop-color="#5ce8c4"/>
-    </linearGradient>
-
-    <!-- SLM text gradient: white to light mint for depth -->
-    <linearGradient id="txt" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#c8efe4"/>
-    </linearGradient>
-
-    <!-- Separator gradient: fades at edges -->
-    <linearGradient id="sep" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3db8a0" stop-opacity="0"/>
-      <stop offset="30%" stop-color="#3db8a0" stop-opacity="0.6"/>
-      <stop offset="70%" stop-color="#3db8a0" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#3db8a0" stop-opacity="0"/>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f9a80"/>
+      <stop offset="0.5" stop-color="#19705c"/>
+      <stop offset="1" stop-color="#0c4a3c"/>
     </linearGradient>
   </defs>
-
-  <!-- Outer decorative ring -->
-  <circle cx="16" cy="16" r="15.5" fill="none"
-    stroke="#3db8a0" stroke-width="0.4" opacity="0.35"/>
-
-  <!-- Main circle with gradient border -->
-  <circle cx="16" cy="16" r="13.6"
-    fill="url(#dome)"
-    stroke="url(#ring)" stroke-width="1.4"/>
-
-  <!-- Inner subtle ring for seal effect -->
-  <circle cx="16" cy="16" r="12"
-    fill="none"
-    stroke="#3db8a0" stroke-width="0.3" opacity="0.15"/>
-
-  <!-- "SLM" primary text with gradient -->
-  <text x="16" y="13.8"
-    text-anchor="middle"
-    font-family="'Helvetica Neue','Arial Black',Arial,sans-serif"
-    font-size="7.5"
-    font-weight="900"
-    fill="url(#txt)">SLM</text>
-
-  <!-- Elegant fading separator -->
-  <line x1="8" y1="16" x2="24" y2="16"
-    stroke="url(#sep)" stroke-width="0.5"/>
-
-  <!-- Center diamond on separator -->
-  <polygon points="16,15.3 16.7,16 16,16.7 15.3,16"
-    fill="#3db8a0" opacity="0.45"/>
-
-  <!-- "JUDGE" secondary text -->
-  <text x="16" y="21.5"
-    text-anchor="middle"
-    font-family="'Helvetica Neue',Arial,sans-serif"
-    font-size="4.2"
-    font-weight="700"
-    letter-spacing="1.2"
-    fill="#3db8a0">JUDGE</text>
+  <rect width="32" height="32" rx="8" fill="url(#g)"/>
+  <g transform="translate(4 4)" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 4.5v15M8 19.5h8M4.5 7.5h15"/>
+    <path d="M6.5 7.5 4 13M6.5 7.5 9 13M17.5 7.5 15 13M17.5 7.5 20 13" stroke-width="1.4"/>
+    <path d="M3.4 13h6.2a3.1 3.1 0 0 1-6.2 0ZM14.4 13h6.2a3.1 3.1 0 0 1-6.2 0Z"/>
+  </g>
+  <circle cx="16" cy="8.4" r="1.2" fill="#fff"/>
 </svg>

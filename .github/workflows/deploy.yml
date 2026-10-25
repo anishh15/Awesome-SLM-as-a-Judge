@@ -6,6 +6,11 @@ on:
     paths:
       - 'website/**'
       - 'assets/**'
+      # the site is built from the paper list and checked against these files
+      - 'data/**'
+      - 'README.md'
+      - 'CITATION.cff'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
@@ -31,7 +36,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: website
-        run: npm install
+        run: npm ci
 
       - name: Build
         working-directory: website

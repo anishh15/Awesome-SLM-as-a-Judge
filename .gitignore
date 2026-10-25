@@ -9,18 +9,8 @@ Thumbs.db
 .vscode/
 .idea/
 
-# LaTeX build artifacts
-*.aux
-*.log
-*.bbl
-*.blg
-*.out
-*.toc
-*.fls
-*.fdb_latexmk
-*.synctex.gz
-
 # Python
 __pycache__/
 *.pyc
+.venv/
 .env

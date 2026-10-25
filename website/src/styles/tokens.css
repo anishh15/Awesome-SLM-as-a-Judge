@@ -1,0 +1,154 @@
+/* Design tokens. The theme is a deep green-teal close to the paper's table
+   colour (#1F6F6F in main.tex), shifted toward green; the dark theme uses the
+   green accents of the earlier site. Gold (one token, --gold) is the paper's
+   insightgold #B8860B and marks only the insights and the word "Awesome".
+   The category accents (coral, slate, moss, plum) come from the figure
+   palette of figure_source/refconfig.py. */
+
+/* Metric-matched fallback, so the swap to Inter does not move text. */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+  size-adjust: 107.06%;
+}
+
+:root {
+  --font-sans: 'Inter Variable', 'Inter Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* type scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.3125rem;
+  --fs-2xl: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
+  --fs-3xl: clamp(1.875rem, 1.4rem + 1.8vw, 2.5rem);
+  --fs-display: clamp(2.375rem, 1.5rem + 3.6vw, 4.25rem);
+
+  /* spacing (4px grid) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px; --s-6: 24px;
+  --s-8: 32px; --s-10: 40px; --s-12: 48px; --s-16: 64px; --s-20: 80px; --s-24: 96px;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  --container: 1200px;
+  --container-narrow: 860px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --header-h: 64px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 140ms;
+  --t: 220ms;
+  --t-slow: 420ms;
+
+}
+
+:root,
+[data-theme='light'] {
+  --bg: #f6faf8;
+  --bg-elev: #ffffff;
+  --bg-sunken: #edf5f1;
+  --bg-glass: rgba(246, 250, 248, 0.8);
+  --tint: #e5f2ec;
+  --tint-strong: #d0e7dc;
+  --line: #d8e7e0;
+  --line-strong: #bdd5ca;
+  --text: #1b2a25;
+  --text-2: #3f544d;
+  --text-3: #5d7169;
+  --teal: #19705c;
+  --teal-hover: #145c4c;
+  --teal-strong: #0c4a3c;
+  --teal-ink: #105342;
+  --teal-soft: #b7dacb;
+  --on-teal: #ffffff;
+  --head-bg: #19705c;
+  --head-fg: #ffffff;
+  --logo: linear-gradient(145deg, #2f9a80 0%, #19705c 45%, #0c4a3c 100%);
+  --accent-text: linear-gradient(120deg, #19705c 10%, #0c4a3c 90%);
+  --orb: rgba(25, 112, 92, 0.3);
+  --coral: #c75146;
+  /* insightgold #B8860B darkened to pass AA as text and under white text */
+  --gold: #8a6508;
+  --on-gold: #ffffff;
+  --plum: #7a4e9e;
+  --plum-soft: #f1eaf7;
+  --slate: #3b6ea5;
+  --slate-ink: #2f5c8c;
+  --slate-soft: #e7eef6;
+  --moss: #5a8c4a;
+  --coral-soft: #fbeae8;
+  --moss-soft: #e8f1e4;
+  --fig-bg: #ffffff;
+  --grid-line: rgba(25, 112, 92, 0.06);
+  --glow: rgba(25, 112, 92, 0.18);
+  --shadow-sm: 0 1px 2px rgba(12, 40, 32, 0.05);
+  --shadow: 0 1px 2px rgba(12, 40, 32, 0.04), 0 4px 16px -4px rgba(12, 40, 32, 0.08);
+  --shadow-lg: 0 2px 6px rgba(12, 40, 32, 0.05), 0 18px 40px -12px rgba(12, 40, 32, 0.18);
+  --focus: 0 0 0 3px rgba(25, 112, 92, 0.3);
+  --selection: rgba(25, 112, 92, 0.18);
+}
+
+/* Dark: green-black neutrals and the green accents of the earlier site
+   (#3DB8A0, #5CE0C5). Figures keep #0D1117, the background of the dark renders. */
+[data-theme='dark'] {
+  --bg: #071411;
+  --bg-elev: #0b1b17;
+  --bg-sunken: #050f0c;
+  --bg-glass: rgba(7, 20, 17, 0.76);
+  --tint: #11302a;
+  --tint-strong: #173c34;
+  --line: #16302a;
+  --line-strong: #21433a;
+  --text: #e8f5f0;
+  --text-2: #b4cec6;
+  --text-3: #87a89f;
+  --teal: #3db8a0;
+  --teal-hover: #52c8b0;
+  --teal-strong: #5ce0c5;
+  --teal-ink: #6fe3cb;
+  --teal-soft: #1f4d47;
+  --on-teal: #03120e;
+  --head-bg: #1f4d47;
+  --head-fg: #e8f5f0;
+  --logo: linear-gradient(145deg, #5ce0c5 0%, #3db8a0 40%, #1f4d47 100%);
+  --accent-text: linear-gradient(120deg, #a8f0de 0%, #5ce0c5 45%, #3db8a0 100%);
+  --orb: rgba(61, 184, 160, 0.26);
+  --coral: #d9776d;
+  /* close to the banner's insight pill (#E9C46A text, #E0B43E outline) */
+  --gold: #e5bd57;
+  --on-gold: #1c1505;
+  --plum: #b08ad0;
+  --plum-soft: #241a2e;
+  --slate: #6e9bd0;
+  --slate-ink: #a9c4e6;
+  --slate-soft: #142235;
+  --moss: #87b677;
+  --coral-soft: #321b18;
+  --moss-soft: #172617;
+  --fig-bg: #0d1117;
+  --grid-line: rgba(92, 224, 197, 0.05);
+  --glow: rgba(61, 184, 160, 0.24);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 20px -6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.4), 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+  --focus: 0 0 0 3px rgba(61, 184, 160, 0.42);
+  --selection: rgba(61, 184, 160, 0.3);
+}
+
+/* Category colours (five App. M categories) */
+.cat-judge-systems { --cat: var(--teal); --cat-soft: var(--tint); }
+.cat-benchmarks-metrics { --cat: var(--slate); --cat-soft: var(--slate-soft); }
+.cat-training-methodology { --cat: var(--plum); --cat-soft: var(--plum-soft); }
+.cat-bias-robustness { --cat: var(--coral); --cat-soft: var(--coral-soft); }
+.cat-foundational-models { --cat: var(--moss); --cat-soft: var(--moss-soft); }

@@ -1,0 +1,1599 @@
+# data/papers.yaml: every work cited in "Small Language Models as Judges: A Survey"
+#
+# This file is the single source for the paper list in README.md and for the
+# project website. Edit it here; never edit the generated parts of README.md.
+#
+#   python3 scripts/sync_bib.py --paper-dir PATH   # refresh bib fields from the paper
+#   python3 scripts/build_readme.py                # rewrite the generated README blocks
+#   python3 scripts/build_readme.py --check        # fail if README.md is out of date
+#
+# Top-level keys
+#   corpus      Counts reported in the survey (App. M, Corpus Statistics). The build
+#               script recomputes them from `papers` and stops if they differ.
+#   categories  The five groups of App. M, in README order. Each has `groups`
+#               (sub-headings that follow the survey's sections and tables).
+#   papers      One entry per work.
+#
+# Paper fields (A = set by scripts/sync_bib.py from data/references.bib, H = by hand)
+#   key         H  BibTeX key, the same as in the survey and data/references.bib
+#   name        H  short name the survey uses for the system or benchmark (optional)
+#   title       H  title as printed on the linked page; sync_bib.py warns if it
+#                  stops matching the bib title (case and punctuation ignored)
+#   authors     A  list of authors as given in the bib
+#   et_al       A  true when the bib author list ends with "and others"
+#   year        A  year as given in the bib
+#   venue       A  short venue name derived from the bib (rules in sync_bib.py)
+#   venue_full  A  booktitle or journal as given in the bib
+#   category    H  id of one of the five categories below
+#   group       H  id of a group inside that category
+#   in_survey   H  omit for works the survey cites; set false for later additions
+#   sections    A  where the survey cites the work (§ = main text, App. = appendix)
+#   links       H  paper (ACL Anthology for ACL venues, OpenReview for ICLR, else
+#                  arXiv), arxiv (when `paper` is not arXiv), code, model
+#   note        H  anything a reader should know about the citation (optional)
+#
+# The category of each work was assigned for this repository so that the counts
+# match App. M; the survey reports the counts but does not list the works per
+# category.
+
+corpus:
+  source: Survey, Appendix M (Corpus Statistics and Figure 15)
+  total: 105
+  categories:
+    judge-systems: 29
+    benchmarks-metrics: 20
+    training-methodology: 26
+    bias-robustness: 13
+    foundational-models: 17
+  years:
+    2023 or earlier: 21
+    '2024': 26
+    '2025': 44
+    '2026': 14
+
+categories:
+  - id: judge-systems
+    title: Judge systems
+    summary: Models and pipelines that act as judges, from prompted small models to trained, probed and multi-model judges.
+    where: §3, §4, Table 9, App. C
+    figure: 5_paradigm_scatter
+    groups:
+      - id: prompted
+        title: Prompted judges and judges in applications
+        where: §3.1, App. D, App. J
+      - id: sft
+        title: Supervised fine-tuned judges
+        where: §3.1, Table 9, App. C
+      - id: self-taught
+        title: Self-taught and preference-calibrated judges
+        where: Table 9, §5.1, App. C
+      - id: rl
+        title: Judges trained with reinforcement learning
+        where: §3.1, Table 9, App. C
+      - id: representation
+        title: Representation-based judges
+        where: §3.1, Table 9, App. C
+      - id: multi-judge
+        title: Panels, cascades and debate judges
+        where: §4, App. E, App. G
+  - id: benchmarks-metrics
+    title: Benchmarks and metrics
+    summary: Benchmarks that test judges and reward models, task benchmarks used in judge studies, and text evaluation metrics.
+    where: §5.3, Table 24, App. I, App. J
+    figure: 11_benchmark_coverage
+    groups:
+      - id: judge-benchmarks
+        title: Judge and reward-model benchmarks
+        where: §5.3, Table 24, App. I
+      - id: task-benchmarks
+        title: Task benchmarks used in judge studies
+        where: App. C, App. I, App. J
+      - id: metrics
+        title: Text evaluation metrics
+        where: App. A, App. H
+  - id: training-methodology
+    title: Training and methodology
+    summary: Methods that judges are built on or run with, such as preference training, reasoning budgets, debate and calibration.
+    where: §3.3, §4.2, §6, App. C, App. D, App. G, App. L
+    figure: 6_paradigm_supervision
+    groups:
+      - id: alignment
+        title: Alignment and reward modeling
+        where: App. A, App. C
+      - id: reasoning
+        title: Reasoning budget and inference
+        where: §3.3, App. D
+      - id: debate
+        title: Multi-agent debate
+        where: §4.2, App. G
+      - id: calibration
+        title: Calibration and agreement with humans
+        where: §6 (C2), App. L
+  - id: bias-robustness
+    title: Bias and robustness
+    summary: Biases of model judges, attacks on them, and how personas change their verdicts.
+    where: §5, App. H, App. K
+    figure: 10_bias_heatmap
+    groups:
+      - id: biases
+        title: Judge biases and validity
+        where: §5.1, §5.3, App. H
+      - id: robustness
+        title: Adversarial robustness and persona effects
+        where: §5.2, App. K
+  - id: foundational-models
+    title: Foundational and model reports
+    summary: Related surveys of LLM judges and small language models, and the reports of the model families that SLM judges are built on.
+    where: §1, Table 1, App. B
+    figure: 4_family_heatmap
+    groups:
+      - id: surveys
+        title: Related surveys
+        where: §1, Table 1, App. A
+      - id: models
+        title: Model reports
+        where: App. B
+
+papers:
+
+  - key: crupi2026improving
+    title: Improving Code Generation via Small Language Model-as-a-judge
+    authors: [Giuseppe Crupi, Rosalia Tufano, Gabriele Bavota]
+    year: 2026
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2602.11911"
+    category: judge-systems
+    group: sft
+    sections: [App. J]
+    links:
+      paper: "https://arxiv.org/abs/2602.11911"
+
+  - key: jayarao2025explicit
+    name: Qwen3-Judge
+    title: "Explicit Reasoning Makes Better Judges: A Systematic Study on Accuracy, Efficiency, and Robustness"
+    authors: [Pratik Jayarao, Himanshu Gupta, Neeraj Varshney, Chaitanya Dwivedi]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2509.13332"
+    category: judge-systems
+    group: prompted
+    sections: [§3, App. B, App. C, App. D, App. H, App. L, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2509.13332"
+
+  - key: wei2025igniting
+    title: "Igniting Creative Writing in Small Language Models: LLM-as-a-Judge versus Multi-Agent Refined Rewards"
+    authors: [Xiaolong Wei, Bo Lu, Xingyu Zhang, Zhejun Zhao, Dongdong Shen, Long Xia, Dawei Yin]
+    year: 2025
+    venue: EMNLP
+    venue_full: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing
+    category: training-methodology
+    group: alignment
+    sections: [§6, App. J, App. N, App. O]
+    links:
+      paper: "https://aclanthology.org/2025.emnlp-main.868/"
+      arxiv: "https://arxiv.org/abs/2508.21476"
+      code: "https://github.com/weixiaolong94-hub/Igniting-Creative-Writing-in-Small-Language-Models"
+
+  - key: zhang2025crowd
+    title: "Crowd Comparative Reasoning: Unlocking Comprehensive Evaluations for LLM-as-a-Judge"
+    authors: [Qiyuan Zhang, Yufei Wang, Yuxin Jiang, Liangyou Li, Chuhan Wu, Yasheng Wang, Xin Jiang, Lifeng Shang, Ruiming Tang, Fuyuan Lyu]
+    et_al: true
+    year: 2025
+    venue: ACL
+    venue_full: "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+    category: judge-systems
+    group: prompted
+    sections: [App. D]
+    links:
+      paper: "https://aclanthology.org/2025.acl-long.252/"
+      arxiv: "https://arxiv.org/abs/2502.12501"
+      code: "https://github.com/Don-Joey/CCE"
+
+  - key: alexandru2025atla
+    name: Selene Mini
+    title: "Atla Selene Mini: A General Purpose Evaluation Model"
+    authors: [Andrei Alexandru, Antonia Calvi, Henry Broomfield, Jackson Golden, Kyle Dai, Mathias Leys, Maurice Burger, Max Bartolo, Roman Engeler, Sashank Pisupati]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2501.17195"
+    category: judge-systems
+    group: sft
+    sections: [§3, App. C, App. D, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2501.17195"
+      code: "https://github.com/atla-ai/selene-mini"
+
+  - key: deshpande2024glider
+    name: GLIDER
+    title: "GLIDER: Grading LLM Interactions and Decisions using Explainable Ranking"
+    authors: [Darshan Deshpande, Selvan Sunitha Ravi, Sky CH-Wang, Bartosz Mielczarek, Anand Kannappan, Rebecca Qian]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2412.14140"
+    category: judge-systems
+    group: sft
+    sections: [§1, §3, App. A, App. B, App. C, App. D, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2412.14140"
+      model: "https://huggingface.co/PatronusAI/glider"
+
+  - key: kim2024prometheus1
+    name: Prometheus
+    title: "Prometheus: Inducing Fine-grained Evaluation Capability in Language Models"
+    authors: [Seungone Kim, Jay Shin, Joel Jang, Shayne Longpre, Hwaran Lee, Sangdoo Yun, Ryan Shin, Sungdong Kim, James Thorne, Minjoon Seo]
+    et_al: true
+    year: 2024
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: judge-systems
+    group: sft
+    sections: [§1, App. A, App. C]
+    links:
+      paper: "https://openreview.net/forum?id=8euJaTveKw"
+      arxiv: "https://arxiv.org/abs/2310.08491"
+      code: "https://github.com/prometheus-eval/prometheus"
+
+  - key: kim2024prometheus2
+    name: Prometheus 2
+    title: "Prometheus 2: An Open Source Language Model Specialized in Evaluating Other Language Models"
+    authors: [Seungone Kim, Juyoung Suk, Shayne Longpre, Bill Yuchen Lin, Jamin Shin, Sean Welleck, Graham Neubig, Moontae Lee, Kyungjae Lee, Minjoon Seo]
+    year: 2024
+    venue: EMNLP
+    venue_full: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing
+    category: judge-systems
+    group: sft
+    sections: [§3, App. A, App. C, App. H, App. O]
+    links:
+      paper: "https://aclanthology.org/2024.emnlp-main.248/"
+      arxiv: "https://arxiv.org/abs/2405.01535"
+      code: "https://github.com/prometheus-eval/prometheus-eval"
+
+  - key: li2024generative
+    name: Auto-J
+    title: Generative Judge for Evaluating Alignment
+    authors: [Junlong Li, Shichao Sun, Weizhe Yuan, Run-Ze Fan, Pengfei Liu]
+    et_al: true
+    year: 2024
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: judge-systems
+    group: sft
+    sections: [§3, App. A, App. C]
+    links:
+      paper: "https://openreview.net/forum?id=gtkFw6sZGS"
+      arxiv: "https://arxiv.org/abs/2310.05470"
+      code: "https://github.com/GAIR-NLP/auto-j"
+
+  - key: pombal2025m
+    name: M-Prometheus
+    title: "M-Prometheus: A Suite of Open Multilingual LLM Judges"
+    authors: [José Pombal, Dongkeun Yoon, Patrick Fernandes, Ian Wu, Seungone Kim, Ricardo Rei, Graham Neubig, André FT Martins]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2504.04953"
+    category: judge-systems
+    group: sft
+    sections: [§6, App. C, App. I, App. J, App. L, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2504.04953"
+      model: "https://huggingface.co/Unbabel/M-Prometheus-7B"
+
+  - key: vu2024foundational
+    name: FLAMe
+    title: "Foundational Autoraters: Taming Large Language Models for Better Automatic Evaluation"
+    authors: [Tu Vu, Kalpesh Krishna, Salaheddin Alzubi, Chris Tar, Manaal Faruqui, Yun-Hsuan Sung]
+    year: 2024
+    venue: EMNLP
+    venue_full: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing
+    category: judge-systems
+    group: sft
+    sections: [App. A, App. C, App. O]
+    links:
+      paper: "https://aclanthology.org/2024.emnlp-main.949/"
+      arxiv: "https://arxiv.org/abs/2407.10817"
+
+  - key: wang2023shepherd
+    name: Shepherd
+    title: "Shepherd: A Critic for Language Model Generation"
+    authors: [Tianlu Wang, Ping Yu, Xiaoqing Ellen Tan, Sean O'Brien, Ramakanth Pasunuru, Jane Dwivedi-Yu, Olga Golovneva, Luke Zettlemoyer, Maryam Fazel-Zarandi, Asli Celikyilmaz]
+    year: 2023
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2308.04592"
+    category: judge-systems
+    group: sft
+    sections: [App. A]
+    links:
+      paper: "https://arxiv.org/abs/2308.04592"
+      code: "https://github.com/facebookresearch/Shepherd"
+
+  - key: wang2024pandalm
+    name: PandaLM
+    title: "PandaLM: An Automatic Evaluation Benchmark for LLM Instruction Tuning Optimization"
+    authors: [Yidong Wang, Zhuohao Yu, Wenjin Yao, Zhengran Zeng, Linyi Yang, Cunxiang Wang, Hao Chen, Chaoya Jiang, Rui Xie, Jindong Wang]
+    et_al: true
+    year: 2024
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: judge-systems
+    group: sft
+    sections: [App. A, App. C]
+    links:
+      paper: "https://openreview.net/forum?id=5Nn2BLV7SB"
+      arxiv: "https://arxiv.org/abs/2306.05087"
+      code: "https://github.com/WeOpenML/PandaLM"
+
+  - key: zhu2025judgelm
+    name: JudgeLM
+    title: "JudgeLM: Fine-tuned Large Language Models are Scalable Judges"
+    authors: [Lianghui Zhu, Xinggang Wang, Xinlong Wang]
+    year: 2025
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: judge-systems
+    group: sft
+    sections: [§1, §3, §5, App. A, App. C, App. O]
+    links:
+      paper: "https://openreview.net/forum?id=xsELpEPn4A"
+      arxiv: "https://arxiv.org/abs/2310.17631"
+      code: "https://github.com/baaivision/JudgeLM"
+
+  - key: li2025judging
+    title: "Judging with Confidence: Calibrating Autoraters to Preference Distributions"
+    authors: [Zhuohang Li, Xiaowei Li, Chengyu Huang, Guowang Li, Katayoon Goshvadi, Bo Dai, Dale Schuurmans, Paul Zhou, Hamid Palangi, Yiwen Song]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2510.00263"
+    category: judge-systems
+    group: self-taught
+    sections: [§5, §6, App. H, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2510.00263"
+
+  - key: wang2024self
+    name: Self-Taught Evaluators
+    title: Self-Taught Evaluators
+    authors: [Tianlu Wang, Ilia Kulikov, Olga Golovneva, Ping Yu, Weizhe Yuan, Jane Dwivedi-Yu, Richard Yuanzhe Pang, Maryam Fazel-Zarandi, Jason Weston, Xian Li]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2408.02666"
+    category: judge-systems
+    group: self-taught
+    sections: [App. A, App. C]
+    links:
+      paper: "https://arxiv.org/abs/2408.02666"
+      code: "https://github.com/facebookresearch/RAM/tree/main/projects/self_taught_evaluator"
+
+  - key: chen2025judgelrm
+    name: JudgeLRM
+    title: "JudgeLRM: Large Reasoning Models as a Judge"
+    authors: [Nuo Chen, Zhiyuan Hu, Qingyun Zou, Jiaying Wu, Qian Wang, Bryan Hooi, Bingsheng He]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2504.00050"
+    category: judge-systems
+    group: rl
+    sections: [§3, §6, App. A, App. C, App. D, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2504.00050"
+      code: "https://github.com/NuoJohnChen/JudgeLRM"
+
+  - key: whitehouse2025j1
+    name: J1
+    title: "J1: Incentivizing Thinking in LLM-as-a-Judge via Reinforcement Learning"
+    authors: [Chenxi Whitehouse, Tianlu Wang, Ping Yu, Xian Li, Jason Weston, Ilia Kulikov, Swarnadeep Saha]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2505.10320"
+    category: judge-systems
+    group: rl
+    sections: [§1, §3, §5, App. A, App. B, App. C, App. D, App. H, App. I, App. K, App. L, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2505.10320"
+
+  - key: xiong2025stepwiser
+    name: StepWiser
+    title: "StepWiser: Stepwise Generative Judges for Wiser Reasoning"
+    authors: [Wei Xiong, Wenting Zhao, Weizhe Yuan, Olga Golovneva, Tong Zhang, Jason Weston, Sainbayar Sukhbaatar]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2508.19229"
+    category: judge-systems
+    group: rl
+    sections: [App. C, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2508.19229"
+
+  - key: xu2025j4r
+    name: J4R
+    title: "J4R: Learning to Judge with Equivalent Initial State Group Relative Policy Optimization"
+    authors: [Austin Xu, Yilun Zhou, Xuan-Phi Nguyen, Caiming Xiong, Shafiq Joty]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2505.13346"
+    category: judge-systems
+    group: rl
+    sections: [§3, App. A, App. C]
+    links:
+      paper: "https://arxiv.org/abs/2505.13346"
+
+  - key: xu2026incentivizing
+    name: TIR-Judge
+    title: Incentivizing Agentic Reasoning in LLM Judges via Tool-Integrated Reinforcement Learning
+    authors: [Ran Xu, Jingjing Chen, Jiayu Ye, Yu Wu, Jun Yan, Carl Yang, Hongkun Yu]
+    year: 2026
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: judge-systems
+    group: rl
+    sections: [App. C, App. I, App. J, App. O]
+    links:
+      paper: "https://openreview.net/forum?id=AXNRILww9c"
+      arxiv: "https://arxiv.org/abs/2510.23038"
+
+  - key: zhang2025compassjudger
+    name: CompassJudger-2
+    title: "CompassJudger-2: Towards Generalist Judge Model via Verifiable Rewards"
+    authors: [Taolin Zhang, Maosong Cao, Alexander Lam, Songyang Zhang, Kai Chen]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2507.09104"
+    category: judge-systems
+    group: rl
+    sections: [§3, App. A, App. C, App. I]
+    links:
+      paper: "https://arxiv.org/abs/2507.09104"
+      code: "https://github.com/open-compass/CompassJudger"
+
+  - key: zhao2026genprm
+    name: GenPRM
+    title: "GenPRM: Scaling Test-Time Compute of Process Reward Models via Generative Reasoning"
+    authors: [Jian Zhao, Runze Liu, Kaiyan Zhang, Zhimu Zhou, Junqi Gao, Dong Li, Jiafei Lyu, Zhouyi Qian, Biqing Qi, Xiu Li]
+    et_al: true
+    year: 2026
+    venue: AAAI
+    venue_full: Proceedings of the AAAI Conference on Artificial Intelligence
+    category: judge-systems
+    group: rl
+    sections: [§3, App. C, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2504.00891"
+      code: "https://github.com/RyanLiu112/GenPRM"
+
+  - key: lai2026beyond
+    name: LAGER
+    title: "Beyond the Surface: Enhancing LLM-as-a-Judge Alignment with Human via Internal Representations"
+    authors: [Peng Lai, Jianjie Zheng, Sijie Cheng, Yun Chen, Peng Li, Yang Liu, Guanhua Chen]
+    year: 2026
+    venue: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
+    category: judge-systems
+    group: representation
+    sections: [App. C]
+    links:
+      paper: "https://arxiv.org/abs/2508.03550"
+
+  - key: li2026rethinking
+    name: INSPECTOR
+    title: "Rethinking LLM-as-a-Judge: Representation-as-a-Judge with Small Language Models via Semantic Capacity Asymmetry"
+    authors: [Zhuochun Li, Yong Zhang, Ming Li, Yuelyu Ji, Yiming Zeng, Ning Cheng, Yun Zhu, Yanmeng Wang, Shaojun Wang, Jing Xiao]
+    et_al: true
+    year: 2026
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2601.22588"
+    category: judge-systems
+    group: representation
+    sections: [§3, §6, App. A, App. C, App. D, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2601.22588"
+      code: "https://github.com/zhuochunli/Representation-as-a-judge"
+
+  - key: cho2025cosmosfl
+    name: COSMosFL
+    title: "COSMosFL: Ensemble of Small Language Models for Fault Localisation"
+    authors: [Hyunjoon Cho, Sungmin Kang, Gabin An, Shin Yoo]
+    year: 2025
+    venue: LLM4Code
+    venue_full: 2025 IEEE/ACM International Workshop on Large Language Models for Code (LLM4Code)
+    category: judge-systems
+    group: multi-judge
+    sections: [§4, App. E, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2502.02908"
+      code: "https://github.com/coinse/cosmosfl"
+
+  - key: jung2025trust
+    title: "Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement"
+    authors: [Jaehun Jung, Faeze Brahman, Yejin Choi]
+    year: 2025
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: judge-systems
+    group: multi-judge
+    sections: [§4, §6, App. H, App. L]
+    links:
+      paper: "https://openreview.net/forum?id=UHPnqSTBPO"
+      arxiv: "https://arxiv.org/abs/2407.18370"
+      code: "https://github.com/jaehunjung1/cascaded-selective-evaluation"
+
+  - key: lin2025efficient
+    title: Efficient LLM Safety Evaluation through Multi-Agent Debate
+    authors: [Dachuan Lin, Guobin Shen, Zihao Yang, Tianrong Liu, Dongcheng Zhao, Yi Zeng]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2511.06396"
+    category: judge-systems
+    group: multi-judge
+    sections: [§4, App. G, App. J, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2511.06396"
+
+  - key: verga2024replacing
+    name: PoLL
+    title: "Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models"
+    authors: [Pat Verga, Sebastian Hofstatter, Sophia Althammer, Yixuan Su, Aleksandra Piktus, Arkady Arkhangorodsky, Minjie Xu, Naomi White, Patrick Lewis]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2404.18796"
+    category: judge-systems
+    group: multi-judge
+    sections: [§2, §4, App. A, App. E, App. H, App. K, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2404.18796"
+
+  - key: aggarwal2025optimalthinkingbench
+    name: OptimalThinkingBench
+    title: "OptimalThinkingBench: Evaluating Over and Underthinking in LLMs"
+    authors: [Pranjal Aggarwal, Seungone Kim, Jack Lanchantin, Sean Welleck, Jason Weston, Ilia Kulikov, Swarnadeep Saha]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2508.13141"
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [§3, App. D, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2508.13141"
+      code: "https://github.com/facebookresearch/RAM/tree/main/projects/otb"
+
+  - key: bi2026judgeboard
+    name: JudgeBoard
+    title: "JudgeBoard: Benchmarking and Enhancing Small Language Models for Reasoning Evaluation"
+    authors: [Zhenyu Bi, Gaurav Srivastava, Yang Li, Swastik Roy, Meng Lu, Morteza Ziyadi, Xuan Wang]
+    year: 2026
+    venue: AAAI
+    venue_full: Proceedings of the AAAI Conference on Artificial Intelligence
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [§1, §4, §5, §6, App. E, App. I, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2511.15958"
+
+  - key: chen2026benchmarking
+    title: Benchmarking LLM-as-a-Judge for Long-Form Output Evaluation
+    authors: [Junjie Chen, Yuxi Dong, Haitao Li, Weihang Su, Yujia Zhou, Min Zhang, Yiqun Liu, Qinyao Ai]
+    year: 2026
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2606.01629"
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [§6, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2606.01629"
+      code: "https://github.com/cjj826/LongJudgeBench"
+
+  - key: jiang2025codejudgebench
+    name: CodeJudgeBench
+    title: "CodeJudgeBench: Benchmarking LLM-as-a-Judge for Coding Tasks"
+    authors: [Hongchao Jiang, Yiming Chen, Yushi Cao, Hung-yi Lee, Robby T Tan]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2507.10535"
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [§3, §5, §6, App. I, App. J, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2507.10535"
+      code: "https://github.com/hongcha0/CodeJudgeBench"
+
+  - key: lambert2025rewardbench
+    name: RewardBench
+    title: "RewardBench: Evaluating Reward Models for Language Modeling"
+    authors: [Nathan Lambert, Valentina Pyatkin, Jacob Morrison, LJ Miranda, Bill Yuchen Lin, Khyathi Chandu, Nouha Dziri, Sachin Kumar, Tom Zick, Yejin Choi]
+    et_al: true
+    year: 2025
+    venue: Findings of NAACL
+    venue_full: "Findings of the Association for Computational Linguistics: NAACL 2025"
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [App. C, App. I, App. M]
+    links:
+      paper: "https://aclanthology.org/2025.findings-naacl.96/"
+      arxiv: "https://arxiv.org/abs/2403.13787"
+      code: "https://github.com/allenai/reward-bench"
+
+  - key: son2024mm
+    name: MM-Eval
+    title: "MM-Eval: A Multilingual Meta-Evaluation Benchmark for LLM-as-a-Judge and Reward Models"
+    authors: [Guijin Son, Dongkeun Yoon, Juyoung Suk, Javier Aula-Blasco, Mano Aslan, Vu Trong Kim, Shayekh Bin Islam, Jaume Prats-Cristià, Lucía Tormo-Bañuelos, Seungone Kim]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2410.17578"
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [§6, App. J]
+    links:
+      paper: "https://arxiv.org/abs/2410.17578"
+      code: "https://github.com/guijinSON/MM-Eval"
+
+  - key: tan2025judgebench
+    name: JudgeBench
+    title: "JudgeBench: A Benchmark for Evaluating LLM-based Judges"
+    authors: [Sijun Tan, Siyuan Zhuang, Kyle Montgomery, William Tang, Alejandro Cuadron, Chenguang Wang, Raluca Popa, Ion Stoica]
+    year: 2025
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [§1, §3, §5, App. C, App. H, App. I]
+    links:
+      paper: "https://openreview.net/forum?id=G0dksFayVq"
+      arxiv: "https://arxiv.org/abs/2410.12784"
+      code: "https://github.com/ScalerLab/JudgeBench"
+
+  - key: xu2025does
+    name: ContextualJudgeBench
+    title: Does Context Matter? ContextualJudgeBench for Evaluating LLM-based Judges in Contextual Settings
+    authors: [Austin Xu, Srijan Bansal, Yifei Ming, Semih Yavuz, Shafiq Joty]
+    year: 2025
+    venue: ACL
+    venue_full: "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [App. I]
+    links:
+      paper: "https://aclanthology.org/2025.acl-long.470/"
+      arxiv: "https://arxiv.org/abs/2503.15620"
+      code: "https://github.com/SalesforceAIResearch/ContextualJudgeBench"
+
+  - key: zheng2023judging
+    name: MT-Bench
+    title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena
+    authors: [Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric Xing]
+    et_al: true
+    year: 2023
+    venue: NeurIPS
+    venue_full: Advances in neural information processing systems
+    category: benchmarks-metrics
+    group: judge-benchmarks
+    sections: [§1, §2, §5, App. A, App. H, App. I]
+    links:
+      paper: "https://arxiv.org/abs/2306.05685"
+      code: "https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge"
+
+  - key: cobbe2021training
+    name: GSM8K
+    title: Training Verifiers to Solve Math Word Problems
+    authors: [Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano]
+    et_al: true
+    year: 2021
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2110.14168"
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. C, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2110.14168"
+      code: "https://github.com/openai/grade-school-math"
+
+  - key: hendrycks2020measuring
+    name: MMLU
+    title: Measuring Massive Multitask Language Understanding
+    authors: [Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, Jacob Steinhardt]
+    year: 2020
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2009.03300"
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. I]
+    links:
+      paper: "https://arxiv.org/abs/2009.03300"
+      code: "https://github.com/hendrycks/test"
+
+  - key: hendrycks2021measuring
+    name: MATH
+    title: Measuring Mathematical Problem Solving With the MATH Dataset
+    authors: [Dan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric Tang, Dawn Song, Jacob Steinhardt]
+    year: 2021
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2103.03874"
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. C, App. I, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2103.03874"
+      code: "https://github.com/hendrycks/math"
+
+  - key: jain2025livecodebench
+    name: LiveCodeBench
+    title: "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code"
+    authors: [Naman Jain, Alex Gu, Wen-Ding Li, Fanjia Yan, Tianjun Zhang, Sida Wang, Armando Solar-Lezama, Koushik Sen, Ion Stoica]
+    year: 2025
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. J]
+    links:
+      paper: "https://openreview.net/forum?id=chfJJYC3iL"
+      arxiv: "https://arxiv.org/abs/2403.07974"
+      code: "https://github.com/LiveCodeBench/LiveCodeBench"
+
+  - key: jimenez2024swe
+    name: SWE-bench
+    title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
+    authors: [Carlos E Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, Karthik Narasimhan]
+    year: 2024
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. J]
+    links:
+      paper: "https://openreview.net/forum?id=VTF8yNQM66"
+      arxiv: "https://arxiv.org/abs/2310.06770"
+      code: "https://github.com/SWE-bench/SWE-bench"
+
+  - key: lin2022truthfulqa
+    name: TruthfulQA
+    title: "TruthfulQA: Measuring How Models Mimic Human Falsehoods"
+    authors: [Stephanie Lin, Jacob Hilton, Owain Evans]
+    year: 2022
+    venue: ACL
+    venue_full: "Proceedings of the 60th annual meeting of the association for computational linguistics (volume 1: long papers)"
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. J, App. O]
+    links:
+      paper: "https://aclanthology.org/2022.acl-long.229/"
+      arxiv: "https://arxiv.org/abs/2109.07958"
+      code: "https://github.com/sylinrl/TruthfulQA"
+
+  - key: wang2023decodingtrust
+    name: DecodingTrust
+    title: "DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models"
+    authors: [Boxin Wang, Weixin Chen, Hengzhi Pei, Chulin Xie, Mintong Kang, Chenhui Zhang, Chejian Xu, Zidi Xiong, Ritik Dutta, Rylan Schaeffer]
+    et_al: true
+    year: 2023
+    venue: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
+    category: benchmarks-metrics
+    group: task-benchmarks
+    sections: [App. J, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2306.11698"
+      code: "https://github.com/AI-secure/DecodingTrust"
+
+  - key: lee2024fleur
+    name: FLEUR
+    title: "FLEUR: An Explainable Reference-Free Evaluation Metric for Image Captioning Using a Large Multimodal Model"
+    authors: [Yebin Lee, Imseong Park, Myungjoo Kang]
+    year: 2024
+    venue: ACL
+    venue_full: "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+    category: benchmarks-metrics
+    group: metrics
+    sections: [App. H]
+    links:
+      paper: "https://aclanthology.org/2024.acl-long.205/"
+      arxiv: "https://arxiv.org/abs/2406.06004"
+      code: "https://github.com/Yebin46/FLEUR"
+
+  - key: papineni2002bleu
+    name: BLEU
+    title: "BLEU: a Method for Automatic Evaluation of Machine Translation"
+    authors: [Kishore Papineni, Salim Roukos, Todd Ward, Wei-Jing Zhu]
+    year: 2002
+    venue: ACL
+    venue_full: Proceedings of the 40th annual meeting of the Association for Computational Linguistics
+    category: benchmarks-metrics
+    group: metrics
+    sections: [App. A]
+    links:
+      paper: "https://aclanthology.org/P02-1040/"
+
+  - key: rei2020comet
+    name: COMET
+    title: "COMET: A Neural Framework for MT Evaluation"
+    authors: [Ricardo Rei, Craig Stewart, Ana C Farinha, Alon Lavie]
+    year: 2020
+    venue: EMNLP
+    venue_full: Proceedings of the 2020 conference on empirical methods in natural language processing (emnlp)
+    category: benchmarks-metrics
+    group: metrics
+    sections: [App. A]
+    links:
+      paper: "https://aclanthology.org/2020.emnlp-main.213/"
+      arxiv: "https://arxiv.org/abs/2009.09025"
+      code: "https://github.com/Unbabel/COMET"
+
+  - key: zhang2019bertscore
+    name: BERTScore
+    title: "BERTScore: Evaluating Text Generation with BERT"
+    authors: [Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q Weinberger, Yoav Artzi]
+    year: 2019
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:1904.09675"
+    category: benchmarks-metrics
+    group: metrics
+    sections: [App. A]
+    links:
+      paper: "https://arxiv.org/abs/1904.09675"
+      code: "https://github.com/Tiiiger/bert_score"
+
+  - key: bai2022constitutional
+    name: Constitutional AI
+    title: "Constitutional AI: Harmlessness from AI Feedback"
+    authors: [Yuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion, Andy Jones, Anna Chen, Anna Goldie, Azalia Mirhoseini, Cameron McKinnon]
+    et_al: true
+    year: 2022
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2212.08073"
+    category: training-methodology
+    group: alignment
+    sections: [§1, App. A, App. J]
+    links:
+      paper: "https://arxiv.org/abs/2212.08073"
+      code: "https://github.com/anthropics/ConstitutionalHarmlessnessPaper"
+
+  - key: burns2023weak
+    title: "Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision"
+    authors: [Collin Burns, Pavel Izmailov, Jan Hendrik Kirchner, Bowen Baker, Leo Gao, Leopold Aschenbrenner, Yining Chen, Adrien Ecoffet, Manas Joglekar, Jan Leike]
+    et_al: true
+    year: 2023
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2312.09390"
+    category: training-methodology
+    group: alignment
+    sections: [App. A, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2312.09390"
+      code: "https://github.com/openai/weak-to-strong"
+
+  - key: lightman2024let
+    title: Let's Verify Step by Step
+    authors: [Hunter Lightman, Vineet Kosaraju, Yuri Burda, Harrison Edwards, Bowen Baker, Teddy Lee, Jan Leike, John Schulman, Ilya Sutskever, Karl Cobbe]
+    year: 2024
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: training-methodology
+    group: alignment
+    sections: [App. C, App. J, App. L]
+    links:
+      paper: "https://openreview.net/forum?id=v8L0pN6EOi"
+      arxiv: "https://arxiv.org/abs/2305.20050"
+      code: "https://github.com/openai/prm800k"
+
+  - key: ouyang2022training
+    name: InstructGPT
+    title: Training language models to follow instructions with human feedback
+    authors: [Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray]
+    et_al: true
+    year: 2022
+    venue: NeurIPS
+    venue_full: Advances in neural information processing systems
+    category: training-methodology
+    group: alignment
+    sections: [§1, App. A]
+    links:
+      paper: "https://arxiv.org/abs/2203.02155"
+      code: "https://github.com/openai/following-instructions-human-feedback"
+
+  - key: rafailov2023direct
+    name: DPO
+    title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+    authors: [Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher D Manning, Stefano Ermon, Chelsea Finn]
+    year: 2023
+    venue: NeurIPS
+    venue_full: Advances in neural information processing systems
+    category: training-methodology
+    group: alignment
+    sections: [App. C]
+    links:
+      paper: "https://arxiv.org/abs/2305.18290"
+      code: "https://github.com/eric-mitchell/direct-preference-optimization"
+
+  - key: ghosal2026does
+    title: Does Thinking More always Help? Mirage of Test-Time Scaling in Reasoning Models
+    authors: [Soumya Suvra Ghosal, Souradip Chakraborty, Avinash Reddy, Yifu Lu, Mengdi Wang, Dinesh Manocha, Furong Huang, Mohammad Ghavamzadeh, Amrit Singh Bedi]
+    year: 2026
+    venue: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
+    category: training-methodology
+    group: reasoning
+    sections: [App. D, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2506.04210"
+
+  - key: han2025token
+    title: Token-Budget-Aware LLM Reasoning
+    authors: [Tingxu Han, Zhenting Wang, Chunrong Fang, Shiyu Zhao, Shiqing Ma, Zhenyu Chen]
+    year: 2025
+    venue: Findings of ACL
+    venue_full: "Findings of the Association for Computational Linguistics: ACL 2025"
+    category: training-methodology
+    group: reasoning
+    sections: [§3, App. D]
+    links:
+      paper: "https://aclanthology.org/2025.findings-acl.1274/"
+      arxiv: "https://arxiv.org/abs/2412.18547"
+
+  - key: kwon2023efficient
+    name: vLLM
+    title: Efficient Memory Management for Large Language Model Serving with PagedAttention
+    authors: [Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph Gonzalez, Hao Zhang, Ion Stoica]
+    year: 2023
+    venue: SOSP
+    venue_full: Proceedings of the 29th symposium on operating systems principles
+    category: training-methodology
+    group: reasoning
+    sections: [App. B]
+    links:
+      paper: "https://arxiv.org/abs/2309.06180"
+      code: "https://github.com/vllm-project/vllm"
+
+  - key: ma2025reasoning
+    name: NoThinking
+    title: Reasoning Models Can Be Effective Without Thinking
+    authors: [Wenjie Ma, Jingxuan He, Charlie Snell, Tyler Griggs, Sewon Min, Matei Zaharia]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2504.09858"
+    category: training-methodology
+    group: reasoning
+    sections: [App. D, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2504.09858"
+
+  - key: shojaee2026illusion
+    title: "The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity"
+    authors: [Parshin Shojaee, Iman Mirzadeh, Maxwell Horton, Samy Bengio, Mehrdad Farajtabar]
+    et_al: true
+    year: 2026
+    venue: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
+    category: training-methodology
+    group: reasoning
+    sections: [§3, App. D, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2506.06941"
+
+  - key: srivastava2025llms
+    title: Do LLMs Overthink Basic Math Reasoning? Benchmarking the Accuracy-Efficiency Tradeoff in Language Models
+    authors: [Gaurav Srivastava, Aafiya Hussain, Sriram Srinivasan, Xuan Wang]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2507.04023"
+    category: training-methodology
+    group: reasoning
+    sections: [App. D, App. N, App. O]
+    links:
+      paper: "https://arxiv.org/abs/2507.04023"
+      code: "https://github.com/ctrl-gaurav/LLMThinkBench"
+
+  - key: sui2025stop
+    title: "Stop Overthinking: A Survey on Efficient Reasoning for Large Language Models"
+    authors: [Yang Sui, Yu-Neng Chuang, Guanchu Wang, Jiamu Zhang, Tianyi Zhang, Jiayi Yuan, Hongyi Liu, Andrew Wen, Shaochen Zhong, Na Zou]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2503.16419"
+    category: training-methodology
+    group: reasoning
+    sections: [§3, App. D]
+    links:
+      paper: "https://arxiv.org/abs/2503.16419"
+      code: "https://github.com/Eclipsess/Awesome-Efficient-Reasoning-LLMs"
+
+  - key: wang2022self
+    title: Self-Consistency Improves Chain of Thought Reasoning in Language Models
+    authors: [Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang, Aakanksha Chowdhery, Denny Zhou]
+    year: 2022
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2203.11171"
+    category: training-methodology
+    group: reasoning
+    sections: [App. D, App. E, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2203.11171"
+
+  - key: wang2024reasoning
+    title: "Reasoning in Token Economies: Budget-Aware Evaluation of LLM Reasoning Strategies"
+    authors: [Junlin Wang, Siddhartha Jain, Dejiao Zhang, Baishakhi Ray, Varun Kumar, Ben Athiwaratkun]
+    year: 2024
+    venue: EMNLP
+    venue_full: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing
+    category: training-methodology
+    group: reasoning
+    sections: [App. D]
+    links:
+      paper: "https://aclanthology.org/2024.emnlp-main.1112/"
+      arxiv: "https://arxiv.org/abs/2406.06461"
+
+  - key: wei2022chain
+    title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
+    authors: [Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou]
+    et_al: true
+    year: 2022
+    venue: NeurIPS
+    venue_full: Advances in neural information processing systems
+    category: training-methodology
+    group: reasoning
+    sections: [§3]
+    links:
+      paper: "https://arxiv.org/abs/2201.11903"
+
+  - key: cemri2026multi
+    name: MAST
+    title: Why Do Multi-Agent LLM Systems Fail?
+    authors: [Mert Cemri, Melissa Z Pan, Shuyi Yang, Lakshya A Agrawal, Bhavya Chopra, Rishabh Tiwari, Kurt Keutzer, Aditya Parameswaran, Dan Klein, Kannan Ramchandran]
+    et_al: true
+    year: 2026
+    venue: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
+    category: training-methodology
+    group: debate
+    sections: [§4, App. G, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2503.13657"
+      code: "https://github.com/multi-agent-systems-failure-taxonomy/MAST"
+
+  - key: du2024improving
+    title: Improving Factuality and Reasoning in Language Models through Multiagent Debate
+    authors: [Yilun Du, Shuang Li, Antonio Torralba, Joshua B Tenenbaum, Igor Mordatch]
+    year: 2024
+    venue: ICML
+    venue_full: Forty-first international conference on machine learning
+    category: training-methodology
+    group: debate
+    sections: [§4, App. G, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2305.14325"
+      code: "https://github.com/composable-models/llm_multiagent_debate"
+
+  - key: hu2026multi
+    title: Multi-Agent Debate for LLM Judges with Adaptive Stability Detection
+    authors: [Tianyu Hu, Zhen Tan, Song Wang, Huaizhi Qu, Tianlong Chen]
+    year: 2026
+    venue: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
+    category: judge-systems
+    group: multi-judge
+    sections: [App. G]
+    links:
+      paper: "https://arxiv.org/abs/2510.12697"
+
+  - key: liang2024encouraging
+    title: Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate
+    authors: [Tian Liang, Zhiwei He, Wenxiang Jiao, Xing Wang, Yan Wang, Rui Wang, Yujiu Yang, Shuming Shi, Zhaopeng Tu]
+    year: 2024
+    venue: EMNLP
+    venue_full: Proceedings of the 2024 conference on empirical methods in natural language processing
+    category: training-methodology
+    group: debate
+    sections: [§4, App. G, App. N]
+    links:
+      paper: "https://aclanthology.org/2024.emnlp-main.992/"
+      arxiv: "https://arxiv.org/abs/2305.19118"
+      code: "https://github.com/Skytliang/Multi-Agents-Debate"
+
+  - key: srivastava2025debate
+    title: "DEBATE, TRAIN, EVOLVE: Self Evolution of Language Model Reasoning"
+    authors: [Gaurav Srivastava, Zhenyu Bi, Meng Lu, Xuan Wang]
+    year: 2025
+    venue: EMNLP
+    venue_full: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing
+    category: training-methodology
+    group: debate
+    sections: [App. G]
+    links:
+      paper: "https://aclanthology.org/2025.emnlp-main.1666/"
+      arxiv: "https://arxiv.org/abs/2505.15734"
+      code: "https://github.com/ctrl-gaurav/Debate-Train-Evolve"
+
+  - key: wynn2025talk
+    title: "Talk Isn't Always Cheap: Understanding Failure Modes in Multi-Agent Debate"
+    authors: [Andrea Wynn, Harsh Satija, Gillian Hadfield]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2509.05396"
+    category: training-methodology
+    group: debate
+    sections: [§1, §4, App. G, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2509.05396"
+
+  - key: zhang2025stop
+    title: Stop Overvaluing Multi-Agent Debate -- We Must Rethink Evaluation and Embrace Model Heterogeneity
+    authors: [Hangfan Zhang, Zhiyao Cui, Jianhao Chen, Xinrun Wang, Qiaosheng Zhang, Zhen Wang, Dinghao Wu, Shuyue Hu]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2502.08788"
+    category: training-methodology
+    group: debate
+    sections: [§1, §4, App. G, App. N]
+    links:
+      paper: "https://arxiv.org/abs/2502.08788"
+
+  - key: landesberg2025causal
+    name: CJE
+    title: "Causal Judge Evaluation: Calibrated Surrogate Metrics for LLM Systems"
+    authors: [Eddie Landesberg, Manjari Narayan]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2512.11150"
+    category: training-methodology
+    group: calibration
+    sections: [§6, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2512.11150"
+      code: "https://github.com/cimo-labs/cje"
+
+  - key: shankar2024validates
+    title: Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences
+    authors: [Shreya Shankar, JD Zamfirescu-Pereira, Björn Hartmann, Aditya Parameswaran, Ian Arawjo]
+    year: 2024
+    venue: UIST
+    venue_full: Proceedings of the 37th Annual ACM Symposium on User Interface Software and Technology
+    category: training-methodology
+    group: calibration
+    sections: [§1, §5, App. I]
+    links:
+      paper: "https://arxiv.org/abs/2404.12272"
+
+  - key: sheng2025analyzing
+    title: "Analyzing Uncertainty of LLM-as-a-Judge: Interval Evaluations with Conformal Prediction"
+    authors: [Huanxin Sheng, Xinyi Liu, Hangfeng He, Jieyu Zhao, Jian Kang]
+    year: 2025
+    venue: EMNLP
+    venue_full: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing
+    category: training-methodology
+    group: calibration
+    sections: [§6, App. L]
+    links:
+      paper: "https://aclanthology.org/2025.emnlp-main.569/"
+      arxiv: "https://arxiv.org/abs/2509.18658"
+      code: "https://github.com/BruceSheng1202/Analyzing_Uncertainty_of_LLM-as-a-Judge"
+
+  - key: wang2025trustjudge
+    name: TrustJudge
+    title: "TrustJudge: Inconsistencies of LLM-as-a-Judge and How to Alleviate Them"
+    authors: [Yidong Wang, Yunze Song, Tingyuan Zhu, Xuanwang Zhang, Zhuohao Yu, Hao Chen, Chiyu Song, Qiufeng Wang, Cunxiang Wang, Zhen Wu]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2509.21117"
+    category: training-methodology
+    group: calibration
+    sections: [§6, App. H, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2509.21117"
+      code: "https://github.com/TrustJudge/TrustJudge"
+
+  - key: bedemariam2025potential
+    title: Potential and Perils of Large Language Models as Judges of Unstructured Textual Data
+    authors: [Rewina Bedemariam, Natalie Perez, Sreyoshi Bhaduri, Satya Kapoor, Alex Gil, Elizabeth Conjar, Ikkei Itoku, David Theil, Aman Chadha, Naumaan Nayyar]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2501.08167"
+    category: bias-robustness
+    group: biases
+    sections: [§5, App. I]
+    links:
+      paper: "https://arxiv.org/abs/2501.08167"
+
+  - key: chen2024humans
+    title: Humans or LLMs as the Judge? A Study on Judgement Bias
+    authors: [Guiming Hardy Chen, Shunian Chen, Ziche Liu, Feng Jiang, Benyou Wang]
+    year: 2024
+    venue: EMNLP
+    venue_full: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing
+    category: bias-robustness
+    group: biases
+    sections: [§5]
+    links:
+      paper: "https://aclanthology.org/2024.emnlp-main.474/"
+      arxiv: "https://arxiv.org/abs/2402.10669"
+      code: "https://github.com/FreedomIntelligence/Humans_LLMs_Judgement_Bias"
+
+  - key: li2025preference
+    title: "Preference Leakage: A Contamination Problem in LLM-as-a-judge"
+    authors: [Dawei Li, Renliang Sun, Yue Huang, Ming Zhong, Bohan Jiang, Jiawei Han, Xiangliang Zhang, Wei Wang]
+    et_al: true
+    year: 2025
+    venue: DIG-BUG Workshop
+    venue_full: Data in Generative Models-The Bad, the Ugly, and the Greats
+    category: bias-robustness
+    group: biases
+    sections: [§5, App. C, App. H]
+    links:
+      paper: "https://arxiv.org/abs/2502.01534"
+      code: "https://github.com/David-Li0406/Preference-Leakage"
+
+  - key: perez2023discovering
+    title: Discovering Language Model Behaviors with Model-Written Evaluations
+    authors: [Ethan Perez, Sam Ringer, Kamile Lukosiute, Karina Nguyen, Edwin Chen, Scott Heiner, Craig Pettit, Catherine Olsson, Sandipan Kundu, Saurav Kadavath]
+    et_al: true
+    year: 2023
+    venue: Findings of ACL
+    venue_full: "Findings of the association for computational linguistics: ACL 2023"
+    category: bias-robustness
+    group: biases
+    sections: [§5, App. G, App. H]
+    links:
+      paper: "https://aclanthology.org/2023.findings-acl.847/"
+      arxiv: "https://arxiv.org/abs/2212.09251"
+      code: "https://github.com/anthropics/evals"
+
+  - key: szymanski2025limitations
+    title: Limitations of the LLM-as-a-Judge Approach for Evaluating LLM Outputs in Expert Knowledge Tasks
+    authors: [Annalisa Szymanski, Noah Ziems, Heather A Eicher-Miller, Toby Jia-Jun Li, Meng Jiang, Ronald A Metoyer]
+    year: 2025
+    venue: IUI
+    venue_full: Proceedings of the 30th international conference on intelligent user interfaces
+    category: bias-robustness
+    group: biases
+    sections: [§5]
+    links:
+      paper: "https://arxiv.org/abs/2410.20266"
+
+  - key: wei2024simplesyntheticdatareduces
+    title: Simple synthetic data reduces sycophancy in large language models
+    authors: [Jerry Wei, Da Huang, Yifeng Lu, Denny Zhou, Quoc V. Le]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2308.03958"
+    category: bias-robustness
+    group: biases
+    sections: [§5, App. G, App. H]
+    links:
+      paper: "https://arxiv.org/abs/2308.03958"
+      code: "https://github.com/google/sycophancy-intervention"
+
+  - key: ye2025justice
+    name: CALM
+    title: Justice or Prejudice? Quantifying Biases in LLM-as-a-Judge
+    authors: [Jiayi Ye, Yanbo Wang, Yue Huang, Dongping Chen, Qihui Zhang, Nuno Moniz, Tian Gao, Werner Geyer, Chao Huang, Pin-Yu Chen]
+    et_al: true
+    year: 2025
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: bias-robustness
+    group: biases
+    sections: [App. H]
+    links:
+      paper: "https://openreview.net/forum?id=3GTtZFiajM"
+      arxiv: "https://arxiv.org/abs/2410.02736"
+      code: "https://github.com/Y0oMu/LLM-Judge-Bias-Dataset"
+
+  - key: abdullahi2026persona
+    title: "The Persona Paradox: Medical Personas as Behavioral Priors in Clinical Language Models"
+    authors: [Tassallah Abdullahi, Shrestha Ghosh, Hamish S Fraser, Daniel León Tramontini, Adeel Abbasi, Ghada Bourjeily, Carsten Eickhoff, Ritambhara Singh]
+    year: 2026
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2601.05376"
+    category: bias-robustness
+    group: robustness
+    sections: [App. K]
+    links:
+      paper: "https://arxiv.org/abs/2601.05376"
+      code: "https://github.com/rsinghlab/Persona_Paradox"
+
+  - key: ryan2025synthesizeme
+    name: SynthesizeMe
+    title: SynthesizeMe! Inducing Persona-Guided Prompts for Personalized Reward Models in LLMs
+    authors: [Michael J Ryan, Omar Shaikh, Aditri Bhagirath, Daniel Frees, William Barr Held, Diyi Yang]
+    year: 2025
+    venue: ACL
+    venue_full: "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+    category: bias-robustness
+    group: robustness
+    sections: [App. K]
+    links:
+      paper: "https://aclanthology.org/2025.acl-long.397/"
+      arxiv: "https://arxiv.org/abs/2506.05598"
+      code: "https://github.com/SALT-NLP/SynthesizeMe"
+
+  - key: salewski2023context
+    title: In-Context Impersonation Reveals Large Language Models' Strengths and Biases
+    authors: [Leonard Salewski, Stephan Alaniz, Isabel Rio-Torto, Eric Schulz, Zeynep Akata]
+    year: 2023
+    venue: NeurIPS
+    venue_full: Advances in neural information processing systems
+    category: bias-robustness
+    group: robustness
+    sections: [App. K]
+    links:
+      paper: "https://arxiv.org/abs/2305.14930"
+      code: "https://github.com/ExplainableML/in-context-impersonation"
+
+  - key: tseng2024two
+    title: "Two Tales of Persona in LLMs: A Survey of Role-Playing and Personalization"
+    authors: [Yu-Min Tseng, Yu-Chao Huang, Teng-Yun Hsiao, Wei-Lin Chen, Chao-Wei Huang, Yu Meng, Yun-Nung Chen]
+    year: 2024
+    venue: Findings of EMNLP
+    venue_full: "Findings of the Association for Computational Linguistics: EMNLP 2024"
+    category: bias-robustness
+    group: robustness
+    sections: [App. K]
+    links:
+      paper: "https://aclanthology.org/2024.findings-emnlp.969/"
+      arxiv: "https://arxiv.org/abs/2406.01171"
+      code: "https://github.com/MiuLab/PersonaLLM-Survey"
+
+  - key: zhao2025one
+    title: One Token to Fool LLM-as-a-Judge
+    authors: [Yulai Zhao, Haolin Liu, Dian Yu, Sunyuan Kung, Meijia Chen, Haitao Mi, Dong Yu]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2507.08794"
+    category: bias-robustness
+    group: robustness
+    sections: [§5, App. K]
+    links:
+      paper: "https://arxiv.org/abs/2507.08794"
+      model: "https://huggingface.co/sarosavo/Master-RM"
+
+  - key: zheng2025cheating
+    title: "Cheating Automatic LLM Benchmarks: Null Models Achieve High Win Rates"
+    authors: [Xiaosen Zheng, Tianyu Pang, Chao Du, Qian Liu, Jing Jiang, Min Lin]
+    year: 2025
+    venue: ICLR
+    venue_full: International Conference on Learning Representations
+    category: bias-robustness
+    group: robustness
+    sections: [§5, App. K]
+    links:
+      paper: "https://openreview.net/forum?id=syThiTmWWm"
+      arxiv: "https://arxiv.org/abs/2410.07137"
+      code: "https://github.com/sail-sg/Cheating-LLM-Benchmarks"
+
+  - key: dougruoz2026challenges
+    title: Challenges and Recommendations for LLMs-as-a-Judge in Multilingual Settings and Low-Resource Languages
+    authors: [A Seza Doğruöz, Xixian Liao, Verena Blaschke, Jakob Prange, Senyu Li, David Ifeoluwa Adelani]
+    year: 2026
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2607.02235"
+    category: foundational-models
+    group: surveys
+    sections: [§6, App. L]
+    links:
+      paper: "https://arxiv.org/abs/2607.02235v1"
+    note: Cited as arXiv v1. Later arXiv versions are titled "Challenges and Recommendations for LLM-as-a-Judge in Multilingual Settings and for Low-Resource Languages".
+
+  - key: gu2024survey
+    title: A Survey on LLM-as-a-Judge
+    authors: [Jiawei Gu, Xuhui Jiang, Zhichao Shi, Hexiang Tan, Xuehao Zhai, Chengjin Xu, Wei Li, Yinghan Shen, Shengjie Ma, Honghao Liu]
+    et_al: true
+    year: 2024
+    venue: The Innovation
+    venue_full: The Innovation
+    category: foundational-models
+    group: surveys
+    sections: [§1, App. A, App. H, App. M]
+    links:
+      paper: "https://arxiv.org/abs/2411.15594"
+      code: "https://github.com/DataArcTech/LLM-as-a-Judge"
+
+  - key: li2024llms
+    title: "LLMs-as-Judges: A Comprehensive Survey on LLM-based Evaluation Methods"
+    authors: [Haitao Li, Qian Dong, Junjie Chen, Huixue Su, Yujia Zhou, Qingyao Ai, Ziyi Ye, Yiqun Liu]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2412.05579"
+    category: foundational-models
+    group: surveys
+    sections: [§1, App. A, App. M]
+    links:
+      paper: "https://arxiv.org/abs/2412.05579"
+      code: "https://github.com/CSHaitao/Awesome-LLMs-as-Judges"
+
+  - key: li2025generation
+    title: "From Generation to Judgment: Opportunities and Challenges of LLM-as-a-judge"
+    authors: [Dawei Li, Bohan Jiang, Liangjie Huang, Alimohammad Beigi, Chengshuai Zhao, Zhen Tan, Amrita Bhattacharjee, Yuxuan Jiang, Canyu Chen, Tianhao Wu]
+    et_al: true
+    year: 2025
+    venue: EMNLP
+    venue_full: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing
+    category: foundational-models
+    group: surveys
+    sections: [§1, App. A, App. M]
+    links:
+      paper: "https://aclanthology.org/2025.emnlp-main.138/"
+      arxiv: "https://arxiv.org/abs/2411.16594"
+      code: "https://github.com/llm-as-a-judge/Awesome-LLM-as-a-judge"
+
+  - key: lu2024small
+    title: "Small Language Models: Survey, Measurements, and Insights"
+    authors: [Zhenyan Lu, Xiang Li, Dongqi Cai, Rongjie Yi, Fangming Liu, Xiwen Zhang, Nicholas D Lane, Mengwei Xu]
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2409.15790"
+    category: foundational-models
+    group: surveys
+    sections: [§1, §2, App. A]
+    links:
+      paper: "https://arxiv.org/abs/2409.15790"
+      code: "https://github.com/UbiquitousLearning/SLM_Survey"
+
+  - key: wan2023efficient
+    title: "Efficient Large Language Models: A Survey"
+    authors: [Zhongwei Wan, Xin Wang, Che Liu, Samiul Alam, Yu Zheng, Jiachen Liu, Zhongnan Qu, Shen Yan, Yi Zhu, Quanlu Zhang]
+    et_al: true
+    year: 2023
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2312.03863"
+    category: foundational-models
+    group: surveys
+    sections: [§1, §2]
+    links:
+      paper: "https://arxiv.org/abs/2312.03863"
+      code: "https://github.com/AIoT-MLSys-Lab/Efficient-LLMs-Survey"
+
+  - key: abdin2024phi
+    name: Phi-4
+    title: Phi-4 Technical Report
+    authors: [Marah Abdin, Jyoti Aneja, Harkirat Behl, Sébastien Bubeck, Ronen Eldan, Suriya Gunasekar, Michael Harrison, Russell J Hewett, Mojan Javaheripi, Piero Kauffmann]
+    et_al: true
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2412.08905"
+    category: foundational-models
+    group: models
+    sections: [§1, App. B]
+    links:
+      paper: "https://arxiv.org/abs/2412.08905"
+
+  - key: abdin2025phi
+    name: Phi-4-reasoning
+    title: Phi-4-reasoning Technical Report
+    authors: [Marah Abdin, Sahaj Agarwal, Ahmed Awadallah, Vidhisha Balachandran, Harkirat Behl, Lingjiao Chen, Gustavo de Rosa, Suriya Gunasekar, Mojan Javaheripi, Neel Joshi]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2504.21318"
+    category: foundational-models
+    group: models
+    sections: [App. B]
+    links:
+      paper: "https://arxiv.org/abs/2504.21318"
+
+  - key: abouelenin2025phi
+    name: Phi-4-mini
+    title: "Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs"
+    authors: [Abdelrahman Abouelenin, Atabak Ashfaq, Adam Atkinson, Hany Awadalla, Nguyen Bach, Jianmin Bao, Alon Benhaim, Martin Cai, Vishrav Chaudhary, Congcong Chen]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2503.01743"
+    category: foundational-models
+    group: models
+    sections: [§1, App. B]
+    links:
+      paper: "https://arxiv.org/abs/2503.01743"
+
+  - key: achiam2023gpt
+    name: GPT-4
+    title: GPT-4 Technical Report
+    authors: [Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat]
+    et_al: true
+    year: 2023
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2303.08774"
+    category: foundational-models
+    group: models
+    sections: [§1]
+    links:
+      paper: "https://arxiv.org/abs/2303.08774"
+
+  - key: grattafiori2024llama
+    name: Llama 3
+    title: The Llama 3 Herd of Models
+    authors: [Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan]
+    et_al: true
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2407.21783"
+    category: foundational-models
+    group: models
+    sections: [§1, App. B]
+    links:
+      paper: "https://arxiv.org/abs/2407.21783"
+      code: "https://github.com/meta-llama/llama-models"
+
+  - key: guo2025deepseek
+    name: DeepSeek-R1
+    title: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning
+    authors: [Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang, Shirong Ma, Xiao Bi]
+    et_al: true
+    year: 2025
+    venue: Nature
+    venue_full: Nature
+    category: foundational-models
+    group: models
+    sections: [§1, App. B, App. C]
+    links:
+      paper: "https://www.nature.com/articles/s41586-025-09422-z"
+      arxiv: "https://arxiv.org/abs/2501.12948"
+      code: "https://github.com/deepseek-ai/DeepSeek-R1"
+    note: "Cited as the Nature article. The arXiv preprint is titled \"DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning\"."
+
+  - key: manik2026gemma
+    title: "Gemma 4, Phi-4, and Qwen3: Accuracy-Efficiency Tradeoffs in Dense and MoE Reasoning Language Models"
+    authors: [Md Motaleb Hossen Manik, Ge Wang]
+    year: 2026
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2604.07035"
+    category: foundational-models
+    group: models
+    sections: [App. B]
+    links:
+      paper: "https://arxiv.org/abs/2604.07035v1"
+    note: Cited as arXiv v1. Later arXiv versions are titled "Unified Deployment-Aware Evaluation of Open Reasoning Language Models".
+
+  - key: qwen2025qwen25technicalreport
+    name: Qwen2.5
+    title: Qwen2.5 Technical Report
+    authors: [Qwen, ":", An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tianyi Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, Zihan Qiu]
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2412.15115"
+    category: foundational-models
+    group: models
+    sections: [App. B]
+    links:
+      paper: "https://arxiv.org/abs/2412.15115"
+
+  - key: team2024gemma1
+    name: Gemma
+    title: "Gemma: Open Models Based on Gemini Research and Technology"
+    authors: [Gemma Team, Thomas Mesnard, Cassidy Hardin, Robert Dadashi, Surya Bhupatiraju, Shreya Pathak, Laurent Sifre, Morgane Rivière, Mihir Sanjay Kale, Juliette Love]
+    et_al: true
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2403.08295"
+    category: foundational-models
+    group: models
+    sections: [App. B]
+    links:
+      paper: "https://arxiv.org/abs/2403.08295"
+
+  - key: team2024gemma2
+    name: Gemma 2
+    title: "Gemma 2: Improving Open Language Models at a Practical Size"
+    authors: [Gemma Team, Morgane Riviere, Shreya Pathak, Pier Giuseppe Sessa, Cassidy Hardin, Surya Bhupatiraju, Léonard Hussenot, Thomas Mesnard, Bobak Shahriari, Alexandre Ramé]
+    et_al: true
+    year: 2024
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2408.00118"
+    category: foundational-models
+    group: models
+    sections: [App. B]
+    links:
+      paper: "https://arxiv.org/abs/2408.00118"
+
+  - key: yang2025qwen3
+    name: Qwen3
+    title: Qwen3 Technical Report
+    authors: [An Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao, Chengen Huang, Chenxu Lv]
+    et_al: true
+    year: 2025
+    venue: arXiv
+    venue_full: "arXiv preprint arXiv:2505.09388"
+    category: foundational-models
+    group: models
+    sections: [§1, App. B]
+    links:
+      paper: "https://arxiv.org/abs/2505.09388"
+      code: "https://github.com/QwenLM/Qwen3"

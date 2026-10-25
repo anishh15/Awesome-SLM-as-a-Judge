@@ -1,0 +1,354 @@
+\documentclass[11pt]{article}
+
+\usepackage[final]{acl}
+
+\usepackage{times}
+\usepackage{latexsym}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{microtype}
+
+\usepackage{inconsolata}
+
+\usepackage{graphicx}
+
+\setlength\titlebox{6.2cm}
+
+\usepackage{etoolbox}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{colortbl}
+\usepackage{array}
+
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{wrapfig}
+
+\usepackage{afterpage}
+\usepackage{placeins}
+\usepackage{dblfloatfix}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes,arrows,arrows.meta,positioning,fit,calc,decorations.pathmorphing}
+\usepackage[edges]{forest}
+\pgfplotsset{compat=1.18}
+
+\usepackage[most]{tcolorbox}
+
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{pifont}
+\usepackage{soul}
+
+\usepackage{titletoc}
+
+\hbadness=10000
+\vbadness=10000
+\hfuzz=20pt
+\sloppy
+\AtBeginDocument{\hbadness=10000\vbadness=10000\hfuzz=20pt\sloppy}
+
+\setcounter{topnumber}{4}
+\setcounter{totalnumber}{6}
+\renewcommand{\topfraction}{0.90}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.85}
+\setlength{\textfloatsep}{10pt plus 2pt minus 4pt}
+
+\definecolor{slmblue}{HTML}{1B2A4A}
+\definecolor{slmcream}{HTML}{F5F5F0}
+\definecolor{surveygreen}{HTML}{2E7D32}
+\definecolor{surveyorange}{HTML}{E65100}
+\definecolor{surveypurple}{HTML}{6A1B9A}
+\definecolor{hidden-draw}{RGB}{20,68,106}
+\definecolor{hidden-pink}{RGB}{255,245,247}
+\definecolor{insightgold}{HTML}{B8860B}
+\definecolor{findingblue}{HTML}{1565C0}
+
+\definecolor{tealhead}{HTML}{1F6F6F}
+\definecolor{tealrow}{HTML}{EAF2F2}
+\definecolor{tealrule}{HTML}{1F6F6F}
+
+\renewcommand{\arraystretch}{1.18}
+\newcommand{\prettytable}{\rowcolors{2}{white}{tealrow}}
+
+\newcommand{\yes}{\textcolor{green!60!black}{\ding{51}}}
+\newcommand{\no}{\textcolor{red!70!black}{\ding{55}}}
+\newcommand{\maybe}{\textcolor{orange!80!black}{\ding{108}}}
+
+\title{Small Language Models as Judges: A Survey}
+
+\author{
+  \textbf{Anish Laddha}\textsuperscript{1} \qquad
+  \textbf{Nitesh Pradhan}\textsuperscript{1} \qquad
+  \textbf{Gaurav Srivastava}\textsuperscript{2} \\\\
+  \textsuperscript{1}Department of Computer Science and Engineering, LNMIIT, India \\
+  \textsuperscript{2}Department of Computer Science, Virginia Tech, USA \\
+  \texttt{anshladdha15@gmail.com} \qquad
+  \texttt{nitesh.pradhan@lnmiit.ac.in} \qquad
+  \texttt{gks@vt.edu} \\\\
+  \faGlobe\ \textbf{Website:} \href{https://anishh15.github.io/Awesome-SLM-as-a-Judge/}{\texttt{anishh15.github.io/Awesome-SLM-as-a-Judge/}} \\
+  \faGithub\ \textbf{GitHub:} \href{https://github.com/anishh15/Awesome-SLM-as-a-Judge}{\texttt{github.com/anishh15/Awesome-SLM-as-a-Judge}}
+}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+\begin{abstract}
+Automated evaluation of language model outputs has shifted from costly human annotation toward model-based judging, yet the field has relied mostly on large proprietary models whose cost, opacity, and data-privacy risks limit scalable deployment. This survey examines \textit{Small Language Models} (SLMs, $\leq$14B parameters) as judges, synthesizing \textbf{105 works} spanning the full pipeline from supervised fine-tuning and preference optimization through reinforcement learning with verifiable rewards to representation-based probing. We organize the field into five dimensions and distill five insights, each graded by the strength of its evidence:
+(\textbf{I1})~evaluation-specific training matters more than raw scale;
+(\textbf{I2})~reasoning tokens help only when they surface genuinely new discriminative signals;
+(\textbf{I3})~cross-family ensemble diversity decorrelates errors;
+(\textbf{I4})~debate value is bounded by information novelty, not round count; and
+(\textbf{I5})~SLM judge reliability tracks the verifiability gradient of the domain.
+In every surveyed paper that reports a trained judge next to its own base model under one protocol, evaluation-specific training improves the base model, with relative gains of 15--63\%. Position-consistent accuracy protocols further show that much apparent judge performance is heuristic-driven, and that all judges, including frontier models, degrade sharply on hard evaluation pairs. Across surveyed studies, fine-tuned 3--8B judges match proprietary-model accuracy on standard benchmarks, and heterogeneous panels of smaller models reach comparable quality at over 7$\times$ lower API cost; this parity narrows in subjective domains that lack external verification. Small judges also make private, on-device evaluation practical for continuous Reinforcement Learning from Human Feedback (RLHF) loops. We close with a research agenda on calibration, adaptive inference, and generalization.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Evaluating language model outputs reliably and at scale remains a central open problem in NLP. Human annotation, while the gold standard, fails to scale: assembling expert annotators for the thousands of iterative experiments required by modern RLHF pipelines \citep{ouyang2022training} and constitutional alignment approaches \citep{bai2022constitutional} is prohibitively expensive. This bottleneck motivated the \emph{LLM-as-a-Judge} paradigm \citep{zheng2023judging}, in which a powerful model, typically GPT-4 \citep{achiam2023gpt}, serves as an automated proxy for human preference. MT-Bench demonstrated over 80\% agreement between GPT-4 and expert humans; JudgeLM \citep{zhu2025judgelm} and Prometheus \citep{kim2024prometheus1} then extended this capability to open-source fine-tuned models.
+
+The proprietary judge paradigm, however, carries structural costs that constrain its use. At evaluation scale $N \gg 10^4$, total API expenditure scales linearly in $N$, making continuous RLHF loops financially untenable for most research groups. Cloud-based judges also create data-privacy exposure, version-drift opacity, and latency that prevents real-time feedback loops. These constraints, combined with the rapid capability gains of recent small models \citep{abdin2024phi, yang2025qwen3, grattafiori2024llama, guo2025deepseek}, raise the question this survey sets out to answer: \textit{can small language models reliably serve as judges, and if so, under what conditions?} The answer is not a simple yes or no. As we show, it depends on how the judge is trained, how much it is allowed to reason, whether it acts alone or in a panel, and above all on whether the domain admits external verification.
+
+\paragraph{The moment is right for this survey.} Two concurrent pressures converge: (1)~SLMs in 2025--2026 achieve reasoning performance previously requiring 70B+ models \citep{abouelenin2025phi, guo2025deepseek}; and (2)~the LLM-as-a-Judge literature has matured, with dedicated benchmarks \citep{tan2025judgebench, bi2026judgeboard}, training paradigms \citep{whitehouse2025j1, deshpande2024glider}, and systematic failure analyses \citep{wynn2025talk, zhang2025stop}, to support a synthesis.
+
+Existing surveys address either LLM judges broadly \citep{gu2024survey, li2025generation, li2024llms}, SLMs generally \citep{lu2024small}, or efficient LLMs from a systems perspective \citep{wan2023efficient}. Table~\ref{tab:prior_surveys} makes the gap concrete: none of them dedicates a section to sub-14B judge training, ensemble economics, reasoning-budget analysis, or domain-verifiability effects. To our knowledge this is the first survey specifically examining \emph{SLMs as judges}, which raises distinct questions that fall outside the scope of general LLM-judge surveys: how does parameter budget constrain judging capability? when do ensemble strategies with sub-10B models pay off? and can representation-based evaluation bypass generation entirely? The question of whether automated judges need validation \citep{shankar2024validates} becomes acute for smaller models with narrower training distributions.
+
+\input{tables/1_prior_surveys}
+
+Table~\ref{tab:general_vs_slm} (Appendix~\ref{app:background}) further delineates what is already known from the general LLM-judge literature and what this survey contributes as SLM-specific findings for each insight.
+
+\paragraph{Scope and Methodology.} We survey papers through mid-2026 from Semantic Scholar, arXiv, ACL Anthology, and Google Scholar. Inclusion required that (i)~the work involve models with $\leq$14B parameters in an evaluative role, or (ii)~it provide methodology or baselines adopted by SLM judge papers. From $\sim$320 initial candidates, title-and-abstract screening and full-text assessment yielded the 105 works cited here, spanning individual judging (\S\ref{sec:individual}), ensemble and debate strategies (\S\ref{sec:multiagent}), reliability (\S\ref{sec:reliability}), and future directions (\S\ref{sec:challenges}). Appendix~\ref{app:methodology} documents the search strategy, inclusion criteria, and corpus statistics.
+
+\paragraph{Contributions.} (1)~A five-dimension taxonomy (Figure~\ref{fig:taxonomy}) unifying 105 works; (2)~five insights graded by evidence strength, summarized in Table~\ref{tab:insights} and detailed per insight in Appendix~\ref{app:evidence}; (3)~a cross-system comparison on shared benchmarks (Table~\ref{tab:cross_system}) and a 19-system master table; (4)~a deployment decision tree and coverage-gap analysis; and (5)~an agenda on calibration, adaptive inference, and domain generalization.
+
+\input{tables/2_insight_summary}
+
+\section{Background}
+\label{sec:background}
+
+We first fix the paradigm and vocabulary the survey builds on: how model-based judging is defined, and why a parameter budget became the central axis. This grounds the judge function and deployment economics used throughout.
+
+\subsection{The LLM-as-a-Judge Paradigm}
+
+LLM-based evaluation was systematized by \citet{zheng2023judging} with MT-Bench, a static benchmark of 80 multi-turn questions across eight categories. The paradigm defines a \emph{judge} $f_\mathcal{J}$ mapping a (question, response) or (question, response-A, response-B) tuple to a verdict $v \in \mathcal{V}$, where $\mathcal{V}$ is either a scalar (\emph{pointwise direct assessment}) or a preference direction (\emph{pairwise ranking}). A third mode, \emph{listwise ranking}, orders multiple candidates simultaneously. GPT-4's agreement with expert humans exceeds 80\%, comparable to human-to-human agreement, which established automated judging as a viable proxy \citep{zheng2023judging}. Appendix~\ref{app:background} provides full historical context.
+
+Subsequent work diversified both architectures and supervision: distilled judges (PandaLM, JudgeLM), rubric-conditioned scorers (Prometheus~2), human-preference-trained reward models (FLAMe), and compact generalists (GLIDER, 3.8B) progressively demonstrated that capable evaluation does not require frontier scale. Appendix~\ref{app:background} traces this full history.
+
+\subsection{Why SLMs? Definitions and Deployment Economics}
+
+Motivated by recent SLM surveys \citep{lu2024small} that target the 100M--5B range, we broaden the operational definition: a \emph{Small Language Model} has $\leq$14B \emph{dense} parameters, deployable on a single consumer GPU (24GB VRAM class) at 8-bit precision without model parallelism: at one byte per parameter its weights take about 14GB, against about 28GB at 16-bit. For mixture-of-experts (MoE) architectures, we apply this threshold to \emph{active} (per-token) parameters and report the total next to it. Prometheus~2's 8$\times$7B variant, for example, activates 12.9B of its 46.7B parameters per token, so it falls inside our scope while needing the memory of a much larger model. Throughout the survey, sizes are totals for dense models and active/total for MoE models.
+
+The threshold is a deployment regime, not a capability claim. What fits on one GPU stays well defined as models improve, whereas a capability-anchored boundary erodes: defining SLMs as ``models that cannot match GPT-4 at judging'' would already exclude most systems surveyed here. Resource-anchored scoping is standard, with \citet{lu2024small} anchored to edge deployment and \citet{wan2023efficient} to systems-level efficiency. What changes is what fits inside the envelope, and that change is this survey's subject rather than a threat to its scope. Appendix~\ref{app:slm_landscape} details the SLM landscape and MoE boundary cases.
+
+Let $f_\mathcal{J}^{(B)} : \mathcal{Q} \times \mathcal{R} \rightarrow \mathcal{V}$ denote a judge operating under token budget $B$, and let the \emph{Instruction Following Rate} (IFR) be the fraction of evaluations producing a parseable verdict. \citet{verga2024replacing} report that a heterogeneous panel of small and mid-tier models is over 7$\times$ less expensive than a single GPT-4 judge at API list prices, which brings continuous evaluation at the scale of millions of judgments within reach.
+
+\section{Taxonomy and Individual SLM Judges}
+\label{sec:individual}
+
+\begin{figure*}[p]
+	\centering
+	\includegraphics[width=\textwidth]{figures/1_main_taxonomy.pdf}
+	\caption{Taxonomy of the SLM-as-a-Judge survey. The five dimensions map to main paper sections (\S\ref{sec:background}--\S\ref{sec:challenges}), with insights I1--I5 and challenges C1--C6 positioned at their primary locations. Each leaf node lists representative papers and key concepts. Appendices~\ref{app:background}--\ref{app:future} provide extended coverage of all branches.}
+	\label{fig:taxonomy}
+\end{figure*}
+
+\paragraph{Taxonomy.} Figure~\ref{fig:taxonomy} organizes SLM judging across five orthogonal dimensions, each yielding one of our five insights: \textbf{background} (\S\ref{sec:background}); \textbf{individual SLM judges} (this section); \textbf{multi-agent evaluation strategies} (\S\ref{sec:multiagent}); \textbf{reliability and meta-evaluation} (\S\ref{sec:reliability}); and \textbf{challenges and future directions} (\S\ref{sec:challenges}). We begin with the simplest dimension, the single judge acting alone.
+
+\paragraph{The individual judge.} An individual SLM judge realizes the map $f_\mathcal{J}: \mathcal{Q}\times\mathcal{R}^{(1:k)}\!\rightarrow\mathcal{V}$ of \S\ref{sec:background} with no auxiliary models, ensemble voting, or inter-agent communication. Its design space factorizes along four axes that interact in task-dependent ways,
+\begin{equation}
+f_\mathcal{J} \;=\; g\bigl(\underbrace{\pi}_{\text{train}},\ \underbrace{B}_{\text{budget}},\ \underbrace{m}_{\text{mode}},\ \underbrace{\theta}_{\text{scale}}\bigr),
+\label{eq:design_space}
+\end{equation}
+the training paradigm $\pi$ (\S\ref{sec:individual}.1), the token budget $B$ and inference mode $m\in\{\textsc{think},\textsc{direct}\}$ (\S\ref{sec:overthinking}), and the parameter count $\theta$ (\S\ref{sec:individual}.2); the first two dominate quality. Cascaded evaluation (\S\ref{sec:multiagent}.3) optimizes $B$ dynamically. We take each axis in turn.
+
+\subsection{Training Paradigms}
+
+\paragraph{Off-the-shelf prompting.}
+General-purpose SLMs can serve as zero-shot or few-shot judges without task-specific training; \citet{jayarao2025explicit} find that thinking-mode models (Qwen~3, 0.6B--4B) already achieve $\sim$10\% higher accuracy than non-thinking counterparts through innate chain-of-thought. But off-the-shelf judges face three structural failure modes: inconsistent format adherence (frequent parse failures on complex rubrics for sub-3B models), unmitigated positional and verbosity biases, and susceptibility to adversarial phrases that inflate scores regardless of content.
+
+\paragraph{Supervised fine-tuning (SFT).}
+SFT on evaluation-specific data is the dominant paradigm. JudgeLM \citep{zhu2025judgelm} trains on GPT-4 judgments with \emph{swap augmentation} (both orderings) to reduce position bias at the data level; Prometheus~2 \citep{kim2024prometheus2} adds rubric-conditioned Likert scoring; and Auto-J \citep{li2024generative}, a 13B generative judge, generalizes across 58 real-world scenarios (Appendix~\ref{app:training}).
+
+\paragraph{RL-based judge training.}
+RL offers a second-order improvement by optimizing the judge directly against evaluation accuracy. J1 \citep{whitehouse2025j1} trains thinking judges via Group Relative Policy Optimization (GRPO), casting both verifiable and open-ended tasks into a unified verifiable reward, with a consistency reward that penalizes position-dependent verdicts \emph{at the objective level}. JudgeLRM \citep{chen2025judgelrm} trains 3B--14B judges with outcome-driven GRPO rewards and finds a negative correlation between SFT gains and the share of reasoning-demanding samples, confirming that SFT is structurally insufficient for reasoning-intensive judgment.
+
+\paragraph{Representation-based judging.}
+A different paradigm bypasses generation entirely. \citet{li2026rethinking} introduce INSPECTOR, probing hidden states of a frozen small LM to predict aspect-level scores via lightweight linear probes. Its basis is the \emph{Semantic Capacity Asymmetry Hypothesis}: evaluation is a discriminative task accessible in early-to-mid layers, whereas generation requires the full forward pass plus sampling (Appendix~\ref{app:training}).
+
+\subsection{Scale, Capability, and the Training-Data Boundary}
+
+A prevalent assumption in early LLM judging work was that larger models make better judges. The record is more nuanced once evaluation-specific training is controlled for. Each insight carries an evidence tag: [\textsc{Consensus}] for a finding replicated across four or more independent sources, [\textsc{Replicated}] for two or three, or one study with strong controls, and [\textsc{Preliminary}] for a single study or an untested mechanism. Sources count as independent when they come from different groups and do not share both backbone and benchmark; systems above 14B serve only as reference points. The same levels grade rows in Appendix~\ref{app:evidence}.
+
+\textsc{Evaluation-Specific Training Outweighs Scale Because Judging Is Primarily Discriminative.} [\textsc{Consensus}: 5 independent lines of evidence] \textit{Across surveyed studies, a 3.8B judge trained on evaluation data can outperform a far larger proprietary model such as GPT-4o under reported protocols, because recognizing quality differences requires pattern-matching against internalized evaluation criteria, not the full generative capacity needed for open-ended text production.} Eight surveyed papers report a trained judge next to its own base model under one protocol, which holds the backbone fixed, and in all eight, evaluation-specific training improves the base model, with relative gains from 15\% to 63\% (Table~\ref{tab:evidence_i1}). In the clearest case, Selene Mini adds evaluation training to LLaMA-3.1-8B-Instruct and lifts RewardBench accuracy from 0.750 to 0.891, a 19\% gain \citep{alexandru2025atla}. Table~\ref{tab:judge_systems} summarizes nine key systems, and Figure~\ref{fig:individual_trends}(\subref{fig:trend_scale}) plots reported RewardBench accuracy against size: among trained judges the curve does not climb with scale (8B: 0.891; 24B: 0.878).
+
+Table~\ref{tab:cross_system} extends this across shared benchmarks. On FLASK, GLIDER (3.8B) reaches Pearson $r\approx0.615$, above GPT-4o's 0.610 and GPT-4o-mini's 0.565 under the same evaluation run \citep{deshpande2024glider}. On PandaLM, JudgeLRM at 3B exceeds GPT-4 and at 7B outperforms DeepSeek-R1 by 2.6 F1 \citep{chen2025judgelrm}. J1-8B matches the prompted Llama-3.3-70B on RewardBench (85.7 against 85.4) \citep{whitehouse2025j1}, CompassJudger-2 (7B) reports judgment accuracy competitive with DeepSeek-V3, which activates 37B of its 671B parameters \citep{zhang2025compassjudger}, J4R (7B) beats GPT-4o by 6.7\% on its overall score across PPE, JudgeBench, and ReasoningJudgeBench \citep{xu2025j4r}, and with test-time scaling GenPRM (7B) surpasses a 72B scalar process reward model on ProcessBench \citep{zhao2026genprm}. The crossover depends on the benchmark. Under JudgeBench's original protocol, J1-8B reaches 42\% position-consistent accuracy and no SLM reaches Claude-3.5-Sonnet's 64.3\% \citep{whitehouse2025j1, tan2025judgebench}, and on fine-grained rubric correlation Prometheus~2 scores 0.470 Pearson on FLASK against GPT-4o-mini's 0.615 in the same run \citep{alexandru2025atla}. Appendix~\ref{app:evidence_i1} lists supporting and contrary results side by side.
+
+\textit{Within the $\leq$14B regime, what a judge is trained on matters more than how large it is.}
+
+\paragraph{Threats to comparability.} Most cross-paper comparisons pit fine-tuned SLMs against proprietary baselines prompted zero-shot. That asymmetry \emph{is} the claim, since I1 concerns what training buys rather than inherent capacity, and the same-backbone comparisons above isolate the training variable directly. Table~\ref{tab:threats} (Appendix~\ref{app:threats_i1}) breaks down six sources of asymmetry and the controls available for each.
+
+\begin{figure*}[t]
+\centering
+\begin{subfigure}{0.245\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/2a_panel_scale.pdf}
+\caption{I1: training vs.\ scale.}
+\label{fig:trend_scale}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.245\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/2b_panel_reasoning.pdf}
+\caption{I2: effect of more reasoning.}
+\label{fig:trend_reasoning}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.245\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/2c_panel_ensemble.pdf}
+\caption{I3: panel vs.\ GPT-4.}
+\label{fig:trend_ensemble}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.245\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/2d_panel_verifiability.pdf}
+\caption{I5: verifiability gradient.}
+\label{fig:trend_verif}
+\end{subfigure}
+\caption{\textit{The four quantitative trends behind the survey's insights.} \textbf{(\subref{fig:trend_scale})}~Published RewardBench accuracy against model size. Trained judges do not improve monotonically with scale, and on a fixed LLaMA-3.1-8B backbone the trained judge leads the prompted one by 14.1 points (I1). \textbf{(\subref{fig:trend_reasoning})}~Reasoning-budget studies by the effect of more reasoning they report (I2). \textbf{(\subref{fig:trend_ensemble})}~PoLL's agreement with human labels against cost. Its panel beats a single GPT-4 judge on three QA datasets at 7--8$\times$ lower cost (I3). \textbf{(\subref{fig:trend_verif})}~Reported quality by domain, ordered by the four-level framework of Appendix~\ref{app:domains}, which places medical last because clinical judgement is contextual and no deterministic oracle settles it (I5). I4 is discussed in \S\ref{sec:multiagent}. \emph{Panels~(\subref{fig:trend_scale}) and~(\subref{fig:trend_ensemble}) plot reported numbers; (\subref{fig:trend_reasoning}) and~(\subref{fig:trend_verif}) place each study by its reported outcome.} Appendices~\ref{app:evidence} and~\ref{app:provenance} give the underlying comparisons.}
+\label{fig:individual_trends}
+\end{figure*}
+
+\input{tables/3_judge_systems}
+
+\subsection{Token Budget Effects and Reasoning Mode}
+\label{sec:overthinking}
+
+The reasoning budget $B$ interacts with judging capability in a task-dependent, non-monotone way: $B^\star(\theta,d) = \argmax_{B}\,\mathrm{Acc}(B\mid\theta,d)$ depends on both judge scale $\theta$ and task difficulty $d$.
+
+\textsc{Reasoning Tokens Improve Evaluation Only When They Surface New Discriminative Signals.} [\textsc{Consensus}: 7 studies] \textit{Across surveyed studies, extended chain-of-thought \citep{wei2022chain} improves judgment for complex tasks but degrades verdict quality for simple ones, because the evaluative signal saturates and additional tokens introduce noise through self-contradiction.} Figure~\ref{fig:individual_trends}(\subref{fig:trend_reasoning}) places each study by its reported effect. Thinking models reach about 10\% higher accuracy than non-thinking counterparts \citep{jayarao2025explicit, jiang2025codejudgebench}, and in 0.6--4B judges the extra compute stays under 3$\times$ while consistency under positional and verbosity biases also improves \citep{jayarao2025explicit}. Because the gain is about the same at every size, it matters most for the smallest judges: about 19\% in relative terms at 0.6B, against 13\% at 4B. Sweet spots vary by (model, difficulty) pair \citep{aggarwal2025optimalthinkingbench}, and over-reasoning degrades performance \citep{sui2025stop, shojaee2026illusion}. Budget-constrained prompting \citep{han2025token} preserves accuracy while cutting compute, so adaptive budgets or dual-mode judges give the best cost-quality trade-off. See Appendix~\ref{app:evidence_i2} for the evidence table and Appendix~\ref{app:individual} for analysis.
+
+\subsection{Instruction Following Rate}
+\label{sec:ifr}
+
+IFR (\S\ref{sec:background}) is underreported and its failures are not random: they concentrate on the hardest cases, so scoring only parseable verdicts over-weights easy ones and biases accuracy upward (Appendix~\ref{app:individual}, Eq.~\ref{eq:ifr_bias}). Sub-3B non-thinking judges fail to produce a parseable verdict far more often on complex rubrics, while judges at 7B and above with format-reinforced training rarely fail. IFR must therefore be reported alongside accuracy.
+
+\section{Multi-Agent Evaluation Strategies}
+\label{sec:multiagent}
+
+Individual judges, however capable, carry systematic biases and failure modes (\S\ref{sec:reliability}). Multi-agent strategies pool judgments across models to address these limitations. Two approaches with distinct motivations and empirical profiles dominate, ensemble/jury voting and multi-agent debate, with Figure~\ref{fig:strategy_taxonomy} (Appendix~\ref{app:strategy_taxonomy}) giving the full taxonomy.
+
+\subsection{Ensemble and Jury Methods}
+
+Ensemble judging aggregates the verdicts of $n$ independently queried judges, relying on the Condorcet Jury Theorem: if each juror is correct with probability $p>\tfrac12$ and errors are independent, the majority-vote accuracy $\sum_{k>n/2}\binom{n}{k}p^{k}(1-p)^{n-k}\!\rightarrow 1$ as $n$ grows, so independent errors cancel.
+
+\textsc{Cross-Family Jury Diversity Decorrelates Errors Through Architectural Independence.} [\textsc{Replicated}: 3 studies] \textit{Under reported protocols, heterogeneous panels of smaller judges outperform a single large judge at over 7$\times$ lower API cost, because distinct pretraining corpora and attention mechanisms yield more weakly correlated failure modes, better approximating the independence assumption that Condorcet aggregation relies on.} Figure~\ref{fig:individual_trends}(\subref{fig:trend_ensemble}) situates this result on the cost-quality plane. \citet{verga2024replacing} formalize the approach as PoLL (Panel of LLM Evaluators): a heterogeneous ensemble of Command~R, GPT-3.5-Turbo, and Claude Haiku outperforms a single GPT-4 judge on multiple QA and preference benchmarks and shows less of the intra-model bias that leads a single judge to favor its own family. \citet{bi2026judgeboard} demonstrate that Multi-Agent Judging (MAJ) with SLM backbones can match standalone LLM judges on MATH even when each individual SLM falls substantially short. \citet{cho2025cosmosfl} confirm on fault localization that diverse small-model panels match large-model performance. Appendix~\ref{app:evidence_i3} collects the evidence.
+
+\emph{Family} diversity matters more than stochastic diversity: distinct pretraining corpora, architectures, and alignment objectives leave members of different families failing on different inputs, which is what majority voting needs and what resampling one model cannot supply (Appendix~\ref{app:ensemble}). \textit{Draw jury members from distinct families rather than sampling one model repeatedly.}
+
+\subsection{Multi-Agent Debate}
+
+Multi-agent debate (MAD) \citep{du2024improving} runs multiple LLM instances that exchange and critique responses over multiple rounds. The motivation is information aggregation: diverse agents surface distinct evidence, and cross-criticism enables error correction beyond single-agent reasoning.
+
+\textsc{Debate Value Is Bounded By Information Novelty Across Rounds, Not By Round Count.} [\textsc{Consensus}: 5 studies] \textit{Across surveyed studies, multi-agent debate improves evaluation when agents contribute genuinely different evidence or problem-solving strategies, but degrades performance in shared-context settings because additional rounds amplify sycophantic conformity rather than surfacing new information.} \citet{wynn2025talk} and \citet{zhang2025stop} independently find MAD underperforms single-agent baselines on binary correctness judgment, and the MAST taxonomy \citep{cemri2026multi} attributes $\sim$37\% of multi-agent failures to \emph{Inter-Agent Misalignment}, agents preferring consensus to accuracy (Appendix~\ref{app:debate}). Debate helps when asymmetry is high, whether from distinct evidence fragments \citep{du2024improving} or from opposing roles assigned to the agents \citep{liang2024encouraging}. Small models benefit too. In safety evaluation, a critic, a defender, and a judge built on Qwen3-14B come within 0.03 Cohen's $\kappa$ of GPT-4o at about 46\% of its cost \citep{lin2025efficient}. Table~\ref{tab:evidence_i4} (Appendix~\ref{app:evidence_i4}) sorts these studies by asymmetry and the outcomes split cleanly along it, not by round count. \textit{The critical design variable is information asymmetry.}
+
+\subsection{Cascaded and Speculative Judging}
+
+An alternative is cascaded judging: route evaluations to a small SLM judge, accept high-confidence verdicts, and escalate uncertain ones to a larger model \citep{jung2025trust}. \emph{Speculative judging} pushes this: a small judge proposes a verdict and a large judge verifies only on disagreement. On the cost-quality plane (Figure~\ref{fig:deployment}, Appendix~\ref{app:individual}), cascade and speculative judging sit at the frontier's knee; self-consistency lies below it.
+
+\section{Reliability and Meta-Evaluation}
+\label{sec:reliability}
+
+Whether using individual or multi-agent judges, evaluation reliability requires analysis along three axes: structural biases, adversarial vulnerabilities, and benchmark validity.
+
+\subsection{Bias Taxonomy}
+
+We highlight the four most studied bias categories here; Appendix~\ref{app:biases} gives the full six-category taxonomy with mechanisms and mitigations. \textbf{Position bias} favors responses by presentational order rather than quality \citep{zheng2023judging}; it is quantified by \emph{position-consistent accuracy}, $\text{PC} = \mathbb{1}[v_{ab}=v_{ba}]$, which credits a verdict only when it survives swapping the A/B order, and is mitigated by swap augmentation \citep{zhu2025judgelm}, consistency-based RL rewards \citep{whitehouse2025j1}, or inference-time swapping; fine-tuning 7--9B judges to match the distribution of human preferences raises consistency under swapped order by 7--81\% \citep{li2025judging}. \textbf{Verbosity bias} rewards longer responses regardless of accuracy \citep{chen2024humans, szymanski2025limitations}, conflating information volume with quality. \textbf{Self-preference} favors outputs with low perplexity under the judge's own distribution, and extends to related lineages as \emph{preference leakage} \citep{li2025preference}: a judge trained on data from the evaluated model's family inflates its scores. \textbf{Sycophancy bias} aligns the verdict with expressed user expectations or authority cues rather than substantive quality.
+
+SLM judges are more exposed to surface cues such as position and length (Appendix~\ref{app:biases}, Table~\ref{tab:bias_comparison}), but they are less prone to self-preference, and sycophancy grows with model size \citep{perez2023discovering, wei2024simplesyntheticdatareduces}.
+
+\subsection{Adversarial Robustness}
+
+Judges also face structured adversarial attacks exploiting superficial signals. \citet{zheng2025cheating} show that constant, content-free responses achieve disproportionately high win rates; \citet{zhao2025one} find that a single token such as a colon can elicit false-positive rewards; and epistemic markers (``clearly'', ``definitively'') inflate judged quality without improving content. SLM judges are particularly vulnerable due to weaker instruction following; heterogeneous ensembles provide partial protection since attacks tuned to one architecture transfer poorly to a diverse panel (Appendix~\ref{app:robustness}).
+
+\subsection{Benchmark Validity and Position-Consistent Accuracy}
+
+\textsc{Position-Consistent Accuracy Reveals That Much Apparent Judge Performance Is Heuristic-Driven.} [\textsc{Replicated}: 3 studies] \textit{Under position-consistent accuracy protocols, even frontier judges degrade sharply on hard evaluation pairs, sometimes approaching random-choice baselines, indicating that much apparent performance relies on positional heuristics rather than substantive quality discrimination.} \citet{tan2025judgebench} construct challenging pairs where PC-Acc is dramatically lower than naive accuracy; \citet{bi2026judgeboard} and \citet{jiang2025codejudgebench} confirm this on mathematics and code. The practical implication is to always report PC-Acc alongside naive accuracy, since the gap between them measures how much apparent performance derives from heuristic exploitation.
+
+This reconciles with I1: evaluation-specific training delivers parity on standard benchmarks, but PC-Acc reveals that this parity narrows on the hardest evaluation pairs and in subjective domains~(I5), where all judges, including frontier models, degrade toward chance. Additional validity concerns include limitations of the human gold standard \citep{shankar2024validates}, contamination risks \citep{bedemariam2025potential}, and \emph{preference leakage}: \citet{li2025preference} show that when judge and generator share a model family, the judge systematically overscores, inflating apparent performance on benchmarks like AlpacaEval~2.0 (Appendix~\ref{app:benchmarks}).
+
+\section{Challenges and Future Directions}
+\label{sec:challenges}
+
+\textsc{SLM Judge Reliability Follows The Verifiability Gradient Of The Evaluation Domain.} [\textsc{Consensus}: 8 domains] \textit{Across surveyed studies, SLMs approach LLM-judge quality in high-verifiability domains (math, code) where external verification compensates for limited parametric knowledge, but degrade in subjective domains where internalized knowledge is the irreducible bottleneck.} The gap narrows as domain verifiability $\nu(d)$ rises (Figure~\ref{fig:individual_trends}(\subref{fig:trend_verif})): SLM judges reach near parity on mathematics \citep{bi2026judgeboard, chen2025judgelrm} and code \citep{jiang2025codejudgebench}, but drop sharply for creative tasks where no external oracle exists, though principle-guided judges can drive creative-writing improvement \citep{wei2025igniting}. Table~\ref{tab:evidence_i5} in Appendix~\ref{app:evidence_i5} maps the gradient across eight domains with evidence grading. The challenges below stem from this gradient; Appendix~\ref{app:future} expands them.
+
+Six open challenges follow, each expanded into a full research direction in Appendix~\ref{app:future}.
+
+\begin{itemize}[leftmargin=1.35em, itemsep=1.5pt, topsep=2pt, parsep=0pt]
+\item \textbf{C1: Adaptive inference-time compute.} $B^\star(\theta,d)$ varies sharply with difficulty (\S\ref{sec:overthinking}), but confidence-based routing \citep{jung2025trust} needs calibration SLM judges lack: they are overconfident where least accurate.
+\item \textbf{C2: Calibration without human labels.} Conformal prediction \citep{sheng2025analyzing}, TrustJudge \citep{wang2025trustjudge}, causal surrogate auditing \citep{landesberg2025causal}, and fine-tuning 7--9B judges to match human preference distributions \citep{li2025judging} are starting points, not general frameworks.
+\item \textbf{C3: Domain generalization beyond math and code.} Only 5\% of 650 judge papers address multilingual or low-resource settings \citep{dougruoz2026challenges}; M-Prometheus \citep{pombal2025m} is a first step, MM-Eval \citep{son2024mm} now tests judges in 122 languages, and multimodal SLM judges are unexplored.
+\item \textbf{C4: Resistance to reward hacking.} Generators trained against an SLM judge produce superficially convincing reasoning, and SLM robustness is less studied than LLM robustness.
+\item \textbf{C5: Standardized meta-evaluation.} No benchmark spans PC-Acc, human correlation, domain coverage, robustness, and IFR; long-form evaluation is weakest \citep{chen2026benchmarking}.
+\item \textbf{C6: Representation-based evaluation.} Probing the hidden states of a frozen 1.7B model closely approximates full LLM judges on GSM8K, MATH, and GPQA \citep{li2026rethinking}; open-ended evaluation remains untested.
+\end{itemize}
+
+\paragraph{From insights to deployment.} Read together, the insights give a simple recipe for choosing a judge (Figure~\ref{fig:flowchart}, Appendix~\ref{app:deployment_flowchart}). For verifiable, low-stakes evaluation such as math, code, and factual QA, a single fine-tuned 3--8B judge giving a direct verdict is a practical default, paired with a tool wherever an external oracle exists (I1, I5). When a domain is only partly verifiable, the budget decides the design: a cascade that escalates uncertain cases to a larger judge keeps spending low (I2, C1), while a panel of three judges from different families buys reliability when quality matters most (I3). Hard comparisons can go to thinking mode, which raises a small judge's accuracy by 13--19\% (I2). Debate earns its cost only when the agents hold different evidence or roles (I4), and subjective, high-stakes evaluation keeps a human in the loop. Whatever the design, two numbers belong next to accuracy in every report: position-consistent accuracy, which exposes positional heuristics, and IFR, which exposes silent parse failures (Table~\ref{tab:reporting}). Figure~\ref{fig:coverage_gap} (Appendix~\ref{app:coverage_gap}) shows where the evidence behind these choices concentrates: Qwen and LLaMA on RewardBench, with Gemma, DeepSeek-Distill, and safety underexplored.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This survey organizes 105 works on SLMs as judges into a five-dimension taxonomy with five insights. The convergent finding is that \textbf{reliable automated evaluation needs far fewer resources than the field has assumed}: across surveyed studies, fine-tuned 3--8B judges match proprietary models on standard benchmarks (I1), reasoning tokens help only when they carry new signal (I2), and heterogeneous juries decorrelate errors (I3), while the information-novelty boundary (I4) and the verifiability gradient (I5) mark where human oversight remains necessary. Calibration, multilingual coverage, and contamination resistance remain prerequisites for high-stakes deployment. These findings make SLM judges the practical default for verifiable, low-stakes evaluation rather than a budget compromise, with frontier models and human review reserved for the subjective, high-stakes end of the gradient. The throughline is that judging is discriminative and discrimination is cheaper than generation: scale buys knowledge, but most of what a judge needs comes from targeted training, verification, or panel diversity, so progress lies in better signals rather than larger judges.
+
+\clearpage
+
+\section*{Limitations}
+
+This survey synthesizes findings from 105 papers published through mid-2026, but several limitations should be noted. \textbf{First}, we have not conducted new experiments; all quantitative claims are drawn from cited sources and subject to original study biases. \textbf{Second}, the survey focuses primarily on English-language judges; generalizing to low-resource languages risks underestimating domain-specific failure modes. \textbf{Third}, rapid field evolution means coverage through mid-2026 may not capture later developments. \textbf{Fourth}, our literature selection may underrepresent domain-specific research outside major NLP venues (Appendix~\ref{app:methodology} documents the search protocol). \textbf{Fifth}, panels (b) and (d) of Figure~\ref{fig:individual_trends} place each study by the outcome it reports, so they show the direction of each result but not its size, and Figures~\ref{fig:paradigm_scatter}, \ref{fig:paradigm_supervision}, and~\ref{fig:deployment} have ordinal or schematic axes rather than measured quantities. Panels (a) and (c) plot published numbers, and Appendix~\ref{app:provenance} documents the source of every plotted element. \textbf{Finally}, IFR figures and cost estimates use varying setups, making cross-paper comparisons approximate.
+
+\paragraph{Potential Risks.} This work does not pose direct risks, but reliance on automated evaluation may introduce systematic biases that propagate into downstream model training. Deployment of SLM judges in critical applications (e.g., medical, legal, safety evaluation) should carefully consider robustness limitations documented in this survey. Over-reliance on a single judge architecture risks creating evaluation monocultures where shared failure modes go undetected. Practitioners should document judge identity, model version, and known biases to reduce evaluation drift over time.
+
+\section*{Ethical Considerations}
+
+This survey evaluates existing research on small language models as judges using publicly available papers, benchmarks, and datasets, ensuring transparency and reproducibility. No private or sensitive data was used, and all surveyed systems are assessed based on their published results under fair conditions.
+
+Automated judges influence model alignment through RLHF and data curation. Poor-quality judges can systematically corrupt training signals, amplifying biases at scale. Practitioners should: calibrate SLM judges against human-annotated sets before deployment; disclose judge identity, provenance, and known biases; avoid automated judges as sole arbiters of high-stakes decisions without human review; and audit probe features for demographic bias. The information-novelty boundary of debate (\S\ref{sec:multiagent}) shows that consensus does not guarantee correctness.
+
+\section*{Acknowledgements}
+
+We thank the open-source community for developing and maintaining the models, datasets, and evaluation frameworks that made this survey possible, and the developers of the small language models discussed here, whose work continues to make automated evaluation more accessible.
+
+\begingroup
+\emergencystretch=3em
+\bibliography{references}
+\endgroup
+
+\appendix
+\input{appendix/appendix}
+
+\end{document}

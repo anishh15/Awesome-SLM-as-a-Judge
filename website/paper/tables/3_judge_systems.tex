@@ -1,0 +1,27 @@
+
+\begin{table}[t]
+\centering
+\small
+
+\begin{adjustbox}{max width=\columnwidth}
+\prettytable
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+\textbf{System} & \textbf{Base} & \textbf{Params} & \textbf{Train} & \textbf{Mode} & \textbf{Strength} & \textbf{Open} \\
+\midrule
+JudgeLM & Vicuna & 7--33B & SFT & DA/PR & Speed & \checkmark \\
+Prometheus~2 & Mistral & 7B; 12.9B/46.7B & SFT+Merge & DA+PR & Rubric & \checkmark \\
+Selene Mini & LLaMA-3.1 & 8B & SFT+DPO & DA/PR & OOD Gen. & \checkmark \\
+GLIDER & Phi-3.5-mini & 3.8B & SFT & DA & Coverage & \checkmark \\
+FLAMe-RM & PaLM~2 & 24B$^{\dagger}$ & SFT-Human & ORM & Fairness & -- \\
+Auto-J & LLaMA-2 & 13B & SFT & DA/PR & Diversity & \checkmark \\
+J1 & LLaMA-3.1 & 8B & GRPO & DA/PR & Reasoning & \checkmark \\
+JudgeLRM & Qwen & 3--14B & GRPO & DA & F1 Score & \checkmark \\
+INSPECTOR & frozen SLM & 1.7B & Probe & DA & Efficiency & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\caption{Selected SLM judge systems. DA = direct assessment, PR = pairwise ranking, ORM = outcome reward model. \textbf{Params} are totals for dense models and active/total for the 8$\times$7B mixture-of-experts variant of Prometheus~2. $^{\dagger}$FLAMe-RM exceeds 14B and is shown as a reference point. Table~\ref{tab:cross_system} (Appendix~\ref{app:training}) compares systems on shared benchmarks.}
+\label{tab:judge_systems}
+\end{table}
