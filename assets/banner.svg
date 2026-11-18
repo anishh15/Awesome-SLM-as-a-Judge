@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img" aria-labelledby="bannerTitle">
-<title id="bannerTitle">Awesome SLM-as-a-Judge: Small Language Models as Judges, A Survey</title>
+<title id="bannerTitle">Awesome SLM-as-a-Judge: Small Language Models as Judges, A Survey (EACL 2027)</title>
 <defs>
 
   <!-- BACKGROUNDS -->
@@ -423,6 +423,12 @@
   <polygon points="672,148 656,203.4 624,203.4 608,148 624,92.6 656,92.6"
            fill="none" stroke="#3DB8A0" stroke-width=".55"
            stroke-dasharray="14 22" opacity=".14"/>
+</g>
+
+<!-- venue chip -->
+<g font-family="'Segoe UI',Inter,sans-serif" text-anchor="middle">
+  <rect x="584" y="28" width="112" height="28" rx="14" fill="#1B7A64" fill-opacity=".22" stroke="#3DB8A0" stroke-width=".8" opacity=".85"/>
+  <text x="640" y="47" font-size="13.5" font-weight="600" letter-spacing="1.2" fill="#5CE0C5">EACL 2027</text>
 </g>
 
 <!-- LAYER 7 - "Awesome" label -->

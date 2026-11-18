@@ -13,9 +13,9 @@ export default {
   repo: 'https://github.com/anishh15/Awesome-SLM-as-a-Judge',
 
   // Publication status, shown in the hero, the footer and the citation page.
-  venue: 'Preprint, 2026',
-  status: 'preprint',
-  year: 2026,
+  venue: 'EACL 2027',
+  status: 'in-press',
+  year: 2027,
 
   // The paper. `pdf` is relative to the site root (public/paper.pdf, written by
   // `npm run sync`). Set `arxiv` to the abstract URL once the survey is posted.
@@ -25,12 +25,12 @@ export default {
   },
 
   // Must equal the ```bibtex block in ../README.md (checked at build time).
-  bibtex: `@misc{laddha2026slmjudge,
-  title  = {Small Language Models as Judges: A Survey},
-  author = {Laddha, Anish and Pradhan, Nitesh and Srivastava, Gaurav},
-  year   = {2026},
-  note   = {Preprint},
-  url    = {https://anishh15.github.io/Awesome-SLM-as-a-Judge/}
+  bibtex: `@inproceedings{laddha2026slmjudge,
+  title     = {Small Language Models as Judges: A Survey},
+  author    = {Laddha, Anish and Pradhan, Nitesh and Srivastava, Gaurav},
+  booktitle = {Findings of the Association for Computational Linguistics: EACL 2027},
+  year      = {2027},
+  url       = {https://anishh15.github.io/Awesome-SLM-as-a-Judge/}
 }`,
 
   // Profile links for the authors, keyed by the name in the paper's author

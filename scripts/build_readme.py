@@ -180,6 +180,7 @@ def badge(label, message, logo=None):
 def block_badges(data):
     n = sum(1 for p in data["papers"] if p.get("in_survey", True))
     items = [
+        (SITE + "#/cite", badge("EACL", "2027"), "EACL 2027"),
         (SITE + "paper.pdf", badge("Paper", "PDF", "readthedocs"), "Paper (PDF)"),
         (SITE, badge("Website", "project_page", "googlechrome"), "Project website"),
         ("#paper-list", badge("surveyed_works", str(n)), f"{n} works in the survey"),

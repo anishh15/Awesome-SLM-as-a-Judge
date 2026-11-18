@@ -1,10 +1,11 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Awesome SLM-as-a-Judge: companion repository of the survey Small Language Models as Judges, by Anish Laddha, Nitesh Pradhan and Gaurav Srivastava" width="100%">
+  <img src="assets/banner.svg" alt="Awesome SLM-as-a-Judge: companion repository of the EACL 2027 survey Small Language Models as Judges, by Anish Laddha, Nitesh Pradhan and Gaurav Srivastava" width="100%">
 </p>
 
 <div align="center">
 
 <!-- BEGIN GENERATED: badges -->
+<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/#/cite"><img src="https://img.shields.io/badge/EACL-2027-1F6F6F?style=for-the-badge&labelColor=0B2B2B" alt="EACL 2027"></a>
 <a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/paper.pdf"><img src="https://img.shields.io/badge/Paper-PDF-1F6F6F?style=for-the-badge&labelColor=0B2B2B&logo=readthedocs&logoColor=white" alt="Paper (PDF)"></a>
 <a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/"><img src="https://img.shields.io/badge/Website-project_page-1F6F6F?style=for-the-badge&labelColor=0B2B2B&logo=googlechrome&logoColor=white" alt="Project website"></a>
 <a href="#paper-list"><img src="https://img.shields.io/badge/surveyed_works-105-1F6F6F?style=for-the-badge&labelColor=0B2B2B" alt="105 works in the survey"></a>
@@ -32,6 +33,7 @@
 
 | Date | Update |
 |:--|:--|
+| **Nov 2026** | The survey is accepted at **EACL 2027**. |
 | **Oct 2026** | The list now covers all 105 works cited in the survey, sorted into the survey's five corpus categories, and all 17 figures are here in dark versions. |
 | **Jun 2026** | The [project website](https://anishh15.github.io/Awesome-SLM-as-a-Judge/) went live. |
 | **May 2026** | Repository launched. |
@@ -498,15 +500,15 @@ All 17 figures of the survey are in [`assets/figures`](assets/figures) as dark S
 
 ## 📖 Citation
 
-If the survey or this list helps your work, please cite:
+If the survey or this list helps your work, please cite our EACL 2027 paper:
 
 ```bibtex
-@misc{laddha2026slmjudge,
-  title  = {Small Language Models as Judges: A Survey},
-  author = {Laddha, Anish and Pradhan, Nitesh and Srivastava, Gaurav},
-  year   = {2026},
-  note   = {Preprint},
-  url    = {https://anishh15.github.io/Awesome-SLM-as-a-Judge/}
+@inproceedings{laddha2026slmjudge,
+  title     = {Small Language Models as Judges: A Survey},
+  author    = {Laddha, Anish and Pradhan, Nitesh and Srivastava, Gaurav},
+  booktitle = {Findings of the Association for Computational Linguistics: EACL 2027},
+  year      = {2027},
+  url       = {https://anishh15.github.io/Awesome-SLM-as-a-Judge/}
 }
 ```
 

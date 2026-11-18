@@ -26,7 +26,7 @@ keywords:
   - reward models
   - survey
 preferred-citation:
-  type: generic
+  type: conference-paper
   title: "Small Language Models as Judges: A Survey"
   authors:
     - family-names: Laddha
@@ -35,7 +35,9 @@ preferred-citation:
       given-names: Nitesh
     - family-names: Srivastava
       given-names: Gaurav
-  year: 2026
-  status: preprint
-  notes: Preprint
+  collection-title: "Findings of the Association for Computational Linguistics: EACL 2027"
+  conference:
+    name: "EACL 2027"
+  year: 2027
+  status: in-press
   url: "https://anishh15.github.io/Awesome-SLM-as-a-Judge/"

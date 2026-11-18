@@ -1,12 +1,12 @@
 {
   "note": "Written by scripts/sync-paper.mjs. Hashes are the first 16 hex digits of SHA-256.",
-  "syncedAt": "2026-10-25",
+  "syncedAt": "2026-11-18",
   "pdf": {
-    "bytes": 1216187,
-    "sha256": "4a2255e817c35f6b"
+    "bytes": 1159228,
+    "sha256": "b6ec48ed034017e7"
   },
   "files": {
-    "main.tex": "61f56f7120e4afcb",
+    "main.tex": "05838f8479e44fb2",
     "tables/2_insight_summary.tex": "2c87aad8ac3de871",
     "tables/3_judge_systems.tex": "292087c4add5334f",
     "appendix/M_methodology.tex": "96d8c485c8600c03"
@@ -25,16 +25,16 @@
       "dark": "18e7c53d321393d5"
     },
     "13_coverage_gap_heatmap": {
-      "light": "1c2ac80bf2e3960c",
-      "dark": "83124d00cd428e2c"
+      "light": "3e50d4e962710157",
+      "dark": "4fac8bf3e05f7403"
     },
     "14_deployment_flowchart": {
       "light": "b55e35f04cef912a",
       "dark": "1ef362e02932edac"
     },
     "1_main_taxonomy": {
-      "light": "8bc1d719aaecf153",
-      "dark": "73849a0ee142b0d1"
+      "light": "bea37eb067d96788",
+      "dark": "c5beb6889097f0a1"
     },
     "2a_panel_scale": {
       "light": "2d1b4dda6681605e",
@@ -61,16 +61,16 @@
       "dark": "25aa1a377326556c"
     },
     "5_paradigm_scatter": {
-      "light": "7e1fff820f26babb",
-      "dark": "015feca49626241f"
+      "light": "7a6d36eb59e6256c",
+      "dark": "c68dff07d8b24a5a"
     },
     "6_paradigm_supervision": {
       "light": "8b08bfdbebdd6b94",
       "dark": "2c1c3cef272fe44d"
     },
     "7_deployment_tradeoff": {
-      "light": "cfd4247804176304",
-      "dark": "a099a729e7f2f532"
+      "light": "39c1334247b30500",
+      "dark": "6a869cfa46ae8eab"
     },
     "8_strategy_taxonomy": {
       "light": "20d5a89c27b0b64d",

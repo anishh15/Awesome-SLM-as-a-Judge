@@ -13,15 +13,15 @@ const joinNames = (xs) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1)
 export default function Cite() {
   useTitle('Cite')
   const { paper, config } = site
-  const status = config.venue.replace(new RegExp(`,?\\s*${config.year}$`), '')
-  const plain = `${joinNames(paper.authors.map((a) => a.name))}. ${config.year}. ${paper.title}. ${status}. ${config.url}`
+  const venue = config.status === 'preprint' ? 'Preprint' : `In ${config.venue}`
+  const plain = `${joinNames(paper.authors.map((a) => a.name))}. ${config.year}. ${paper.title}. ${venue}. ${config.url}`
   const blob = (p) => `${config.repo}/blob/main/${p}`
 
   return (
     <>
       <PageHeader eyebrow="Cite" title="Citing the survey">
         <p>
-          If the survey or the paper list helps your work, please cite the survey ({status.toLowerCase()}, {config.year}).
+          If the survey or the paper list helps your work, please cite the survey ({config.venue}).
         </p>
       </PageHeader>
 

@@ -15,10 +15,6 @@
 
 \usepackage{graphicx}
 
-\setlength\titlebox{6.2cm}
-
-\usepackage{etoolbox}
-
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
@@ -26,48 +22,27 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
-\usepackage{algorithm}
-\usepackage{algorithmic}
-
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{multicol}
-\usepackage{makecell}
-\usepackage{tabularx}
 \usepackage{adjustbox}
 \usepackage{colortbl}
 \usepackage{array}
+\usepackage{tabularx}
 
 \usepackage{subcaption}
-\usepackage{float}
-\usepackage{wrapfig}
-
-\usepackage{afterpage}
-\usepackage{placeins}
 \usepackage{dblfloatfix}
 
 \usepackage{tikz}
-\usepackage{pgfplots}
 \usetikzlibrary{shapes,arrows,arrows.meta,positioning,fit,calc,decorations.pathmorphing}
-\usepackage[edges]{forest}
-\pgfplotsset{compat=1.18}
 
-\usepackage[most]{tcolorbox}
-
-\usepackage{fontawesome5}
 \usepackage{enumitem}
-\usepackage{xspace}
 \usepackage{xcolor}
 \usepackage{pifont}
-\usepackage{soul}
-
-\usepackage{titletoc}
 
 \hbadness=10000
 \vbadness=10000
-\hfuzz=20pt
 \sloppy
-\AtBeginDocument{\hbadness=10000\vbadness=10000\hfuzz=20pt\sloppy}
+\AtBeginDocument{\hbadness=10000\vbadness=10000\sloppy}
 
 \setcounter{topnumber}{4}
 \setcounter{totalnumber}{6}
@@ -75,16 +50,6 @@
 \renewcommand{\textfraction}{0.07}
 \renewcommand{\floatpagefraction}{0.85}
 \setlength{\textfloatsep}{10pt plus 2pt minus 4pt}
-
-\definecolor{slmblue}{HTML}{1B2A4A}
-\definecolor{slmcream}{HTML}{F5F5F0}
-\definecolor{surveygreen}{HTML}{2E7D32}
-\definecolor{surveyorange}{HTML}{E65100}
-\definecolor{surveypurple}{HTML}{6A1B9A}
-\definecolor{hidden-draw}{RGB}{20,68,106}
-\definecolor{hidden-pink}{RGB}{255,245,247}
-\definecolor{insightgold}{HTML}{B8860B}
-\definecolor{findingblue}{HTML}{1565C0}
 
 \definecolor{tealhead}{HTML}{1F6F6F}
 \definecolor{tealrow}{HTML}{EAF2F2}
@@ -102,14 +67,14 @@
 \author{
   \textbf{Anish Laddha}\textsuperscript{1} \qquad
   \textbf{Nitesh Pradhan}\textsuperscript{1} \qquad
-  \textbf{Gaurav Srivastava}\textsuperscript{2} \\\\
-  \textsuperscript{1}Department of Computer Science and Engineering, LNMIIT, India \\
-  \textsuperscript{2}Department of Computer Science, Virginia Tech, USA \\
-  \texttt{anshladdha15@gmail.com} \qquad
+  \textbf{Gaurav Srivastava}\textsuperscript{2} \\[-1pt]
+  \mdseries \textsuperscript{1}Department of Computer Science and Engineering, LNMIIT, India \\[-1pt]
+  \mdseries \textsuperscript{2}Department of Computer Science, Virginia Tech, USA \\[1pt]
+  \mdseries\small \texttt{anshladdha15@gmail.com} \qquad
   \texttt{nitesh.pradhan@lnmiit.ac.in} \qquad
-  \texttt{gks@vt.edu} \\\\
-  \faGlobe\ \textbf{Website:} \href{https://anishh15.github.io/Awesome-SLM-as-a-Judge/}{\texttt{anishh15.github.io/Awesome-SLM-as-a-Judge/}} \\
-  \faGithub\ \textbf{GitHub:} \href{https://github.com/anishh15/Awesome-SLM-as-a-Judge}{\texttt{github.com/anishh15/Awesome-SLM-as-a-Judge}}
+  \texttt{gks@vt.edu} \\[1pt]
+  \mdseries\small \textbf{Website:} \href{https://anishh15.github.io/Awesome-SLM-as-a-Judge/}{\texttt{anishh15.github.io/Awesome-SLM-as-a-Judge}} \\[-3pt]
+  \mdseries\small \textbf{GitHub:} \href{https://github.com/anishh15/Awesome-SLM-as-a-Judge}{\texttt{github.com/anishh15/Awesome-SLM-as-a-Judge}}
 }
 
 \begin{document}
@@ -117,13 +82,13 @@
 \maketitle
 
 \begin{abstract}
-Automated evaluation of language model outputs has shifted from costly human annotation toward model-based judging, yet the field has relied mostly on large proprietary models whose cost, opacity, and data-privacy risks limit scalable deployment. This survey examines \textit{Small Language Models} (SLMs, $\leq$14B parameters) as judges, synthesizing \textbf{105 works} spanning the full pipeline from supervised fine-tuning and preference optimization through reinforcement learning with verifiable rewards to representation-based probing. We organize the field into five dimensions and distill five insights, each graded by the strength of its evidence:
+Model-based judging of language model outputs relies mostly on large proprietary models whose cost, opacity, and data-privacy risks limit deployment. This survey examines \textit{Small Language Models} (SLMs, $\leq$14B parameters) as judges, synthesizing \textbf{105 works} from supervised fine-tuning to reinforcement learning with verifiable rewards and representation-based probing. We organize the field into five dimensions and distill five evidence-graded insights:
 (\textbf{I1})~evaluation-specific training matters more than raw scale;
-(\textbf{I2})~reasoning tokens help only when they surface genuinely new discriminative signals;
+(\textbf{I2})~reasoning tokens help only when they surface new discriminative signals;
 (\textbf{I3})~cross-family ensemble diversity decorrelates errors;
 (\textbf{I4})~debate value is bounded by information novelty, not round count; and
 (\textbf{I5})~SLM judge reliability tracks the verifiability gradient of the domain.
-In every surveyed paper that reports a trained judge next to its own base model under one protocol, evaluation-specific training improves the base model, with relative gains of 15--63\%. Position-consistent accuracy protocols further show that much apparent judge performance is heuristic-driven, and that all judges, including frontier models, degrade sharply on hard evaluation pairs. Across surveyed studies, fine-tuned 3--8B judges match proprietary-model accuracy on standard benchmarks, and heterogeneous panels of smaller models reach comparable quality at over 7$\times$ lower API cost; this parity narrows in subjective domains that lack external verification. Small judges also make private, on-device evaluation practical for continuous Reinforcement Learning from Human Feedback (RLHF) loops. We close with a research agenda on calibration, adaptive inference, and generalization.
+In every surveyed same-backbone comparison, such training yields relative gains of 15--63\%. Position-consistent accuracy shows that much apparent judge performance is heuristic-driven and that all judges, frontier models included, degrade sharply on hard pairs. Across surveyed studies, fine-tuned 3--8B judges match proprietary-model accuracy on standard benchmarks, and panels of smaller models reach comparable quality at over 7$\times$ lower API cost; this parity narrows in subjective domains that lack external verification. Small judges also enable private, on-device evaluation. We close with a research agenda on calibration, adaptive inference, and generalization.
 \end{abstract}
 
 \section{Introduction}
@@ -298,7 +263,7 @@ Judges also face structured adversarial attacks exploiting superficial signals. 
 
 \subsection{Benchmark Validity and Position-Consistent Accuracy}
 
-\textsc{Position-Consistent Accuracy Reveals That Much Apparent Judge Performance Is Heuristic-Driven.} [\textsc{Replicated}: 3 studies] \textit{Under position-consistent accuracy protocols, even frontier judges degrade sharply on hard evaluation pairs, sometimes approaching random-choice baselines, indicating that much apparent performance relies on positional heuristics rather than substantive quality discrimination.} \citet{tan2025judgebench} construct challenging pairs where PC-Acc is dramatically lower than naive accuracy; \citet{jiang2025codejudgebench} find that swapping response order substantially changes code-judging accuracy, and \citet{bi2026judgeboard} that small math judges often accept wrong answers. The practical implication is to always report PC-Acc alongside naive accuracy, since the gap between them indicates how much apparent performance rests on positional heuristics.
+\textsc{Position-Consistent Accuracy Reveals That Much Apparent Judge Performance Is Heuristic-Driven.} [\textsc{Replicated}: 3 studies] \textit{Under position-consistent accuracy protocols, even frontier judges degrade sharply on hard evaluation pairs, sometimes approaching random-choice baselines, indicating that much apparent performance relies on positional heuristics rather than substantive quality discrimination.} \citet{tan2025judgebench} construct challenging pairs where PC-Acc is dramatically lower than naive accuracy; \citet{jiang2025codejudgebench} find that swapping response order substantially changes code-judging accuracy, and \citet{bi2026judgeboard} that small math judges often accept wrong answers. JudgeBench also finds that judging is tied to solving; Appendix~\ref{app:benchmarks} argues this holds only where judging needs the same knowledge as generation (e.g., graduate STEM), so SLMs can judge pattern-matching tasks such as formatting but should route knowledge-heavy ones to larger models. The practical implication is to always report PC-Acc alongside naive accuracy, since the gap between them indicates how much apparent performance rests on positional heuristics.
 
 This reconciles with I1: evaluation-specific training delivers parity on standard benchmarks, but PC-Acc reveals that this parity narrows on the hardest evaluation pairs and in subjective domains~(I5), where all judges, including frontier models, degrade toward chance. Additional validity concerns include limitations of the human gold standard \citep{shankar2024validates}, contamination risks \citep{bedemariam2025potential}, and \emph{preference leakage}: \citet{li2025preference} show that when judge and generator share a model family, the judge systematically overscores, inflating apparent performance on benchmarks like AlpacaEval~2.0 (Appendix~\ref{app:benchmarks}).
 
@@ -323,8 +288,6 @@ This reconciles with I1: evaluation-specific training delivers parity on standar
 
 This survey organizes 105 works on SLMs as judges into a five-dimension taxonomy with five insights. The convergent finding is that \textbf{reliable automated evaluation needs far fewer resources than the field has assumed}. Across surveyed studies, fine-tuned 3--8B judges match proprietary models on standard benchmarks (I1), reasoning tokens help only when they carry new signal (I2), and heterogeneous juries decorrelate errors (I3), while the information-novelty boundary (I4) and the verifiability gradient (I5) mark where human oversight remains necessary. Calibration, multilingual coverage, and contamination resistance remain prerequisites for high-stakes deployment. These findings make SLM judges the practical default for verifiable, low-stakes evaluation rather than a budget compromise, with frontier models and human review reserved for the subjective, high-stakes end of the gradient. The throughline is that judging is discriminative and discrimination is cheaper than generation. Scale buys knowledge, but most of what a judge needs comes from targeted training, verification, or panel diversity, so progress lies in better signals rather than larger judges.
 
-\clearpage
-
 \section*{Limitations}
 
 This survey synthesizes findings from 105 papers published through mid-2026, but several limitations should be noted. \textbf{First}, we have not conducted new experiments; all quantitative claims are drawn from cited sources and subject to original study biases. \textbf{Second}, the survey focuses primarily on English-language judges; generalizing to low-resource languages risks underestimating domain-specific failure modes. \textbf{Third}, rapid field evolution means coverage through mid-2026 may not capture later developments. \textbf{Fourth}, our literature selection may underrepresent domain-specific research outside major NLP venues (Appendix~\ref{app:methodology} documents the search protocol). \textbf{Fifth}, panels (b) and (d) of Figure~\ref{fig:individual_trends} place each study by the outcome it reports, so they show the direction of each result but not its size, and Figures~\ref{fig:paradigm_scatter}, \ref{fig:paradigm_supervision}, and~\ref{fig:deployment} have ordinal or schematic axes rather than measured quantities. Panels (a) and (c) plot published numbers, and Appendix~\ref{app:provenance} documents the source of every plotted element. \textbf{Finally}, IFR figures and cost estimates use varying setups, making cross-paper comparisons approximate.
@@ -340,6 +303,8 @@ Automated judges influence model alignment through RLHF and data curation. Poor-
 \section*{Acknowledgements}
 
 We thank the open-source community for developing and maintaining the models, datasets, and evaluation frameworks that made this survey possible, and the developers of the small language models discussed here, whose work continues to make automated evaluation more accessible.
+
+\paragraph{AI Assistance.} We used a general-purpose AI assistant for parts of the Appendix, such as generating LaTeX code for tables and figures, and refining text written by the authors. All AI-generated content was carefully reviewed and revised by the authors to ensure accuracy, clarity, and factual correctness.
 
 \begingroup
 \emergencystretch=3em

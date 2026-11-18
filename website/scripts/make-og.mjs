@@ -82,6 +82,12 @@ function svg(W, H) {
   const cardW = 70, cardH = y(50), cardY = y(178)
   const ax = 128, bx = W - 128
   const authors = site.paper.authors.map((a) => a.name.toUpperCase()).join(' · ')
+  // Venue chip above the wordmark, once the paper has a venue.
+  const venue = site.config.status === 'preprint' ? null : site.config.venue
+  const venueW = venue ? Math.round([...venue].length * 19 * 0.62 + 44) : 0
+  const venueH = y(36), venueY = y(58)
+  const venueSvg = venue ? `<rect x="${cx - venueW / 2}" y="${venueY}" width="${venueW}" height="${venueH}" rx="${venueH / 2}" fill="${C.mid}" fill-opacity=".22" stroke="${C.accent}" stroke-width="1.2" stroke-opacity=".85"/>
+  <text x="${cx}" y="${venueY + venueH / 2 + 6.5}" text-anchor="middle" font-size="19" font-weight="600" letter-spacing="1.5" fill="${C.bright}">${venue}</text>` : ''
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
@@ -146,7 +152,8 @@ function svg(W, H) {
     <path d="M-23,2 Q-16,9 -9,2 Z M9,2 Q16,9 23,2 Z" fill="${C.bright}" fill-opacity=".35" stroke="${C.text}" stroke-width="1.2" opacity=".9"/>
   </g>
 
-  <!-- title -->
+  <!-- venue and title -->
+  ${venueSvg}
   <text x="${cx}" y="${y(160)}" text-anchor="middle" font-size="28" font-weight="650" letter-spacing="8" fill="url(#awesome)">AWESOME</text>
   <text x="${cx}" y="${titleY}" text-anchor="middle" font-size="100" letter-spacing="-1.5" fill="${C.primary}" opacity=".45" filter="url(#bloom)"><tspan font-weight="800">SLM</tspan><tspan font-weight="300" dx="9">-as-a-</tspan><tspan font-weight="800" dx="9">Judge</tspan></text>
   <text x="${cx}" y="${titleY}" text-anchor="middle" font-size="100" letter-spacing="-1.5" filter="url(#glow)"><tspan font-weight="800" fill="url(#slm)">SLM</tspan><tspan font-weight="300" dx="9" fill="${C.bright}" fill-opacity=".92">-as-a-</tspan><tspan font-weight="800" dx="9" fill="url(#judge)">Judge</tspan></text>
