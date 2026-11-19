@@ -78,7 +78,7 @@ export default function Header() {
           <LogoMark size={30} />
           <span className="brand-text">
             <span className="brand-name"><span className="brand-awesome">Awesome</span> <b>SLM</b>-as-a-<b className="brand-accent">Judge</b></span>
-            <span className="brand-sub">Survey · {site.config.venue}</span>
+            <span className="brand-sub">Survey · <span className="brand-venue">{site.config.venue}</span></span>
           </span>
         </Link>
 

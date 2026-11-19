@@ -16,7 +16,7 @@
 }
 .hero-orb-b {
   width: 360px; height: 360px; right: -80px; top: 120px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--slate) 18%, transparent), transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--teal) 14%, transparent), transparent 70%);
   animation: orb-drift 22s var(--ease-in-out) infinite alternate-reverse;
 }
 [data-theme='dark'] .hero-orb-a { background: radial-gradient(circle, var(--orb), transparent 68%); }

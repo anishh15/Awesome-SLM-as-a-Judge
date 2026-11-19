@@ -7,7 +7,8 @@ import { CategoryDot } from './Badges.jsx'
 
 // Counts per category and per year, computed by build-data.mjs from
 // data/papers.yaml and checked there against App. M of the paper.
-export default function CorpusChart() {
+// yearSlot replaces the "By year" card (the home page passes the timeline).
+export default function CorpusChart({ yearSlot = null }) {
   const { corpus } = site
   const ref = useRef(null)
   useReveal(ref)
@@ -17,7 +18,7 @@ export default function CorpusChart() {
   const pct = (n) => Math.round((n / corpus.total) * 100)
 
   return (
-    <div ref={ref} className="reveal corpus">
+    <div ref={ref} className={`reveal corpus${yearSlot ? ' has-timeline' : ''}`}>
       <div className="card card-pad corpus-card">
         <div className="corpus-card-head">
           <h3 className="corpus-card-title">By category</h3>
@@ -38,6 +39,7 @@ export default function CorpusChart() {
         </ul>
       </div>
 
+      {yearSlot || (
       <div className="card card-pad corpus-card">
         <div className="corpus-card-head">
           <h3 className="corpus-card-title">By year</h3>
@@ -71,6 +73,7 @@ export default function CorpusChart() {
           ))}
         </div>
       </div>
+      )}
 
       <details className="corpus-table-wrap">
         <summary><Table2 size={15} aria-hidden="true" /> Show the counts as a table</summary>

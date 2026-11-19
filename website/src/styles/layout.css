@@ -142,5 +142,10 @@ main { display: block; min-height: 70vh; outline: none; }
 
 .error-page { padding-block: 96px; display: grid; gap: 14px; justify-items: start; }
 .page-header + .section { padding-top: clamp(8px, 2vw, 24px); border-top: 0; }
-.brand-awesome { color: var(--gold); font-weight: 650; }
+.brand-awesome {
+  font-size: 0.74em; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--teal); margin-right: 1px; vertical-align: 0.08em;
+}
+[data-theme='dark'] .brand-awesome { color: var(--teal-strong); }
+.brand-venue { color: var(--gold); font-weight: 650; }
 @media (max-width: 400px) { .brand-name { font-size: 14px; letter-spacing: -0.02em; } .brand { gap: 8px; } }

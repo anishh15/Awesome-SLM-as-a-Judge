@@ -171,8 +171,8 @@ REPO = "anishh15/Awesome-SLM-as-a-Judge"
 SITE = "https://anishh15.github.io/Awesome-SLM-as-a-Judge/"
 
 
-def badge(label, message, logo=None):
-    url = (f"https://img.shields.io/badge/{label}-{message}-{THEME}?style=for-the-badge"
+def badge(label, message, logo=None, color=None):
+    url = (f"https://img.shields.io/badge/{label}-{message}-{color or THEME}?style=for-the-badge"
            f"&labelColor={LABEL}")
     return url + (f"&logo={logo}&logoColor=white" if logo else "")
 
@@ -180,7 +180,7 @@ def badge(label, message, logo=None):
 def block_badges(data):
     n = sum(1 for p in data["papers"] if p.get("in_survey", True))
     items = [
-        (SITE + "#/cite", badge("EACL", "2027"), "EACL 2027"),
+        (SITE + "#/cite", badge("EACL", "2027", color="B8860B"), "EACL 2027"),
         (SITE + "paper.pdf", badge("Paper", "PDF", "readthedocs"), "Paper (PDF)"),
         (SITE, badge("Website", "project_page", "googlechrome"), "Project website"),
         ("#paper-list", badge("surveyed_works", str(n)), f"{n} works in the survey"),

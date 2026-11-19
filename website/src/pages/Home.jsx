@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, BookOpen, Cpu, FileText, Library, Lightbulb, Puzzle, Quote } from 'lucide-react'
+import { ArrowRight, Award, BookOpen, Cpu, FileText, Library, Lightbulb, Puzzle, Quote } from 'lucide-react'
 import site, { figureById, mb, pdfUrl } from '../lib/site.js'
 import useTitle from '../lib/useTitle.js'
 import { word, Word } from '../lib/words.js'
@@ -8,12 +8,18 @@ import Rich, { CapRich } from '../components/Rich.jsx'
 import Counter from '../components/Counter.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import CopyButton from '../components/CopyButton.jsx'
-import { ChallengeTag, GradeBadge, InsightTag, Tag } from '../components/Badges.jsx'
+import { ChallengeTag, InsightTag, Tag } from '../components/Badges.jsx'
 import { FigureCard } from '../components/Figure.jsx'
 import { GitHubIcon, ScaleGlyph } from '../components/Icons.jsx'
 import BibTeX from '../components/BibTeX.jsx'
 import Clamp from '../components/Clamp.jsx'
+import SplitWords from '../components/SplitWords.jsx'
 import CorpusChart from '../components/CorpusChart.jsx'
+import CorpusTimeline from '../components/viz/CorpusTimeline.jsx'
+import VerdictScene from '../components/viz/VerdictScene.jsx'
+import SystemsTicker from '../components/viz/SystemsTicker.jsx'
+import { InsightMini } from '../components/viz/InsightViz.jsx'
+import GradeMeter from '../components/viz/GradeMeter.jsx'
 
 export default function Home() {
   useTitle(null)
@@ -62,9 +68,10 @@ export default function Home() {
                 <Link to={`/insights/${ins.id}`} viewTransition className="card card-link insight-card">
                   <div className="insight-card-top">
                     <InsightTag id={ins.id} />
-                    <GradeBadge grade={ins.grade} compact />
+                    <GradeMeter grade={ins.grade} size="sm" count={false} />
                   </div>
                   <h3 className="insight-card-title">{ins.short}</h3>
+                  <InsightMini id={ins.id} className="insight-card-viz" />
                   <p className="insight-card-claim"><Rich nodes={ins.boundary} /></p>
                   <span className="card-more">Read the evidence <ArrowRight size={15} /></span>
                 </Link>
@@ -75,7 +82,7 @@ export default function Home() {
                 <p className="quote-label">Evidence grades</p>
                 <ul className="legend-list">
                   {site.gradeLegend.map((g) => (
-                    <li key={g.grade}><GradeBadge grade={g.grade} /><span className="legend-text"><Rich nodes={g.text} /></span></li>
+                    <li key={g.grade}><GradeMeter grade={g.grade} size="sm" count={false} /><span className="legend-text"><Rich nodes={g.text} /></span></li>
                   ))}
                 </ul>
               </Link>
@@ -123,7 +130,7 @@ export default function Home() {
             title={<><Counter value={corpus.total} /> works in {word(corpus.categories.length)} categories</>}
             action={<Link className="btn btn-secondary btn-sm" to="/papers" viewTransition>Browse the list <ArrowRight size={15} className="btn-arrow" /></Link>}
           />
-          <CorpusChart />
+          <CorpusChart yearSlot={<CorpusTimeline />} />
         </div>
       </section>
 
@@ -189,9 +196,14 @@ function Hero() {
       </div>
       <div className="container hero-inner">
         <div className="hero-copy">
-          <p className="pill-badge hero-in" style={{ '--i': 0 }}><span className="pill-dot" /> Survey · {config.venue}</p>
+          <Link to="/cite" viewTransition className="venue-badge hero-in" style={{ '--i': 0 }} aria-label={`${config.venue}. How to cite the survey`}>
+            <Award size={15} aria-hidden="true" />
+            <span className="venue-badge-name">{config.venue}</span>
+            <span className="venue-badge-sep" aria-hidden="true" />
+            <span className="venue-badge-kind">Survey</span>
+          </Link>
           <h1 className="hero-title hero-in" style={{ '--i': 1 }}>
-            Small Language Models <span className="hero-title-accent">as Judges</span>
+            <SplitWords>Small Language Models</SplitWords> <span className="hero-title-accent"><SplitWords>as Judges</SplitWords></span>
           </h1>
           <p className="hero-sub hero-in" style={{ '--i': 2 }}>A Survey</p>
           <p className="hero-question hero-in" style={{ '--i': 3 }}>
@@ -226,14 +238,18 @@ function Hero() {
             </a>
           </div>
         </div>
+        <div className="hero-in hero-scene-wrap" style={{ '--i': 6 }}>
+          <VerdictScene />
+        </div>
       </div>
       <div className="container">
-        <dl className="stat-row hero-in" style={{ '--i': 6 }}>
+        <dl className="stat-row hero-in" style={{ '--i': 7 }}>
           <Stat icon={Library} value={<Counter value={counts.works} />} label="works surveyed" to="/papers" />
           <Stat icon={Cpu} value={site.threshold} label="parameter scope" to="/survey/scope" />
           <Stat icon={Lightbulb} value={<Counter value={counts.insights} />} label="evidence-graded insights" to="/insights" gold />
           <Stat icon={Puzzle} value={<Counter value={counts.challenges} />} label="open challenges" to="/challenges" />
         </dl>
+        <div className="hero-in" style={{ '--i': 8 }}><SystemsTicker /></div>
       </div>
     </section>
   )

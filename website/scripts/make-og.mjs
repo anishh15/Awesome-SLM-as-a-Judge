@@ -82,12 +82,17 @@ function svg(W, H) {
   const cardW = 70, cardH = y(50), cardY = y(178)
   const ax = 128, bx = W - 128
   const authors = site.paper.authors.map((a) => a.name.toUpperCase()).join(' · ')
-  // Venue chip above the wordmark, once the paper has a venue.
+  // Venue badge above the wordmark, drawn like the site's hero badge: award icon, gold venue, dot, "Survey".
   const venue = site.config.status === 'preprint' ? null : site.config.venue
-  const venueW = venue ? Math.round([...venue].length * 19 * 0.62 + 44) : 0
-  const venueH = y(36), venueY = y(58)
-  const venueSvg = venue ? `<rect x="${cx - venueW / 2}" y="${venueY}" width="${venueW}" height="${venueH}" rx="${venueH / 2}" fill="${C.mid}" fill-opacity=".22" stroke="${C.accent}" stroke-width="1.2" stroke-opacity=".85"/>
-  <text x="${cx}" y="${venueY + venueH / 2 + 6.5}" text-anchor="middle" font-size="19" font-weight="600" letter-spacing="1.5" fill="${C.bright}">${venue}</text>` : ''
+  const venueH = y(40), venueY = y(52), vW = 262, vX = cx - vW / 2
+  const gold = '#E5BD57'
+  const venueSvg = venue ? `<rect x="${vX}" y="${venueY}" width="${vW}" height="${venueH}" rx="${venueH / 2}" fill="${gold}" fill-opacity=".1" stroke="${gold}" stroke-opacity=".55" stroke-width="1.2"/>
+  <g transform="translate(${vX + 20} ${venueY + venueH / 2 - 11}) scale(0.95)" fill="none" stroke="${gold}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>
+  </g>
+  <text x="${vX + 50}" y="${venueY + venueH / 2 + 7}" font-size="19" font-weight="700" letter-spacing="1.3" fill="${gold}">${venue}</text>
+  <circle cx="${vX + 176}" cy="${venueY + venueH / 2}" r="2" fill="${gold}" opacity=".6"/>
+  <text x="${vX + 187}" y="${venueY + venueH / 2 + 7}" font-size="19" font-weight="550" fill="${C.text2}">Survey</text>` : ''
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
@@ -106,7 +111,7 @@ function svg(W, H) {
     <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.primary}" stop-opacity="0"/><stop offset=".5" stop-color="${C.accent}" stop-opacity=".8"/><stop offset="1" stop-color="${C.primary}" stop-opacity="0"/></linearGradient>
     <radialGradient id="orbFill" cx="46%" cy="40%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".16" stop-color="${C.pale}"/><stop offset=".38" stop-color="${C.accent}"/><stop offset=".62" stop-color="${C.primary}" stop-opacity=".75"/><stop offset="1" stop-color="${C.bgTop}" stop-opacity="0"/></radialGradient>
     <radialGradient id="orbAtmo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="${C.accent}" stop-opacity=".35"/><stop offset=".45" stop-color="${C.accent}" stop-opacity=".08"/><stop offset="1" stop-color="${C.accent}" stop-opacity="0"/></radialGradient>
-    <linearGradient id="awesome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.goldText}"/><stop offset="1" stop-color="${C.goldLine}"/></linearGradient>
+    <linearGradient id="awesome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.pale}"/><stop offset="1" stop-color="${C.bright}"/></linearGradient>
     <linearGradient id="slm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="${C.text}"/></linearGradient>
     <linearGradient id="judge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.bright}"/><stop offset="1" stop-color="${C.accent}"/></linearGradient>
     <linearGradient id="traceA" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.accent}" stop-opacity=".45"/><stop offset="1" stop-color="${C.accent}" stop-opacity=".08"/></linearGradient>

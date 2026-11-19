@@ -1,0 +1,141 @@
+/* Hero verdict scene: judge, swap check, cross-family panel. */
+.hero-scene-wrap { width: 100%; }
+.verdict-scene {
+  --mid: 168px; --gap: 18px;
+  width: min(100%, 860px); margin: clamp(28px, 4vw, 44px) auto 0; padding: 18px 20px 14px;
+  border: 1px solid var(--line); border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--bg-elev) 78%, transparent); backdrop-filter: blur(8px);
+  box-shadow: var(--shadow);
+}
+.vs-stage {
+  position: relative; display: grid; grid-template-columns: 1fr var(--mid) 1fr; grid-template-rows: auto 1fr auto;
+  column-gap: var(--gap); row-gap: 14px; align-items: center;
+}
+
+.vs-question {
+  grid-column: 1 / -1; justify-self: center; display: inline-flex; align-items: center; gap: 10px;
+  padding: 5px 12px 5px 6px; border-radius: var(--radius-full); border: 1px dashed var(--line-strong);
+  font-size: var(--fs-sm); color: var(--text-2);
+}
+.vs-q-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); background: var(--tint); padding: 2px 8px; border-radius: var(--radius-full); }
+.vs-q-text { font-family: var(--font-mono); font-size: 12.5px; }
+
+/* answer cards */
+.vs-card {
+  grid-row: 2; position: relative; z-index: 1; display: grid; gap: 6px; padding: 12px 14px; min-width: 0;
+  border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--bg-elev); text-align: left;
+  transition: transform 900ms var(--ease-in-out), border-color 400ms, box-shadow 400ms, opacity 400ms;
+}
+.vs-card-a { grid-column: 1; }
+.vs-card-b { grid-column: 3; }
+.vs-card.is-right { transform: translateX(calc(100% + var(--mid) + 2 * var(--gap))); }
+.vs-card.is-left { transform: translateX(calc(-100% - var(--mid) - 2 * var(--gap))); }
+.vs-card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.vs-card-text { font-family: var(--font-mono); font-size: 12.5px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vs-line { height: 6px; border-radius: 3px; background: var(--bg-sunken); }
+.vs-line-short { width: 62%; }
+
+/* while the judge reads, each card glows in turn */
+.verdict-scene:not(.is-decided) .vs-card-a { animation: vs-read 1.3s var(--ease-in-out) both; }
+.verdict-scene:not(.is-decided) .vs-card-b { animation: vs-read 1.3s var(--ease-in-out) 0.35s both; }
+@keyframes vs-read { 40% { border-color: color-mix(in srgb, var(--teal) 60%, var(--line)); } }
+
+.is-decided .vs-card-a { border-color: var(--teal); box-shadow: inset 0 0 0 0.5px var(--teal); }
+/* the losing answer greys out but stays opaque, so the wires never show through it */
+.is-decided .vs-card-b { border-style: dashed; }
+.is-decided .vs-card-b .vs-card-text { color: var(--text-3); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--coral) 70%, transparent); }
+.is-decided .vs-card-a::after {
+  content: '✓'; position: absolute; top: -9px; right: -9px; width: 20px; height: 20px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--teal); color: var(--on-teal); font-size: 11px; font-weight: 800;
+  animation: vs-pop 380ms var(--ease-out) both;
+}
+
+/* wires from the cards to the judge */
+.vs-wires { grid-column: 1 / -1; grid-row: 2; align-self: center; width: 100%; height: 40px; pointer-events: none; }
+.vs-wire { fill: none; stroke: color-mix(in srgb, var(--teal) 45%, transparent); stroke-width: 1.4; stroke-dasharray: 2 7; vector-effect: non-scaling-stroke; }
+.verdict-scene:not(.is-decided) .vs-wire { animation: vs-flow 0.9s linear infinite; }
+.is-decided .vs-wire { stroke-dasharray: none; stroke: color-mix(in srgb, var(--teal) 28%, transparent); }
+@keyframes vs-flow { to { stroke-dashoffset: -18; } }
+
+/* the judge */
+.vs-judges { grid-column: 2; grid-row: 2; position: relative; z-index: 2; display: grid; justify-items: center; gap: 6px; }
+.vs-judge {
+  display: grid; justify-items: center; gap: 2px; padding: 11px 16px 10px; border-radius: 14px;
+  background: var(--bg-elev); border: 1.5px solid color-mix(in srgb, var(--teal) 55%, var(--line)); color: var(--teal);
+  animation: vs-pop 420ms var(--ease-out) both;
+}
+[data-theme='dark'] .vs-judge { color: var(--teal-strong); }
+.vs-judge-name { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--text-2); text-transform: uppercase; }
+.vs-judge-size { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); }
+/* reading bar: fills while the judge reads, then holds */
+.vs-read { width: 64px; height: 3px; margin-top: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.vs-read-fill { display: block; height: 100%; background: currentColor; transform-origin: left; transform: scaleX(1); }
+.verdict-scene:not(.is-decided) .vs-read-fill { animation: vs-fill 1.3s var(--ease-in-out) both; }
+@keyframes vs-fill { from { transform: scaleX(0); } }
+
+/* panel jurors */
+.vs-juror {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 7px; width: 100%;
+  padding: 5px 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg-elev);
+  font-size: 12px; animation: vs-rise 460ms var(--ease-out) both; animation-delay: calc(var(--k) * 110ms);
+}
+.vs-juror-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); }
+.vs-juror-1 .vs-juror-dot { background: var(--slate); }
+.vs-juror-2 .vs-juror-dot { background: var(--plum); }
+.vs-juror-name { font-weight: 600; color: var(--text-2); }
+.vs-juror-vote {
+  min-width: 20px; height: 20px; display: grid; place-items: center; border-radius: 6px; font-size: 11px; font-weight: 800;
+  opacity: 0; transform: scale(0.6); transition: opacity 300ms, transform 360ms var(--ease-out);
+  transition-delay: calc(var(--k) * 140ms);
+}
+.is-decided .vs-juror-vote { opacity: 1; transform: none; }
+.vote-A { background: var(--teal); color: var(--on-teal); }
+.vote-B { background: var(--coral); color: #fff; }
+
+/* verdict */
+.vs-verdict {
+  grid-column: 2; grid-row: 3; min-height: 30px; justify-self: center; display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap;
+  padding: 5px 12px; border-radius: var(--radius-full); background: var(--tint); color: var(--teal-ink);
+  opacity: 0; transform: translateY(6px) scale(0.96); transition: opacity 360ms, transform 420ms var(--ease-out);
+}
+[data-theme='dark'] .vs-verdict { color: var(--teal-strong); }
+.is-decided .vs-verdict { opacity: 1; transform: none; }
+.vs-verdict-main { font-weight: 750; font-size: var(--fs-sm); }
+.vs-verdict-sub { font-size: 11.5px; color: var(--text-3); }
+.vs-check { font-weight: 800; }
+
+/* caption and scene steps */
+.vs-caption {
+  display: flex; align-items: center; gap: 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+  font-size: var(--fs-sm); color: var(--text-2); text-align: left;
+}
+.vs-steps { display: inline-flex; gap: 4px; flex: none; padding: 3px; border-radius: var(--radius-full); background: var(--bg-sunken); }
+.vs-step {
+  display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px 0 4px; border-radius: var(--radius-full);
+  font-size: 12px; font-weight: 600; color: var(--text-3); transition: background var(--t-fast), color var(--t-fast);
+}
+.vs-step-num { width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: var(--line); color: var(--text-2); font-size: 11px; font-weight: 700; }
+.vs-step:hover { color: var(--text); }
+.vs-step[aria-pressed="true"] { background: var(--bg-elev); color: var(--text); box-shadow: var(--shadow-sm); }
+.vs-step[aria-pressed="true"] .vs-step-num { background: var(--teal); color: var(--on-teal); }
+.vs-step:focus-visible { box-shadow: var(--focus); }
+.vs-caption-text { min-height: 2.9em; display: flex; align-items: center; gap: 8px; line-height: 1.45; }
+
+@keyframes vs-pop { from { opacity: 0; transform: scale(0.85); } }
+@keyframes vs-rise { from { opacity: 0; transform: translateY(8px); } }
+
+.vs-stage { min-height: 196px; }
+@media (max-width: 640px) {
+  .verdict-scene { --mid: 104px; --gap: 10px; padding: 14px 12px 12px; }
+  .vs-card { padding: 9px 10px; }
+  .vs-card-text { font-size: 11px; white-space: normal; }
+  .vs-line { display: none; }
+  .vs-juror { grid-template-columns: auto auto; justify-content: space-between; padding: 4px 6px; }
+  .vs-juror-name { display: none; }
+  .vs-verdict-sub { display: none; }
+  .vs-caption { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verdict-scene *, .verdict-scene *::after { animation: none !important; transition: none !important; }
+}

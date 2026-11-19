@@ -5,7 +5,7 @@
 <div align="center">
 
 <!-- BEGIN GENERATED: badges -->
-<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/#/cite"><img src="https://img.shields.io/badge/EACL-2027-1F6F6F?style=for-the-badge&labelColor=0B2B2B" alt="EACL 2027"></a>
+<a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/#/cite"><img src="https://img.shields.io/badge/EACL-2027-B8860B?style=for-the-badge&labelColor=0B2B2B" alt="EACL 2027"></a>
 <a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/paper.pdf"><img src="https://img.shields.io/badge/Paper-PDF-1F6F6F?style=for-the-badge&labelColor=0B2B2B&logo=readthedocs&logoColor=white" alt="Paper (PDF)"></a>
 <a href="https://anishh15.github.io/Awesome-SLM-as-a-Judge/"><img src="https://img.shields.io/badge/Website-project_page-1F6F6F?style=for-the-badge&labelColor=0B2B2B&logo=googlechrome&logoColor=white" alt="Project website"></a>
 <a href="#paper-list"><img src="https://img.shields.io/badge/surveyed_works-105-1F6F6F?style=for-the-badge&labelColor=0B2B2B" alt="105 works in the survey"></a>

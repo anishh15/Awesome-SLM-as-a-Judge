@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowRight, FileText } from 'lucide-react'
+import { ArrowRight, ChevronDown, FileText } from 'lucide-react'
 import site, { asset, figureById, insightById } from '../lib/site.js'
 import useTitle from '../lib/useTitle.js'
 import { Word } from '../lib/words.js'
@@ -11,6 +11,7 @@ import SectionHeading from '../components/SectionHeading.jsx'
 import Rich from '../components/Rich.jsx'
 import { ChallengeTag, GradeBadge, InsightTag } from '../components/Badges.jsx'
 import { FigureCard } from '../components/Figure.jsx'
+import DeployGuide from '../components/viz/DeployGuide.jsx'
 
 export default function Challenges() {
   useTitle('Open challenges')
@@ -71,19 +72,25 @@ export default function Challenges() {
       </section>
 
       <section className="section section-alt" id="deployment" aria-labelledby="h-deploy">
-        <div className="container deploy-grid">
-          <div className="deploy-text">
-            <SectionHeading id="h-deploy" eyebrow="From insights to deployment" title="Choosing a judge" />
-            <Reveal className="deploy-prose">
-              <p className="deploy-lead"><Rich nodes={site.deploymentSteps[0]} tags /></p>
+        <div className="container">
+          <SectionHeading id="h-deploy" eyebrow="From insights to deployment" title="Choosing a judge"
+            lead={<Rich nodes={site.deploymentSteps[0]} tags />} />
+          <div className="deploy-grid dg-layout">
+            <Reveal className="dg-main">
+              <DeployGuide />
+            </Reveal>
+            <Reveal className="deploy-fig" delay={80}>
+              <FigureCard fig={flow} priority={false} />
+            </Reveal>
+          </div>
+          <Reveal className="deploy-prose dg-recipe">
+            <details className="dg-recipe-fold">
+              <summary><span>The full recipe from §{site.challengesSection.num}</span><ChevronDown size={18} className="summary-arrow" aria-hidden="true" /></summary>
               <ul className="deploy-steps">
                 {site.deploymentSteps.slice(1).map((s, k) => <li key={k}><Rich nodes={s} tags /></li>)}
               </ul>
-            </Reveal>
+            </details>
             <p className="muted deploy-src">From <a className="link" href={asset(site.challengesSection.href)} target="_blank" rel="noopener">§{site.challengesSection.num} {site.challengesSection.title}</a>.</p>
-          </div>
-          <Reveal className="deploy-fig" delay={80}>
-            <FigureCard fig={flow} priority={false} />
           </Reveal>
         </div>
       </section>

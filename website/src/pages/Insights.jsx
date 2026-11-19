@@ -9,7 +9,10 @@ import { scrollToId } from '../lib/motion.js'
 import { Reveal } from '../lib/reveal.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import Rich from '../components/Rich.jsx'
-import { GradeBadge, InsightTag } from '../components/Badges.jsx'
+import { InsightTag } from '../components/Badges.jsx'
+import GradeMeter from '../components/viz/GradeMeter.jsx'
+import InsightViz from '../components/viz/InsightViz.jsx'
+import JuryPlayground from '../components/viz/JuryPlayground.jsx'
 import { FigureCard, figureLabel } from '../components/Figure.jsx'
 
 
@@ -53,7 +56,7 @@ export default function Insights() {
           <div className="grades">
             {site.gradeLegend.map((g, k) => (
               <Reveal key={g.grade} delay={k * 60} className="card card-pad grade-card">
-                <GradeBadge grade={g.grade} />
+                <GradeMeter grade={g.grade} />
                 <p className="grade-card-text"><Rich nodes={g.text} />.</p>
               </Reveal>
             ))}
@@ -62,7 +65,7 @@ export default function Insights() {
 
           <Reveal className="glance">
             <details className="glance-details">
-            <summary className="glance-title">The {word(site.counts.insights)} insights at a glance <span className="muted">· Table {t2}</span><ChevronDown size={18} className="summary-arrow" aria-hidden="true" /></summary>
+            <summary className="glance-title"><span>The {word(site.counts.insights)} insights at a glance <span className="muted">· Table&nbsp;{t2}</span></span><ChevronDown size={18} className="summary-arrow" aria-hidden="true" /></summary>
             <div className="table-wrap glance-table">
               <table className="paper-table">
                 <thead>
@@ -158,7 +161,7 @@ function InsightBlock({ ins, trends }) {
             <h2 className="insight-title">{ins.short}</h2>
           </div>
         </div>
-        <GradeBadge grade={ins.grade} detail={<Rich nodes={ins.evidence} />} />
+        <GradeMeter grade={ins.grade} count={false} detail={<Rich nodes={ins.evidence} />} />
       </Reveal>
 
       <div className="insight-grid-body">
@@ -167,6 +170,7 @@ function InsightBlock({ ins, trends }) {
             <p className="claim-title">{ins.statement}</p>
             <p className="claim-text"><Rich nodes={ins.claim} /></p>
           </Reveal>
+          <InsightViz id={ins.id} />
           <Reveal className="facts" delay={60}>
             <div className="fact"><p className="fact-label">Main support</p><p><Rich nodes={ins.support} /></p></div>
             <div className="fact"><p className="fact-label">Boundary conditions</p><p><Rich nodes={ins.boundary} /></p></div>
@@ -197,6 +201,7 @@ function InsightBlock({ ins, trends }) {
           )}
         </Reveal>
       </div>
+      {ins.id === 'I3' && <div className="insight-jury"><JuryPlayground /></div>}
     </article>
   )
 }
@@ -209,7 +214,7 @@ function Finding({ f }) {
           <p className="insight-kicker">A related finding · <Where s={f.subsection || f.section} /></p>
           <h2 className="insight-title finding-title">{f.statement}</h2>
         </div>
-        <GradeBadge grade={f.grade} detail={f.detail} />
+        <GradeMeter grade={f.grade} count={false} detail={f.detail} />
       </Reveal>
       <Reveal as="blockquote" className="claim" delay={60}>
         <p className="claim-text"><Rich nodes={f.claim} /></p>

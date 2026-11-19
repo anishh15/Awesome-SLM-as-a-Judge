@@ -26,6 +26,7 @@ import config from '../site.config.mjs'
 import { readGroup, findCommands, findEnvs, tabularBody, tabularRows } from './lib/tex.mjs'
 import { texToNodes, texToText, nodesToText } from './lib/inline.mjs'
 import { parseBib, natbibLabels, splitAuthors } from './lib/bibtex.mjs'
+import { factList } from '../src/lib/facts.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SITE = path.resolve(HERE, '..')
@@ -635,6 +636,13 @@ const site = {
     sections: sectionsOut.filter((s) => !s.appendix).length,
     withCode: corpus.withCode,
   },
+}
+
+// Every number drawn on the insight visuals must be stated in the paper.
+for (const f of factList()) {
+  const src = f.file === 'main.tex' ? main : read(path.join(SITE, 'paper', f.file))
+  if (!src.includes(f.tex)) fail(`facts.js: ${f.key} not found in paper/${f.file}: ${f.tex}`)
+  for (const { n, text } of f.numbers) if (!f.tex.includes(text)) fail(`facts.js: ${f.key} draws ${n}, which its LaTeX does not state`)
 }
 
 if (warnings.length) for (const w of warnings) console.warn(`build-data: warning: ${w}`)

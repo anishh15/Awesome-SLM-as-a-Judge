@@ -318,3 +318,16 @@ html.is-locked .site-header { padding-right: var(--sbw, 0); }
   }
   .card-link:hover::after, .stat:hover::after { opacity: 1; }
 }
+
+/* Venue badge: flat gold. */
+.venue-badge {
+  display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px 0 11px;
+  border-radius: var(--radius-full); border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  background: color-mix(in srgb, var(--gold) 10%, var(--bg-elev)); color: var(--gold);
+  font-size: var(--fs-sm); font-weight: 650; letter-spacing: 0.02em;
+  transition: transform var(--t) var(--ease-out), border-color var(--t);
+}
+.venue-badge:hover { transform: translateY(-1px); border-color: var(--gold); }
+.venue-badge-name { font-weight: 700; letter-spacing: 0.06em; }
+.venue-badge-sep { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+.venue-badge-kind { color: var(--text-2); font-weight: 550; letter-spacing: 0.01em; }
